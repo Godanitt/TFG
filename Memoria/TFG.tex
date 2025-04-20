@@ -1,8 +1,11 @@
+
+% Autor y título
+
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
 
-% Paquetes
+% Paquetess
 
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -11,7 +14,7 @@
 \usepackage{makeidx}
 \usepackage{graphicx}
 \usepackage{lmodern}
-\usepackage{xcolor} 
+\usepackage[dvipsnames]{xcolor} 
 \usepackage{fancyhdr}
 \usepackage{geometry}
 \usepackage{lastpage}		
@@ -23,6 +26,7 @@
 \RequirePackage{siunitx}
 \usepackage{extramarks} % Para poder usar firstleftmarks
 \usepackage[version=4]{mhchem} % Para poder usar formulas de reacciones nucleares
+\usepackage{chemfig}
 \usepackage{xcolor}
 \RequirePackage[most]{tcolorbox}
 \usepackage{enumitem}
@@ -31,9 +35,20 @@
 \usepackage{eso-pic} % Para insertar imágenes de fondo específicas
 \usepackage[absolute,overlay]{textpos} % Paquete para colocar elementos en posiciones absolutas
 \usepackage{wrapfig}
+\usepackage{booktabs}
+\usepackage{float} % en el preámbulo
+\usepackage{lipsum}
+\usepackage{adjustbox} % en el preámbulo
+\usepackage{etoolbox} % asegúrate de incluir esto
+
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{color}
+
+\AtBeginEnvironment{table}{\scriptsize} % cambia \small por \footnotesize, \scriptsize, etc.
 
 
-
+\setlength{\parindent}{0pt} % Elimina la sangría
 \newtcolorbox{mybox}{colback=black!5!white,
 	colframe=black!75!black}
 
@@ -48,13 +63,13 @@
 \sisetup{output-decimal-marker={.},
 	% exponentes ------------------------
 	exponent-mode=threshold,
-	exponent-thresholds=-3:2, % non usar exponentes 10^{-2,-1, 0, 1}
+	exponent-thresholds=-3:4, % non usar exponentes 10^{-2,-1, 0, 1,2,3}
 	% redondear -------------------------
 	% round-mode=figures, % cifras sig
 	% round-mode=places, % cantos decimales
 	round-mode=uncertainty, % cifras sig da incerteza (necesario usar erro)
 	round-precision=2,
-	uncertainty-mode = separate,
+	%uncertainty-mode = separate,
 	print-unity-mantissa=false,
 	% unidades --------------------------
 	inter-unit-product = \ensuremath{{}\cdot{}}, % separacion entre unidades
@@ -70,23 +85,48 @@
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-\definecolor{azulclarito}{rgb}{0.85, 0.85, 1} % Azul clarito
-\definecolor{verdeclarito}{rgb}{0.85, 1, 0.85} % Verde clarito
-\definecolor{verdehojaoscuro}{rgb}{0.13, 0.55, 0.13} % Verde hoja oscuro
-\definecolor{verdehojaclaro}{rgb}{0.66, 0.90, 0.56} % Verde hoja claro
-\definecolor{azulmarino}{rgb}{0.0, 0.0, 0.5}    % Azul marino
-\definecolor{azulpastel}{rgb}{0.68, 0.85, 0.90} % Azul pastel
-\definecolor{verdepino}{rgb}{0.0, 0.5, 0.0} % Verde pino
 
 \usepackage{listings}
 
 
-%\lstdefinestyle{mystyle}{	backgroundcolor=\color{backcolour},   	commentstyle=\color{codegreen},	keywordstyle=\color{magenta},	numberstyle=\tiny\color{codegray},	stringstyle=\color{codepurple},	basicstyle=\ttfamily\footnotesize,	breakatwhitespace=false,         	breaklines=true,                 	captionpos=b,                    	keepspaces=true,                 	numbers=left,                    	numbersep=5pt,                  	showspaces=false,                	showstringspaces=false,	showtabs=false,                  	tabsize=2}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Python,                 % the language of the code
+  otherkeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 
-%\lstset{style=mystyle}
-%\usepackage{background}     % Para manejar el fondo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% BIBLIOGRAFIA %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\usepackage{biblatex} %Imports biblatex package
+\addbibresource{sample.bib} %Import the bibliography file
 
 %##############################################################################
 %######### Tipo de fuente #################################################
@@ -106,7 +146,7 @@
 %######### Geometría #################################################
 %##############################################################################
 
-\geometry{a4paper, total={152mm,237mm}, left=31mm, top=30mm}
+\geometry{a4paper, total={169mm,245mm}, left=20mm, top=30mm}
 
 
 
@@ -119,82 +159,39 @@
 % Configuración de la imagen de fondo solo para la portada
 
 
-
 %##############################################################################
 %######### Hiperreferenias #################################################
 %##############################################################################
 
-
-\usepackage[colorlinks=true,allcolors=blue]{hyperref} % Crea las
-
+\usepackage[colorlinks=true, linkcolor=Blue, citecolor=ForestGreen, urlcolor=BrickRed]{hyperref} % Crea las
+\usepackage[nameinlink]{cleveref}
+\crefname{figure}{fig.}{Figs.}
+\crefname{table}{tab.}{Tabs.}
 
 %##############################################################################
 %######### Formato de pagina #################################################
 %##############################################################################
 
-
-\setlength{\headsep}{27pt} % Distancia entre la cabezera y el texto
-\setlength{\footskip}{30pt} % Distancia entre el pie de pagina y el texto
 \pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE]{\leftmark} % L,R,C-> left, right, center [LE,RO]
-\fancyhead[RO]{\rightmark} % E,O -> even (par), odd (impar)
-\fancyhead[LO,RE]{Daniel Vázquez Lago}
-\fancyfoot[CE,CO]{\thepage}
-\renewcommand{\headrulewidth}{1pt} % Cambiamos el grosor de la linea de arriba
-\renewcommand{\footrulewidth}{0pt}
+\fancyhf{} % Limpia encabezados y pies
+\fancyhead[L]{\small \textbf{Trabajo de Fin de Grado}}    % Encabezado izquierdo
+\fancyhead[R]{\small \textbf{Daniel Vázquez Lago}}     % Encabezado derecho
+\fancyfoot[C]{\thepage}      % Pie de página centrado con el número de página
+\renewcommand{\headrulewidth}{0.4pt}  % Grosor de la línea del encabezado
+\renewcommand{\footrulewidth}{0pt}    % Sin línea en el pie
+\usepackage{etoolbox} % asegúrate de incluir esto
 
-\label{key}
+\AtBeginEnvironment{table}{\small} % cambia \small por \footnotesize, \scriptsize, etc.
+
+
 
 %##############################################################################
 %#########  Modificar caption #################################################
 %##############################################################################
 
-\usepackage[font=small, justification=centering]{caption}  % Configura las captions
+\usepackage[font=small, justification=justified]{caption}  % Configura las captions
 
-%##############################################################################
-%######### Entorno ejercicio/solución #########################################
-%##############################################################################
 
-\newcounter{exercise}[section]
-\newcounter{solution}[section]
-
-% Configuración del entorno Ejercicio
-\newtcolorbox[use counter=exercise, number within=section]{ejercicio}[1][]{
-	colback=azulclarito,
-	colframe=azulmarino,
-	fonttitle=\bfseries\color{white},
-	coltitle=white,
-	rounded corners, % Opción corregida
-	title=Ejercicio~\thetcbcounter,
-	before skip=10pt, % Espaciado antes del cuadro
-	after skip=10pt,  % Espaciado después del cuadro
-	boxsep=5pt,      % Espaciado interno
-	enhanced,
-	breakable,
-	parbox=false, % Permite objetos flotantes como imágenes
-	% Habilita un mejor manejo de contenido
-}
-
-% Estilo de soluciones
-\newtcolorbox[use counter=solution, number within=section]{solucion}[1][]{
-	colback=verdehojaclaro,
-	colframe=verdepino,
-	fonttitle=\bfseries\color{white},
-	coltitle=white,
-	rounded corners, % Opción corregida
-	title=Solución~\thetcbcounter,
-	before skip=10pt, % Espaciado antes del cuadro
-	after skip=10pt,  % Espaciado después del cuadro
-	boxsep=5pt,      % Espaciado interno
-	enhanced,
-	breakable,
-	before=\par\noindent,  % Asegura que el entorno empiece correctamente
-	after=\par,            % Asegura que termine correctamente
-	#1,
-	parbox=false, % Permite objetos flotantes como imágenes
-	% Habilita un mejor manejo de contenido
-}
 
 %##############################################################################
 %######### Comandos propios #################################################
@@ -240,8 +237,16 @@
 \newcommand{\Namas}{\text{Na}^+}
 \newcommand{\Clmenos}{\text{Cl}^-}
 
+\newcommand{\cm}{\text{cm}}
+\newcommand{\eV}{\text{eV}}
+
+\newcommand{\arr}{\text{arr}}
+\newcommand{\diff}{\text{diff}}
+
 \newcommand{\er}{$^{\text{er}}$}
 \newcommand{\cte}{\text{cte}}
+\newcommand{\expo}{\text{exp}}
+\newcommand{\simu}{\text{sim}}
 
 
 % Comandos vectoriales
@@ -284,7 +289,7 @@
 \newcommand{\Ln}{\mathbf{L}}
 \newcommand{\Mn}{\mathbf{M}}
 \newcommand{\Pn}{\mathbf{P}}
-\newcommand{\Rn}{\mathbf{R}}
+%\newcommand{\Rn}{\mathbf{R}}
 \newcommand{\Sn}{\mathbf{S}}
 \newcommand{\Tn}{\mathbf{T}}
 \newcommand{\In}{\mathbf{1}}
@@ -304,48 +309,27 @@
 \newcommand{\hnj}{\hat{\mathbf{j}}}
 \renewcommand{\hnk}{\hat{\mathbf{k}}}
 
-% Definicion de definicion
-
-
-\theoremstyle{theorem}
-\newtheorem{definition}{Definición}[section]
-\newtheorem{definition_equivalente}{Definición equivalente}[definition]
-\theoremstyle{theorem}
-\newtheorem{theorem}{Teorema}[section]
-
-\numberwithin{equation}{section}
-\numberwithin{figure}{section}
-
-\definecolor{myblue}{RGB}{0, 102, 204}
-
-
-
-
-
-% Autor y título
-
-\author{Daniel Vazquez Lago}
-\title{Trabajo de Fin de Grado}
-
+ 
+\title{\textbf{\Huge Trabajo de Fin de Grado}}
+\author{\Large Daniel Vázquez Lago}
+\date{\today}
+			
 
 \begin{document}
-	
-	
+
 \maketitle
-
-
 \newpage
-			
 \tableofcontents
 \newpage
-			
-\setlength{\parskip}{1.5mm} % Cambia el espacio entre párrafos
-			
-			
 
-			
-\include{Cuerpo/Sec_01}
-			
-			
+\setlength{\parskip}{2.2mm} % Cambia el espacio entre párrafos
+
+\input{Cuerpo/Sec_01.tex}
+\input{Cuerpo/Sec_02.tex}
+
+\newpage 
+
+\printbibliography
+\addcontentsline{toc}{section}{Referencias}
 			
 \end{document}
