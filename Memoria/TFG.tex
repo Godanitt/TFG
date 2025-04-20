@@ -132,9 +132,12 @@
 %######### Tipo de fuente #################################################
 %##############################################################################
 
-\usepackage{newtxtext,newtxmath} % Cambia la fuente (pero mola)
-%\usepackage{kpfonts}
+%\usepackage{newtxtext,newtxmath} % Cambia la fuente (pero mola)
+\RequirePackage{libertinus} % Cambia la fuente -> Papers
+\RequirePackage{mathptmx}   % Loads the Times-Roman Math Fonts
 
+
+%\usepackage{kpfonts}
 %\usepackage{helvet} 
 %\renewcommand{\familydefault}{\sfdefault}.
 
@@ -146,7 +149,8 @@
 %######### Geometría #################################################
 %##############################################################################
 
-\geometry{a4paper, total={169mm,245mm}, left=20mm, top=30mm}
+%\geometry{a4paper, total={169mm,245mm}, left=20mm, top=30mm}
+\geometry{a4paper,left=2cm,right=2cm,top=2.5cm,bottom=2.5cm}
 
 
 
@@ -309,6 +313,9 @@
 \newcommand{\hnj}{\hat{\mathbf{j}}}
 \renewcommand{\hnk}{\hat{\mathbf{k}}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% COMIENZA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
 \title{\textbf{\Huge Trabajo de Fin de Grado}}
 \author{\Large Daniel Vázquez Lago}
