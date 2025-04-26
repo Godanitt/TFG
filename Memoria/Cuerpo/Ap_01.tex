@@ -1,0 +1,68 @@
+
+\section{Convenciones de Nombres}
+
+En C++, seguir convenciones claras de nombres para las variables, funciones y clases facilita la legibilidad y el mantenimiento del código. A continuación, se presentan las prácticas más comunes en la denominación de distintos elementos.ç
+\subsection{Clases}
+Las clases suelen seguir la \textbf{Convención PascalCase}, donde cada palabra comienza con mayúscula y no se usan guiones bajos.
+
+\begin{itemize}
+\item Ejemplo: \texttt{Particle}, \texttt{CollisionEvent}, \texttt{EnergyCalculator}
+\end{itemize}
+
+\subsection{Variables}
+\begin{itemize}
+\item \textbf{int}: suele usarse \textbf{camelCase}, empezando con minúscula y sin guiones bajos.
+\begin{itemize}
+\item Ejemplo: \texttt{eventCounter}, \texttt{particleId}
+\end{itemize}
+\item \textbf{double}: se sigue el mismo esquema \textbf{camelCase}, pero indicando la magnitud si es relevante.
+\begin{itemize}
+\item Ejemplo: \texttt{beamEnergy}, \texttt{collisionAngle}
+\end{itemize}
+\item \textbf{bool}: comienza con \texttt{is}, \texttt{has}, \texttt{can}, etc., seguido de PascalCase.
+\begin{itemize}
+\item Ejemplo: \texttt{isActive}, \texttt{hasCollided}
+\end{itemize}
+\end{itemize}
+
+\subsection{Constantes}
+Las constantes globales o locales usan \textbf{UPPERCASE WITH UNDERSCORES}.
+
+\begin{itemize}
+\item Ejemplo: \texttt{PI}, \texttt{MAX PARTICLES}, \texttt{SPEED OF LIGHT}
+\end{itemize}
+
+\subsection{Variables que pueden cambiar (mutable)}
+Siguen las convenciones generales para \textbf{int} o \textbf{double}, sin notación especial adicional:
+
+\begin{itemize}
+\item Ejemplo: \texttt{currentEnergy}, \texttt{numberOfSteps}
+\end{itemize}
+
+\subsection{Funciones y Métodos}
+Se utiliza \textbf{camelCase}, iniciando en minúscula.
+
+\begin{itemize}
+\item Ejemplo: \texttt{calculateEnergy()}, \texttt{setParticleType()}
+\end{itemize}
+
+\subsection{Miembros privados de clase}
+Se puede usar un guion bajo al final o al principio para diferenciarlos.
+
+\begin{itemize}
+\item Ejemplo: \texttt{mass}, \texttt{energy}
+\end{itemize}
+
+\subsection{Resumen de estilos}
+\begin{tabular}{|c|c|}
+\hline
+Tipo & Convención de Nombre \\
+\hline
+Clases & PascalCase \\
+Variables (int, double) & camelCase \\
+Booleanos & camelCase con prefijos (is, has) \\
+Constantes & UPPERCASE WITH UNDERSCORES \\
+Funciones & camelCase \\
+Miembros privados & camelCase con guion bajo al final o inicio \\
+\hline
+\end{tabular}

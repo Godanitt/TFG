@@ -16,5 +16,32 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{key}{article}{}
+      \name{author}{1}{}{%
+        {{hash=4d186321c1a7f0f354b297e8914ab240}{%
+           family={hola},
+           familyi={h\bibinitperiod}}}%
+      }
+      \strng{namehash}{4d186321c1a7f0f354b297e8914ab240}
+      \strng{fullhash}{4d186321c1a7f0f354b297e8914ab240}
+      \strng{bibnamehash}{4d186321c1a7f0f354b297e8914ab240}
+      \strng{authorbibnamehash}{4d186321c1a7f0f354b297e8914ab240}
+      \strng{authornamehash}{4d186321c1a7f0f354b297e8914ab240}
+      \strng{authorfullhash}{4d186321c1a7f0f354b297e8914ab240}
+      \field{sortinit}{h}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{hola}
+      \field{number}{hola}
+      \field{title}{hola}
+      \field{volume}{hola}
+      \field{year}{hola}
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 
