@@ -1,0 +1,42 @@
+
+    /*
+    
+    // Definimos la colisión y la detallamos
+    Colision colision{li11, d, t, li10,p1.get_A()*tBeam}; 
+
+
+    // Definimos el detector
+    ActarTPC detector;
+    double xACTAR{detector.get_xActar()};
+    double yACTAR{detector.get_yActar()};
+    double zACTAR{detector.get_zActar()};
+    std::cout << "Dimensiones del detector: " << xACTAR << " " << yACTAR << " " << zACTAR << '\n';
+
+
+    // Definimos cinemática de la simulacion 
+    auto* Li10aux {new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam)};
+    auto* Li10ex1{new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam,5.0)};
+    auto* Li10ex2 {new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam,10.0)};
+    
+    */
+
+    // Grafica de t3 vs theta3 y T4 vs theta4; Sampleamos cinemática, diferentes estados excitados para comprobar
+
+    /*
+    SampleoCinematica(li11, d, t, li10, Li10aux, tBeam,0.0);  
+    li10ex1.definir_AZ(10, 3,33.0522, 5);
+    SampleoCinematica(li11, d, t, li10ex1, Li10ex1, tBeam,5);  
+    li10ex2.definir_AZ(10, 3,33.0522, 10);
+    SampleoCinematica(li11, d, t, li10ex2, Li10ex2, tBeam,10);  
+    */
+
+        // Para comprobar que a partícula chega a un silicio:
+        // 1o argumento: nome da layer á que queres ver se chegas. a primeira layer é "f0"
+        // 2o vértice
+        // 3o dirección
+        // Para a dirección ten en conta que en ACTAR TPC traballamos con X <--> Z.
+        // O eixo de propagación do beam é X
+        // Lembra que a dirección é o vector unitario r en coordenadas ESFÉRICAS
+        // Se silIndex == -1 -> NON HOUBO IMPACTO
+        // Se silIndex != 1 -> SI houbo impacto, no punto silPoint0
+        auto [silIndex0, silPoint0] {sils->FindSPInLayer("f0", vertex, direction)};

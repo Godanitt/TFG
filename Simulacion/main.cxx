@@ -11,8 +11,9 @@ int main() {
 
 
     Simulation(7.5, 0.0);
-    Simulation(7.5, 0.2);
-    Simulation(7.5, 0.4);
+
+   // Simulation(7.5, 0.2);
+    //Simulation(7.5, 0.4);
 
     return 0;
 }
