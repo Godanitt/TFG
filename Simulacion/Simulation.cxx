@@ -23,7 +23,7 @@ Esta es la función principal que se encarga de decir si efectivamente se ha pro
 Como argumentos:
  - tBeam: energía del haz (en MeV) (por nucleon)
 */
-void Simulation(double tBeam=7.5,double Ex=0.0)
+void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
 {
     // Definimos las particulas
     Particula li11;
@@ -75,7 +75,12 @@ void Simulation(double tBeam=7.5,double Ex=0.0)
     // Silicios
     auto* sils {new ActPhysics::SilSpecs};
     sils->ReadFile("./Inputs/silicons_new.conf");
-    //sils->DrawGeo();
+    sils->GetLayer("f0").MoveZTo(75, {3});
+    sils->GetLayer("f1").MoveZTo(75, {3});
+    sils->GetLayer("l0").MoveZTo(75, {3});
+    sils->GetLayer("r0").MoveZTo(75, {3});
+
+    sils->DrawGeo();
 
     // Cinemática
     auto* kin {new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex)}; // cinemática
@@ -90,9 +95,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0)
     srim.ReadTable("lightInSil", "SRIM/3H_silicon.txt");
 
     //#############################################################
-   
 
-    int interacciones = 1000000;  // numero000 de interacciones
     int fwhm{1}; // FWHM de la resolución
     ROOT::Math::XYZVector vecNormalSil{1, 0, 0}; // vector normal a los siliciones,
 
@@ -100,8 +103,10 @@ void Simulation(double tBeam=7.5,double Ex=0.0)
     // TH2D: "Nombres","numero bins eje x", "minimo x", "maximo x", "numero bins y", "minimo y", "maximo y"
     auto *hKinSampled{new TH2D{"hKinSampled", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3}", 220, 0, 80,220,-5,80}};
     auto *hKinMeasured{new TH2D{"hKinMeasured", "#theta_{3} vs T_{3} Recostrued; #theta_{3};T_{3};Contas", 220, 0, 80, 220, -5, 80}};
-    auto *hImpactSil0{new TH2D{"hImpactSil0", "Impactos Silicio Layer 0; y[mm];z[mm];Contas", 200, -25, 275, 200, 50, 175*2-50}};
-    auto *hImpactSil1{new TH2D{"hImpactSil1", "Impactos Silicio Layer 1; y[mm];z[mm];Contas", 200, -25, 275, 200, 50, 175*2-50}};
+    auto *hImpactSilF0{new TH2D{"hImpactSilF0", "Impactos Silicio Layer f0; y[mm];z[mm];Contas", 200, -25, 275, 200, 0, 175*2-100}};
+    auto *hImpactSilF1{new TH2D{"hImpactSilF1", "Impactos Silicio Layer f1; y[mm];z[mm];Contas", 200, -25, 275, 200, 0, 175*2-100}};
+    auto *hImpactSilL0{new TH2D{"hImpactSilL0", "Impactos Silicio Layer l0; y[mm];z[mm];Contas", 250, -200, 400, 200, -50, 175*2-100}};
+    auto *hImpactSilR0{new TH2D{"hImpactSilR0", "Impactos Silicio Layer r0; y[mm];z[mm];Contas", 250, -200, 400, 200, -50, 175*2-100}};
     // TH1D
     auto *hThetaCMSampled{new TH1D{"hThetaCMSampled", "#theta_{CM} sampled; #theta; Contas", 180, 0, 180}};
     auto *hThetaCMRec{new TH1D{"hThetaCMRec", "#theta_{CM} rec;  #theta; Contas", 180, 0, 180}};
@@ -144,12 +149,29 @@ void Simulation(double tBeam=7.5,double Ex=0.0)
         // Aplicamos resolución angular
         theta3 = ApplyAngleResolution(theta3, fwhm*TMath::DegToRad());      
 
-        // Proyectamos la posición del ángulo incidente a los detectores: 
+        // Proyectamos la posición del ángulo incidente a los detectores: 200
         ROOT::Math::XYZVector direction{std::cos(theta3), std::sin(theta3)*std::sin(phiCM), std::sin(theta3)*std::cos(phiCM)};
 
         // Obtenemos los silIndex
-        auto [silIndex0, silPoint0]{sils->FindSPInLayer("f0", vertex, direction)};
+        int silIndex0 {};
+        ROOT::Math::XYZPoint silPoint0 {};
+        std::string layer0 {};
+        std::string l0 {"l0"};
+        std::string f0 {"f0"};
+        std::string r0 {"r0"};
+        for(const auto& layer : {"f0","l0","r0"})
+        {
+            auto [idx, point] = sils->FindSPInLayer(layer, vertex, direction);
+            if(idx != -1)
+            {
+                silIndex0 = idx;
+                silPoint0 = point;
+                layer0 = layer;
+            }
+        }
+        
         auto [silIndex1, silPoint1]{sils->FindSPInLayer("f1", vertex, direction)};
+
 
         //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         // Propagamos (véase Propagation.cxx)
@@ -159,6 +181,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0)
         // Perdidas de energia
         double dT3Sil0=propagacion.dt3sil0;
         double dT3Sil1=propagacion.dt3sil1;
+
 
         // Distancias en las que se perdieron la energía:
         double silDist0=propagacion.sildist0;
@@ -174,13 +197,37 @@ void Simulation(double tBeam=7.5,double Ex=0.0)
         bool isInSil1=propagacion.isInSil1;
 
         //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        // Recostruimos y rellenamos:
+        // Recostruimos:
+
+        double recT3;
+        double recEx;
+        double recThetaCM;
+    
 
         if (isInSil0) {
-            double recT3{srim.EvalInitialEnergy("light", dT3Sil0, silDist0)};
-            auto recEx {kin->ReconstructExcitationEnergy(recT3, theta3)};
-            auto recThetaCM {kin->ReconstructTheta3CMFromLab(recT3, theta3)};
+            std::cout << "in Sil 0 \n";
+            recT3=srim.EvalInitialEnergy("light", dT3Sil0, silDist0);
+            recEx =kin->ReconstructExcitationEnergy(recT3, theta3);
+            recThetaCM =kin->ReconstructTheta3CMFromLab(recT3, theta3);       
+        }
+        
+        if (isInSil1) {
+            double recT3sil0{srim.EvalInitialEnergy("light", dT3Sil0, silDist0)};
+            double recT3sil1{srim.EvalInitialEnergy("light", dT3Sil1, silDist1)};
 
+            recT3=recT3sil0+recT3sil1;
+
+            recEx =kin->ReconstructExcitationEnergy(recT3, theta3);
+            recThetaCM =kin->ReconstructTheta3CMFromLab(recT3, theta3);
+        }      
+
+        //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        // Enchemos 
+
+        hThetaCMSampled->Fill((TMath::Pi()-thetaCM)*TMath::RadToDeg());
+        hKinSampled->Fill(theta3*TMath::RadToDeg(),t3);
+
+        if (isInSil0 || isInSil1) {
             // Rellenamos: 
             hKinMeasured->Fill(theta3*TMath::RadToDeg(),recT3);
             hThetaCMRec->Fill(recThetaCM);
@@ -189,34 +236,25 @@ void Simulation(double tBeam=7.5,double Ex=0.0)
             t3rec_tree = recT3;
             exrec_tree = recEx;
             theta3_tree = theta3;
-            tree->Fill();            
+            tree->Fill();     
         }
 
-        if (isInSil1) {
-            double recT3sil0{srim.EvalInitialEnergy("light", dT3Sil0, silDist0)};
-            double recT3sil1{srim.EvalInitialEnergy("light", dT3Sil1, silDist1)};
-
-            double recT3{recT3sil0+recT3sil1};
-
-            auto recEx {kin->ReconstructExcitationEnergy(recT3, theta3)};
-            auto recThetaCM {kin->ReconstructTheta3CMFromLab(recT3, theta3)};
-            std::cout << "recThetaCM \t" << recThetaCM *TMath::RadToDeg()<< "\n";
-            // Rellenamos: 
-            hKinMeasured->Fill(theta3*TMath::RadToDeg(),recT3);
-            hThetaCMRec->Fill(recThetaCM*TMath::RadToDeg());
-            
-            // Rellenamos tree
-            t3rec_tree = recT3;
-            exrec_tree = recEx;
-            theta3_tree = theta3;
-            tree->Fill();
-        }       
-
-        // Relleanmos
-        hThetaCMSampled->Fill((TMath::Pi()-thetaCM)*TMath::RadToDeg());
-        hKinSampled->Fill(theta3*TMath::RadToDeg(),t3);
-        if (silIndex0!=-1 && silIndex1!=-1){
-            hImpactSil1->Fill(silPoint1.Y(),silPoint1.Z());
+        if (silIndex0!=-1 && layer0==f0){
+            hImpactSilF0->Fill(silPoint0.Y(),silPoint0.Z());
+        }
+        
+        if (silIndex0!=-1 && silIndex1!=-1 && layer0==f0){
+            hImpactSilF1->Fill(silPoint1.Y(),silPoint1.Z());
+        }
+        
+        if (silIndex0!=-1 && layer0==l0){
+            //std::cout << "Silpoit l0 \t" << silPoint0 << "\n";
+            hImpactSilL0->Fill(silPoint0.X(),silPoint0.Z());
+        }            
+        
+        if (silIndex0!=-1 && layer0==r0){
+            //std::cout << "Silpoit r0 \t" << silPoint0 << "\n";
+            hImpactSilR0->Fill(silPoint0.X(),silPoint0.Z());
         }
     }
 
@@ -234,13 +272,9 @@ c1->cd(1);
 hKinMeasured->Draw("colz");
 
 c1->cd(2);
-hImpactSil1->Draw("colz");
-sils->GetLayer("f0").GetSilMatrix()->Draw();
-
-c1->cd(3);
 hKinSampled->Draw("colz");
 
-c1->cd(4);
+c1->cd(3);
 auto eff {new TEfficiency(*hThetaCMRec, *hThetaCMSampled)};
 eff->Draw("AP");
 gPad->Update();
@@ -250,5 +284,52 @@ eff->GetPaintedGraph()->GetYaxis()->SetTitle("Eficiencia");
 
 c1->SaveAs(TString::Format("Graficas/Completo_Ex%.2f.pdf", Ex));
 c1->SaveAs(TString::Format("Graficas/Completo_Ex%.2f.eps", Ex));
+
+//eff->GetPaintedGraph()->GetXaxis()->SetTitle("#theta_{CM}");
+//eff->GetPaintedGraph()->GetYaxis()->SetTitle("Eficiencia");
+
+// Dibujamos Angulos
+
+/*
+
+auto *c2{new TCanvas{"c2", "theta cm"}};
+c2->cd();
+static int colorIndex = 2;  // Empieza en 2 (rojo)
+hThetaCMSampled->Draw();
+hThetaCMSampled->SetFillColor(colorIndex);
+hThetaCMRec->Draw("same");
+hThetaCMRec->SetFillColor(colorIndex+1);
+c2->Update();
+c2->SaveAs(TString::Format("Graficas/ThetaCM_Ex%.2f.pdf", Ex));
+c2->SaveAs(TString::Format("Graficas/ThetaCM_Ex%.2f.eps", Ex));
+*/
+
+
+// Dibujamos puntos de impacto
+auto *c3{new TCanvas{"c3", "T3_vs_theta"}};
+c3->DivideSquare(4);
+c3->cd(1);
+hImpactSilF0->Draw("colz");
+sils->GetLayer("f0").GetSilMatrix()->Draw();
+
+c3->cd(2);
+hImpactSilF1->Draw("colz");
+sils->GetLayer("f1").GetSilMatrix()->Draw();
+
+c3->cd(3);
+hImpactSilL0->Draw("colz");
+sils->GetLayer("l0").GetSilMatrix()->Draw();
+
+c3->cd(4);
+hImpactSilR0->Draw("colz");
+sils->GetLayer("r0").GetSilMatrix()->Draw();
+
+c3->SaveAs(TString::Format("Graficas/Impacts_Ex%.2f.pdf", Ex));
+c3->SaveAs(TString::Format("Graficas/Impacts_Ex%.2f.eps", Ex));
+
+
+
+
+
 }   
 //####################################################### 

@@ -83,15 +83,30 @@ Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROO
     Resultado res;
 
 
+    int silIndex0 {};
+    ROOT::Math::XYZPoint silPoint0 {};
+    std::string layer0 {};
+    for(const auto& layer : {"f0","l0","r0"})
+    {
+        auto [idx, point] = sils->FindSPInLayer(layer, vertex, direction);
+        if(idx != -1)
+        {
+            silIndex0 = idx;
+            silPoint0 = point;
+            layer0 = layer;
+        }
+    }
+
     // Estudiamos el silicio 1: 
-    auto [silIndex0, silPoint0]{sils->FindSPInLayer("f0", vertex, direction)};
+    //auto [silIndex0, silPoint0]{sils->FindSPInLayer("f0", vertex, direction)};
 
     auto silDist0{(vertex - silPoint0).R()};
     double t3inSil0{ApplyStraggling(&srim, "light", t3, silDist0)};
 
     // Aplicamos straggling y perdidadas de energía a la partícula 3
-    auto silThick0{sils->GetLayer("f0").GetUnit().GetThickness()};
-    double t3outSil0{srim.Slow("lightInSil", t3inSil0, silThick0, theta3* TMath::DegToRad())};
+    auto silThick0{sils->GetLayer(layer0).GetUnit().GetThickness()};
+    //std::cout<<"error slow 1 \t"<< silThick0 << " \t t3:" << t3inSil0 <<" \t theta3:" << theta3  << " \n ";
+    double t3outSil0{srim.Slow("lightInSil", t3inSil0, silThick0+0.01, theta3* TMath::DegToRad())};
     double dT3Sil0{ApplySilResolution(t3inSil0 - t3outSil0)};
 
     // Vemos si la partícula se ha frenaado en el silicio y  si no se ha parado antes
@@ -103,12 +118,12 @@ Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROO
 
     // Calculemos las distancias 
     auto silDist1{(silPoint0 - silPoint1).R()};
-
     // Aplicamos straggling al t3
     double t3inSil1{ApplyStraggling(&srim, "light", t3outSil0, silDist1)};
+    auto silThick1{sils->GetLayer("f1").GetUnit().GetThickness()};
 
     // Aplicamos straggling y perdidadas de energía a la partícula 3
-    auto silThick1{sils->GetLayer("f1").GetUnit().GetThickness()};
+    //std::cout<<"error slow 2 \n";
     double t3outSil1 = srim.Slow("lightInSil", t3inSil1, silThick1, theta3 * TMath::DegToRad());
 
     // Aplicamos la resolución
@@ -126,5 +141,8 @@ Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROO
     res.isInSil1=isInSil1;
     res.silPoint1=silPoint0;
 
+    if (isInSil1){
+    std::cout<< "silDist1" << silDist1 << "\n";
+    }
     return res;
 }
