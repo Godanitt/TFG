@@ -118,13 +118,14 @@ Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROO
 
     // Calculemos las distancias 
     auto silDist1{(silPoint0 - silPoint1).R()};
+
     // Aplicamos straggling al t3
     double t3inSil1{ApplyStraggling(&srim, "light", t3outSil0, silDist1)};
     auto silThick1{sils->GetLayer("f1").GetUnit().GetThickness()};
 
     // Aplicamos straggling y perdidadas de energía a la partícula 3
     //std::cout<<"error slow 2 \n";
-    double t3outSil1 = srim.Slow("lightInSil", t3inSil1, silThick1, theta3 * TMath::DegToRad());
+    double t3outSil1{srim.Slow("lightInSil", t3inSil1, silThick1, theta3 * TMath::DegToRad())};
 
     // Aplicamos la resolución
     double dT3Sil1{ApplySilResolution(t3inSil1 - t3outSil1)};
@@ -140,9 +141,10 @@ Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROO
     res.isInSil0=isInSil0;
     res.isInSil1=isInSil1;
     res.silPoint1=silPoint0;
-
+    /*
     if (isInSil1){
     std::cout<< "silDist1" << silDist1 << "\n";
     }
+    */
     return res;
 }

@@ -186,6 +186,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
         // Distancias en las que se perdieron la energía:
         double silDist0=propagacion.sildist0;
         double silDist1=propagacion.sildist1;
+        //std::cout << silDist1 << "\n";
 
         // Puntos de imapacto del silicio:
         //ROOT::Math::XYZPoint silPoint1=propagacion.silPoint1;
@@ -201,11 +202,11 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
 
         double recT3;
         double recEx;
-        double recThetaCM;
+        double recThetaCM{0.0};
     
 
         if (isInSil0) {
-            std::cout << "in Sil 0 \n";
+            //std::cout << "in Sil 0 \n";
             recT3=srim.EvalInitialEnergy("light", dT3Sil0, silDist0);
             recEx =kin->ReconstructExcitationEnergy(recT3, theta3);
             recThetaCM =kin->ReconstructTheta3CMFromLab(recT3, theta3);       
@@ -230,7 +231,8 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
         if (isInSil0 || isInSil1) {
             // Rellenamos: 
             hKinMeasured->Fill(theta3*TMath::RadToDeg(),recT3);
-            hThetaCMRec->Fill(recThetaCM);
+            //std::cout<<"theta3"<<recThetaCM<<"\n";
+            hThetaCMRec->Fill(recThetaCM*TMath::RadToDeg());
 
             // Rellenamos tree
             t3rec_tree = recT3;
@@ -277,9 +279,9 @@ hKinSampled->Draw("colz");
 c1->cd(3);
 auto eff {new TEfficiency(*hThetaCMRec, *hThetaCMSampled)};
 eff->Draw("AP");
-gPad->Update();
 eff->GetPaintedGraph()->GetXaxis()->SetTitle("#theta_{CM}");
 eff->GetPaintedGraph()->GetYaxis()->SetTitle("Eficiencia");
+gPad->Update();
 
 
 c1->SaveAs(TString::Format("Graficas/Completo_Ex%.2f.pdf", Ex));
