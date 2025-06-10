@@ -19,10 +19,10 @@
  Salida: 
  - double thetalab' (con resolucion)
 */
-double ApplyAngleResolution(double theta4old, double FWHM)
+double ApplyAngleResolution(double thetaold, double FWHM)
 {
     double sigmatheta{FWHM  / 2.55};
-    return gRandom->Gaus(theta4old, sigmatheta);
+    return gRandom->Gaus(thetaold, sigmatheta);
 }
 
 

@@ -2,6 +2,7 @@
 #include "ActSRIM.h"
 #include "ActSilSpecs.h"
 #include "ActTPCParameters.h"
+#include "ActCrossSection.h"
 #include "TH1.h"
 #include "TFile.h"
 #include "TTree.h"
@@ -22,9 +23,18 @@
 Esta es la función principal que se encarga de decir si efectivamente se ha producido la colisión y de obtener histogramas y gráficas
 Como argumentos:
  - tBeam: energía del haz (en MeV) (por nucleon)
-*/
-void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
+ - Ex: energía de excitacion
+ - interacciones: numero de particulas en el haz 
+ - indc =  Array de índices para seleccionar diferentes tipos de incertidumbre. Cada elemento representa un identificador del tipo de incertidumbre:
+    0: todas las fuentes de incertidumbre
+    1: Solo straggling
+    2: Solo theta
+    3: ninguna fuente de incertidumbre
+ */
+
+void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int incIdx = 0)
 {
+    double ExOg {Ex};
     // Definimos las particulas
     Particula li11;
     Particula li10;
@@ -82,16 +92,13 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
 
     sils->DrawGeo();
 
-    // Cinemática
-    auto* kin {new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex)}; // cinemática
-
 
     // SRIM (perdidas de enerǵia)
     ActPhysics::SRIM srim; // &srim -> asi se ''hace'' un pointer
-    srim.ReadTable("beam", "SRIM/11Li_mixture_900mbar.txt");
-    srim.ReadTable("heavy", "SRIM/10Li_mixture_900mbar.txt");
+    srim.ReadTable("beam", "SRIM/11Li_900mb_CF4_90-10.txt");
+    srim.ReadTable("heavy", "SRIM/10Li_900mb_CF4_90-10.txt");
     srim.ReadTable("heavySil", "SRIM/10Li_silicon.txt");
-    srim.ReadTable("light", "SRIM/3H_mixture_900mbar.txt");
+    srim.ReadTable("light", "SRIM/3H_900mb_CF4_90-10.txt");
     srim.ReadTable("lightInSil", "SRIM/3H_silicon.txt");
 
     //#############################################################
@@ -110,10 +117,13 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
     // TH1D
     auto *hThetaCMSampled{new TH1D{"hThetaCMSampled", "#theta_{CM} sampled; #theta; Contas", 180, 0, 180}};
     auto *hThetaCMRec{new TH1D{"hThetaCMRec", "#theta_{CM} rec;  #theta; Contas", 180, 0, 180}};
-    
+    auto* hEx {new TH1D {"hEx", "Rec Ex;E_{x} [MeV];Counts", 300, -5, 5}};
+    auto* hThetaCM {new TH1D {"hThetaCM", "CM;#theta_{CM};Counts", 300, 0, 180}};
+    auto* hRange {new TH1D {"hRangue", "Rangue;#Rangue [mm];Counts", 300, 0, 255}};
+
 
     // Saving con Trees 
-    auto* outfile {new TFile {TString::Format("./Outputs/tree_Ex_%.2f.root", Ex), "recreate"}};
+    auto* outfile {new TFile {TString::Format("./Outputs/tree_Ex_%.2f_incIdx%i.root", ExOg,incIdx), "recreate"}};
     auto* tree {new TTree {"SimulationTree", "Simple simulation tree"}};
     double t3rec_tree {};
     tree->Branch("t3rec", &t3rec_tree);
@@ -122,8 +132,45 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
     double theta3_tree {};
     tree->Branch("theta3", &theta3_tree);
 
+
+    // Cinemática
+    auto* kin {new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex)}; // cinemática
+
+    // Anchura de la Briet-Wigner: 
+    double Gamma{0.01}; // en MeV
+    ExOg=Ex;
+
+    // CrossSection:
+    ActSim::CrossSection xs {};
+    
+    if (Ex==0.0){
+        xs.ReadFile("Inputs/xs/s12_p1i.dat");
+    }
+    if (Ex==0.2){
+        xs.ReadFile("Inputs/xs/p12_p1i.dat");
+    }
+
+
     // Simulacion core
     for (int i=0; i<interacciones; i++){
+        if (ExOg==0.0) {
+            Gamma=0.1;
+            Ex=gRandom->BreitWigner(ExOg, Gamma);
+            if (Ex<ExOg-5 || Ex>ExOg+5){
+                continue;
+            }
+            kin=new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex); // cinemática
+        }
+
+        if (ExOg==0.2) {
+            Gamma=0.2;
+            Ex=gRandom->BreitWigner(ExOg, Gamma);
+            if (Ex<ExOg-5 || Ex>ExOg+5){
+                continue;
+            }
+            kin=new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex); // cinemática
+        }
+        
 
         // Definimos el vértice
         ROOT::Math::XYZPoint vertex{SampleVertex(xActar, yActar, zActar)};
@@ -137,7 +184,12 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
         auto uniforme2{gRandom->Uniform(0,2*TMath::Pi())};
 
         // Aquí iría la seccion eficaz, de momento d#sigma vs d#Omega = 1 
-        auto thetaCM{TMath::ACos(uniforme1)};
+        //auto thetaCM{TMath::ACos(uniforme1)};
+
+        
+        double thetaCM{(xs.SampleHist())*TMath::DegToRad()};
+
+
         auto phiCM{uniforme2};
 
 
@@ -147,7 +199,9 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
         double theta3 {kin->GetTheta3Lab()};
 
         // Aplicamos resolución angular
-        theta3 = ApplyAngleResolution(theta3, fwhm*TMath::DegToRad());      
+        if (incIdx == 0 || incIdx == 2) {
+            theta3 = ApplyAngleResolution(theta3, fwhm*TMath::DegToRad());      
+        }
 
         // Proyectamos la posición del ángulo incidente a los detectores: 200
         ROOT::Math::XYZVector direction{std::cos(theta3), std::sin(theta3)*std::sin(phiCM), std::sin(theta3)*std::cos(phiCM)};
@@ -175,7 +229,8 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
 
         //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         // Propagamos (véase Propagation.cxx)
-        Resultado propagacion = Propagation(t3, theta3, vertex, direction, srim, sils);
+        
+        Resultado propagacion = Propagation(t3, theta3, vertex, direction, srim, sils,incIdx);
 
 
         // Perdidas de energia
@@ -197,16 +252,19 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
         // Booleano que nos dice si se ha medido en el layer 1:
         bool isInSil1=propagacion.isInSil1;
 
+        // Valores que nos dicen si se ha parado antes de chocar con el silicio + nos da su rango dentro d eeste
+        bool stoppedBeforeSil0=propagacion.stoppedBeforeSil0;
+        double rangeBeforeSil0=propagacion.rangeBeforeSil0;
+
         //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         // Recostruimos:
 
         double recT3;
         double recEx;
         double recThetaCM{0.0};
-    
+
 
         if (isInSil0) {
-            //std::cout << "in Sil 0 \n";
             recT3=srim.EvalInitialEnergy("light", dT3Sil0, silDist0);
             recEx =kin->ReconstructExcitationEnergy(recT3, theta3);
             recThetaCM =kin->ReconstructTheta3CMFromLab(recT3, theta3);       
@@ -225,21 +283,30 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
         //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         // Enchemos 
 
-        hThetaCMSampled->Fill((TMath::Pi()-thetaCM)*TMath::RadToDeg());
+        hThetaCMSampled->Fill(thetaCM*TMath::RadToDeg());
         hKinSampled->Fill(theta3*TMath::RadToDeg(),t3);
 
         if (isInSil0 || isInSil1) {
             // Rellenamos: 
             hKinMeasured->Fill(theta3*TMath::RadToDeg(),recT3);
-            //std::cout<<"theta3"<<recThetaCM<<"\n";
-            hThetaCMRec->Fill(recThetaCM*TMath::RadToDeg());
+            hThetaCMRec->Fill(thetaCM*TMath::RadToDeg());
+            hEx->Fill(recEx);
 
             // Rellenamos tree
             t3rec_tree = recT3;
             exrec_tree = recEx;
             theta3_tree = theta3;
             tree->Fill();     
+
         }
+        
+
+        if (stoppedBeforeSil0){
+            hRange->Fill(rangeBeforeSil0);
+            //std::cout<<"Range"<<silDist0<<"\n";
+            //std::cout<<"Range"<<rangeBeforeSil0<<"\n";
+        }
+
 
         if (silIndex0!=-1 && layer0==f0){
             hImpactSilF0->Fill(silPoint0.Y(),silPoint0.Z());
@@ -260,75 +327,81 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000)
         }
     }
 
-outfile->cd();
-tree->Write();
+    outfile->cd();
+    tree->Write();
 
 
-// Graficamos el T3 vs theta3 measured
-auto *c1{new TCanvas{"c1", "T3_vs_theta"}};
-gStyle->SetPadRightMargin(0.15); 
+    // Graficamos el T3 vs theta3 measured
+    auto *c1{new TCanvas{"c1", "T3_vs_theta"}};
+    gStyle->SetPadRightMargin(0.15); 
 
-c1->DivideSquare(4);
+    c1->DivideSquare(6);
 
-c1->cd(1);
-hKinMeasured->Draw("colz");
+    c1->cd(1);
+    hKinMeasured->Draw("colz");
 
-c1->cd(2);
-hKinSampled->Draw("colz");
+    c1->cd(2);
+    hKinSampled->Draw("colz");
 
-c1->cd(3);
-auto eff {new TEfficiency(*hThetaCMRec, *hThetaCMSampled)};
-eff->Draw("AP");
-eff->GetPaintedGraph()->GetXaxis()->SetTitle("#theta_{CM}");
-eff->GetPaintedGraph()->GetYaxis()->SetTitle("Eficiencia");
-gPad->Update();
+    c1->cd(3);
+    auto eff {new TEfficiency(*hThetaCMRec, *hThetaCMSampled)};
+    eff->Draw("AP");
+    gPad->Update();
 
-
-c1->SaveAs(TString::Format("Graficas/Completo_Ex%.2f.pdf", Ex));
-c1->SaveAs(TString::Format("Graficas/Completo_Ex%.2f.eps", Ex));
-
-//eff->GetPaintedGraph()->GetXaxis()->SetTitle("#theta_{CM}");
-//eff->GetPaintedGraph()->GetYaxis()->SetTitle("Eficiencia");
-
-// Dibujamos Angulos
-
-/*
-
-auto *c2{new TCanvas{"c2", "theta cm"}};
-c2->cd();
-static int colorIndex = 2;  // Empieza en 2 (rojo)
-hThetaCMSampled->Draw();
-hThetaCMSampled->SetFillColor(colorIndex);
-hThetaCMRec->Draw("same");
-hThetaCMRec->SetFillColor(colorIndex+1);
-c2->Update();
-c2->SaveAs(TString::Format("Graficas/ThetaCM_Ex%.2f.pdf", Ex));
-c2->SaveAs(TString::Format("Graficas/ThetaCM_Ex%.2f.eps", Ex));
-*/
+    c1->cd(4);
+    hThetaCMSampled->Draw();
 
 
-// Dibujamos puntos de impacto
-auto *c3{new TCanvas{"c3", "T3_vs_theta"}};
-c3->DivideSquare(4);
-c3->cd(1);
-hImpactSilF0->Draw("colz");
-sils->GetLayer("f0").GetSilMatrix()->Draw();
+    c1->cd(5);
+    hEx->Draw();
 
-c3->cd(2);
-hImpactSilF1->Draw("colz");
-sils->GetLayer("f1").GetSilMatrix()->Draw();
+    c1->cd(6);
+    hRange->Draw();
 
-c3->cd(3);
-hImpactSilL0->Draw("colz");
-sils->GetLayer("l0").GetSilMatrix()->Draw();
 
-c3->cd(4);
-hImpactSilR0->Draw("colz");
-sils->GetLayer("r0").GetSilMatrix()->Draw();
+    c1->SaveAs(TString::Format("Graficas/Completo_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
-c3->SaveAs(TString::Format("Graficas/Impacts_Ex%.2f.pdf", Ex));
-c3->SaveAs(TString::Format("Graficas/Impacts_Ex%.2f.eps", Ex));
+    //eff->GetPaintedGraph()->GetXaxis()->SetTitle("#theta_{CM}");
+    //eff->GetPaintedGraph()->GetYaxis()->SetTitle("Eficiencia");
 
+    // Dibujamos Angulos
+
+    /*
+    auto *c2{new TCanvas{"c2", "theta cm"}};
+    c2->cd();
+    static int colorIndex = 2;  // Empieza en 2 (rojo)
+    hThetaCMSampled->Draw();
+    hThetaCMSampled->SetFillColor(colorIndex);
+    hThetaCMRec->Draw("same");
+    hThetaCMRec->SetFillColor(colorIndex+1);
+    c2->Update();
+    c2->SaveAs(TString::Format("Graficas/ThetaCM_Ex%.2f.pdf", Ex));
+    c2->SaveAs(TString::Format("Graficas/ThetaCM_Ex%.2f.eps", Ex));
+    */
+
+
+    // Dibujamos puntos de impacto
+    auto *c3{new TCanvas{"c3", "T3_vs_theta"}};
+    c3->DivideSquare(4);
+    c3->cd(1);
+    hImpactSilF0->Draw("colz");
+    sils->GetLayer("f0").GetSilMatrix()->Draw();
+
+    c3->cd(2);
+    hImpactSilF1->Draw("colz");
+    sils->GetLayer("f1").GetSilMatrix()->Draw();
+
+    c3->cd(3);
+    hImpactSilL0->Draw("colz");
+    sils->GetLayer("l0").GetSilMatrix()->Draw();
+
+    c3->cd(4);
+    hImpactSilR0->Draw("colz");
+    sils->GetLayer("r0").GetSilMatrix()->Draw();
+        c1->cd(4);
+        hEx->Draw();
+
+    c3->SaveAs(TString::Format("Graficas/Impacts/Impacts_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
 
 
