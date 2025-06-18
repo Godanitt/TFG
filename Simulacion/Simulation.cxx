@@ -110,15 +110,17 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     // TH2D: "Nombres","numero bins eje x", "minimo x", "maximo x", "numero bins y", "minimo y", "maximo y"
     auto *hKinSampled{new TH2D{"hKinSampled", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3}", 220, 0, 80,220,-5,80}};
     auto *hKinMeasured{new TH2D{"hKinMeasured", "#theta_{3} vs T_{3} Recostrued; #theta_{3};T_{3};Contas", 220, 0, 80, 220, -5, 80}};
+    auto *hKinL1{new TH2D{"hKinL1", "#theta_{3} vs T_{3} Sampleado; #theta_{3};T_{3};Contas", 220, 0, 80, 220, -5, 80}};
     auto *hImpactSilF0{new TH2D{"hImpactSilF0", "Impactos Silicio Layer f0; y[mm];z[mm];Contas", 200, -25, 275, 200, 0, 175*2-100}};
     auto *hImpactSilF1{new TH2D{"hImpactSilF1", "Impactos Silicio Layer f1; y[mm];z[mm];Contas", 200, -25, 275, 200, 0, 175*2-100}};
     auto *hImpactSilL0{new TH2D{"hImpactSilL0", "Impactos Silicio Layer l0; y[mm];z[mm];Contas", 250, -200, 400, 200, -50, 175*2-100}};
     auto *hImpactSilR0{new TH2D{"hImpactSilR0", "Impactos Silicio Layer r0; y[mm];z[mm];Contas", 250, -200, 400, 200, -50, 175*2-100}};
+    auto *hRangeTheta{new TH2D{"hRangeTheta", "Rango vs #theta_{3}; #theta_{3};R [mm];Contas", 220, 0, 80, 220, 0, 400}};
     // TH1D
     auto *hThetaCMSampled{new TH1D{"hThetaCMSampled", "#theta_{CM} sampled; #theta; Contas", 180, 0, 180}};
     auto *hThetaCMRec{new TH1D{"hThetaCMRec", "#theta_{CM} rec;  #theta; Contas", 180, 0, 180}};
     auto* hEx {new TH1D {"hEx", "Rec Ex;E_{x} [MeV];Counts", 300, -5, 5}};
-    auto* hThetaCM {new TH1D {"hThetaCM", "CM;#theta_{CM};Counts", 300, 0, 180}};
+    auto* hThetaCM {new TH1D {"hThetaCM", "CM;#theta_{CM};C400ounts", 300, 0, 180}};
     auto* hRange {new TH1D {"hRangue", "Rangue;#Rangue [mm];Counts", 300, 0, 255}};
 
 
@@ -159,18 +161,19 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
             if (Ex<ExOg-5 || Ex>ExOg+5){
                 continue;
             }
-            kin=new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex); // cinemática
+            //kin=new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex); // cinemática
         }
 
         if (ExOg==0.2) {
-            Gamma=0.2;
+            Gamma=0.3;
             Ex=gRandom->BreitWigner(ExOg, Gamma);
             if (Ex<ExOg-5 || Ex>ExOg+5){
                 continue;
             }
-            kin=new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex); // cinemática
+            //kin=new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex); // cinemática
         }
         
+        kin->SetEx(Ex);
 
         // Definimos el vértice
         ROOT::Math::XYZPoint vertex{SampleVertex(xActar, yActar, zActar)};
@@ -178,6 +181,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
         // Reducimos la energía. 1-> Calulamos la posición del impacto. 2-> Nueva enerǵia del haz.
         auto r{vertex.X()}; 
         auto tBeamNew{srim.Slow("beam", tBeam*p1.get_A(), r, 0 * TMath::DegToRad())};
+        kin->SetBeamEnergy(tBeamNew);
 
         // Calculamos el ángulo theta3 y phi3 cm. Para esto creamos los ángulos aleatoriamente 
         auto uniforme1{gRandom->Uniform(-1,1)};
@@ -301,10 +305,10 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
         }
         
 
-        if (stoppedBeforeSil0){
+        if (stoppedBeforeSil0 && rangeBeforeSil0>20 ){
             hRange->Fill(rangeBeforeSil0);
-            //std::cout<<"Range"<<silDist0<<"\n";
-            //std::cout<<"Range"<<rangeBeforeSil0<<"\n";
+            hRangeTheta->Fill(theta3*TMath::RadToDeg(),rangeBeforeSil0);
+            hKinL1->Fill(theta3*TMath::RadToDeg(),t3);
         }
 
 
@@ -349,11 +353,12 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     gPad->Update();
 
     c1->cd(4);
-    hThetaCMSampled->Draw();
-
+    //hThetaCMSampled->Draw();
+    hRangeTheta->Draw("colz");
 
     c1->cd(5);
-    hEx->Draw();
+    //hEx->Draw();
+    hKinL1->Draw("colz");
 
     c1->cd(6);
     hRange->Draw();

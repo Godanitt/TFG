@@ -20,8 +20,8 @@ int main() {
 
     for (int i = 0; i < 4; i++) {
         std::cout << "Seleccionamos incertidumbre: "  << uncertaintySelector[i] << "\n";
-        Simulation(7.5, 0.0, 100000,uncertaintySelector[i]);
-        Simulation(7.5, 0.20,100000,uncertaintySelector[i]);
+        Simulation(7.5, 0.0, 1000000,uncertaintySelector[i]);
+        Simulation(7.5, 0.20,1000000,uncertaintySelector[i]);
     }
 
 

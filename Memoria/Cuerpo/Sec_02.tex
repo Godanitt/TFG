@@ -1,216 +1,52 @@
-\section{Cinemática del tritio}
+\section{Motivación experimental}
 
-En esta sección vamos a estudiar la cinemática de las partículas 3 y 4 a partir de los valores que conocemos de 
+\subsection{Núcleos ricos en neutrones}
 
-\subsection{Introducción}
+El estudio de núcleos ricos en neutrones son, en la física nuclear moderna, una de las ramas de mayor interés. No solo porque son fundamentales a la hora de entender los procesos r astrofísicos \cite{THIELEMANN2011346}, (proceso de captura rápida de neutrones), los cuales parecen responsables de la creación de la mayor parte de núcleos muy pesados $(60<A)$, que se dan en la expansión tras un colapso del núcleo de una supernova, o la descompresión de la materia neutrónica emitida por la fusion de una estrella binaria compacta de neutrones; sino porque revelan nuevas estructuras nucleares (halos nucleares, modificación del orden de las capas nucleares y números mágicos...). 
 
-\subsubsection{Relatividad especial}
+Estas nuevas estrucutras nucleares ponen a prueba modelos nucleares a prueba, y arrojan información necesaria para adaptar modelos fenomenológicos que permitirán obtener resultados teóricos extrapolados a otros neutrones ricos en neutrones imposibles de medir experimentalmente por la incapacidad actual de producirlos (debido a su baja estabilidad y su falta de estados ligados).
 
-La relatividad especial nos permite estudiar la conservación de la energía y el momento usando los cuadrivectores. Definimos el 4-momento $P$ de una partícula de masa $m$ que se mueve a una velocidad $v$ de un sistema de coordenadas como:
 
-\begin{equation}
-    P = (p^0, \pn) = m \gamma (c,\vn) =\left( \frac{E}{c},\pn \right)   \label{Ec:01}
-\end{equation}
-La norma de un cuadrimomento cualquiera viene dado siempre por
 
-\begin{equation}
-    P^2  = - m^2 c^2  \label{Ec:02}
-\end{equation}
-Lo que antes era la ley de conservación de la energía y la ley de conservación del momento de cualquier fenómeno físico, ahora se puede condensar ahora en:
+\subsection{Núcleo halo}
 
-\begin{equation}
-    \sum P_{inicial} = \sum P_{final} \label{Ec:03}
-\end{equation}
-Cuando un sistema de referencia se mueve a una velocidad $\vn=(v,0,0)$ respecto otro debemos usar las \textbf{transformaciones de Lorentz} para calcular el cambio del cuadrimomento $\pn$ de una partícula en ambos sistemas de referencia. Si denotamos con primas a los momentos/energía del sistema que se mueve, tendremos que
+La drip-line de neutrones sigue siendo un misterio para nosotros, conociendo únicamente 8 o 9 elementos sobre ella, particularmente en los átomos ligeros. En aquellos que se ha alcanzado esta drip-line los núcleos presentan formas exóticas, comportamientos anómalos que no son vistos en núcleos en la estabilidad. Los halos de neutrones son uno de los fenómenos más llamativos, ya que presentan propiedades inesperadas, como un tamaño (radio) mas grande de lo que se habría (\textcolor{red}{{{Poner ejemplo}}}). \cite{tanihata2023halo}.
 
-\begin{eqnarray}
-    E'/c &  = & \gamma (E/c-\beta p_x) \label{Ec:04}\\ 
-    p_x' &  = & \gamma (p_x - \beta E/c) \label{Ec:05}\\ 
-    p_y' &  = & p_y \\
-    p_z' &  = & p_z 
-\end{eqnarray}
-siendo la transformación inversa:
+El halo de neutrones es, en esencia, una manifestación del efecto túnel cuántico, que surge cuando un estado nuclear ligado se encuentra muy próximo al continuo energético  \cite{tanihata2023halo}, es decir, a un estado no ligado. Para que se de una estructura de halo se necesita una combinación de energía de ligadura de neutrones muy pequeña  ($<1$ MeV) y una fuerza de corto alcanzce (como es la fuerza nuclear). El requerimiento de que la energía de ligadura sea pequeña hace que la mayor parte de los halos solo puedan tener uno o dos neutrones en el halo. Dicha combinación de factores permite al neutrón a través del efecto túnel moverse alrededor del core nucleo, lo que conlleva a su vez que el núcleo tenga un tamaño más grande de lo normal: la función de ondas de los neutrones hace probable que este a distancias mucho más lejanas. 
 
-\begin{eqnarray}
-    E/c &  = & \gamma (E'/c +\beta p_x') \label{Ec:08}\\ 
-    p_x &  = & \gamma (p_x' + \beta E'/c) \label{Ec:09}\\ 
-    p_y &  = & p_y '\\
-    p_z &  = & p_z '
-\end{eqnarray}
-ya que ahora el sistema que se mueve se mueve a la velocidad $\vn=(-v,0,0)$. Los factores $\gamma$ y $\beta$ (en este sistema) se definen como:
+Un núcleo Borromeano es un sistema cuántico de tres cuerpos que se representa como un núcleo con halo de dos neutrones (2n), compuesto por un núcleo central + n + n, en el que ninguno de los subsistemas de dos cuerpos (núcleo + neutrón o neutrón + neutrón) está ligado, pero el sistema completo de tres cuerpos sí forma un estado ligado \cite{tanihata2023lowEnergyHalo}. Ejemplos típicos de átomos Borremeanos: $^6$He, $^{11}$Li, $^{14}$Be y $^{17}$B. 
 
-\begin{eqnarray}
-    \beta = \frac{v_x}{c} \quad \quad \gamma = \frac{1}{\sqrt{1- \beta^2}}
-\end{eqnarray}
+\subsection{Reacción de traferencia $^{11}$Li(d,t)$^{10}$Li}
 
-\subsubsection{Notación}
-
-Como hemos dicho el proceso de interaccición viene dado por
+La reacción en la que nos vamosa centrar nosotros es: 
 
 \begin{equation}
-    ^{11}\mathrm{Li}+^2\mathrm{H} \rightarrow ^3\mathrm{H}+^{10}\mathrm{Li} \Longleftrightarrow 1 + 2 \rightarrow 3 + 4
+   {}^{11}\text{Li} + d \to t + {}^{10}\text{Li}
 \end{equation}
-A partir de ahora nos referiremos a estas partículas como $1,2,3$ y $4$. Así $p_{1}$ será el momento de la partícula uno (en este caso la de litio 11). Dado que en función del sistema de referencia tendremos un valor de momento u otro, necesitaremos especificar que sistema de referencia seguimos. Usaremos las siguiente notación: $p_{1}$ es el momento en el sistema laboratorio y $p_{1}'$ es el sistema del centro de masas. En la siguiente figura presentamos un esquema de ambos sistemas de referencia, y como son las partículas para cada uno de ellos.  
 
-\begin{minipage}[t]{0.45\linewidth} 
-\begin{center}
-\begin{tikzpicture}[thick,scale=0.6]
-\node (1) at (-3,0) {};
-\node (2) at (0,0) {$m_2$};
-\node (3) at (3,1) {$m_3$};
-\node (4) at (3,-1) {$m_4$};
-\node (m1) at (-1.5,0.5) {$m_1$};
-\draw[arrows={->},ultra thick] (1.east)--(2.west);
-\draw[arrows={->},ultra thick] (2.east)--(3.west);
-\draw[arrows={->},ultra thick] (2.east)--(4.west);
-\end{tikzpicture}
-\captionof{figure}{Sistema Laboratorio}
-\end{center}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.45\linewidth}
-\begin{center}
-\begin{tikzpicture}[thick,scale=0.6]
-\node (1) at (-3.5,0) {};
-\node (2) at (3.5,0) {};
-\node (3) at (1.8,2.8) {};
-\node (4) at (-1.8,-2.8) {};
-\draw[arrows={->},ultra thick] (1.east)--(-0.1,0)  ;
-\draw[arrows={->},ultra thick] (2.west)--(0.1,0)  ;
-\draw[arrows={->},ultra thick] (0.1,0.1)--(3.south west)  ;
-\draw[arrows={->},ultra thick] (-0.1,-0.1)--(4.north east)  ;
+Esta reacción es una de las más interesantes a la hora de obtener información acerca de núcleos halo con precisión, en particular información acerca el $^{10}$Li. 
+La reacción de transferencia \({}^{11}\text{Li}(d,t){}^{10}\text{Li}\) es particularmente interesante dentro del estudio de núcleos exóticos debido a su capacidad para proporcionar información directa sobre la estructura del halo de \({}^{11}\text{Li}\). A diferencia de muchas reacciones que sólo permiten estudiar el espectro excitado de \({}^{10}\text{Li}\), esta reacción accede directamente a las configuraciones de un solo neutrón en \({}^{11}\text{Li}\), facilitando la reconstrucción de sus componentes estructurales.
+
+
+¿Por qué es relevante estudiar \({}^{11}\text{Li}(d,t){}^{10}\text{Li}\)?
+\begin{itemize}
+    \item Permite investigar el papel de los estados resonantes de \(^{10}\text{Li}\) en la estructura del halo de \(^{11}\text{Li}\). Dado que $^{10}\text{Li}$ es inestable y no tiene un estado ligado, su estudio experimental es muy complicado, y esta reacción permite observar sus resonancias de forma más directa. \cite{SANETULLAEV2016481}.
     
-\node (m1) at (-1.75,0.3) {$m_1$};
-\node (m2) at (1.75,0.3) {$m_2$};
-\node (m3) at (2.3,1.8) {$m_3$};
-\node (m4) at (-1.8,-1.8) {$m_4$};
-\end{tikzpicture}
-\captionof{figure}{Sistema Centro de Masas}
-\end{center}
-\end{minipage}
+    \item La transferencia de un neutrón desde \(^{11}\text{Li}\) al deuterón que forma el tritón permite poblar estados de \(^{10}\text{Li}\) con características específicas de momento angular y energía, mostrando la naturaleza de las configuraciones \(s_{1/2}\) y \(p_{1/2}\) en el estado fundamental de \({}^{11}\text{Li}\).  \cite{CASAL2017307}. 
+    
+    \item Es sensible a los factores espectroscópicos, es decir, permite medir la probabilidad de encontrar una cierta configuración de un neutrón y \({}^{10}\text{Li}\) en el estado fundamental de \({}^{11}\text{Li}\), lo cual no es accesible en muchas otras reacciones. \cite{SANETULLAEV2016481}. 
+\end{itemize}
 
-\subsection{Cálculo de los ángulos}
-En esta sección trataremos de obtener los ángulos de salida de las partículas 3 y 4 (y sus energías) en función de las variables conocidas: energía cinética y masas de las partículas. Para esto necesitaremos calcular las energías de las partículas en el sistema centro de masas, ya que las relaciones de conservación de la energía es mucho mas sencilla en este sistema referencial. Luego podremos recuperarlas usando la \textit{transformada de Lorentz}. 
-
-Como podemos ver en las figuras, en el sistema laboratorio la partícula 1 está en movimiento mientras que la partícula 2 está en reposo. Eso nos lleva a que sus momentos, en el sistema de referencia del laboratorio:
-
-\begin{eqnarray}
-    P_1 = (E_1/c,\pn_1) & \quad P_2 = (m_2c,0) \\
-    P_3 = (E_3/c,\pn_3) & \quad P_4 = (E_4/c,\pn_4)
-\end{eqnarray}
-Por otro lado, los momentos en el sistema de referencia del centro de masas vendrán dados por
-
-\begin{eqnarray}
-    P_1' = (E_1'/c,\pn_1') \quad P_2 = (E_2'/c,-\pn_1') \\ 
-    P_3' = (E_3'/c,\pn_3') \quad P_4 = (E_4'/c,-\pn_3')
-\end{eqnarray}
-Asumiremos que la partícula 1 incidente se mueve únicamente en el eje $x$ tal que $\pn_1=(p_1,0,0)$. En ese caso el sistema centro de masas se moverá respecto al sistema laboratorio en el eje $x$, por lo que habrá que aplicar la transformaciones de Lorentz (\ref{Ec:04} y \ref{Ec:05}) siendo válidas para \textit{cualquier cuadrimomento}. Definimos las energías totales como $E_{tot}=E_1+E_2$ y como  $E_{tot}'=E_1'+E_2'$, siendo esta última la \textit{energía del centro de masas}, que verifica que
-\begin{equation}
-    E_{tot}' \equiv E_{CM} = E_{tot}^2 - c^2p_1^2 \label{Ec:18}
-\end{equation}
-Tanto $E_{tot}$ como $E_{tot}'$ son variables conocidas. Nos interesa calcular las energías $E_3'$ y $E_4'$, que usando la transformación de Lorentz nos servirán para estudiar las energías $E_3$ y $E_4$, así como los momentos. Las relaciones se pueden calcular como 
-
-\begin{equation}
-    E_c' = E_{tot}' - E_{ex}
-\end{equation}
-siendo $E_{ex}$ la parte de la energía inicial que se convierte en energía de estados excitados de las partículas 3 y 4. Así pues: 
-\begin{eqnarray}
-    E_3 ' & = & \frac{1}{2} \left( E_{c}' + \frac{m_3^2c^4- m_4^2c_4}{E_{c}'} \right) \\
-    E_4 ' & = & \frac{1}{2} \left( E_{c}' + \frac{m_4^2c^4- m_3^2c_4}{E_{c}'} \right) 
-\end{eqnarray}
-A partir de estos valores de $E_3'$ y $E_4'$ podemos calcular el valor de los momentos $p_3'$ y $p_4'$ (en módulo). Podemos suponer sin ningún tipo de problema que la coordenada $x$ de los momentos vienen dadas por
-
-\begin{eqnarray}
-    p_{3x}' = p_3' \cos (\theta_3') \\
-    p_{4x}' = p_4' \cos (\theta_4')
-\end{eqnarray}
-de este modo podemos aplicar las transformaciones de Lorentz para hallar los valores del $\cos (\theta_3)$ y $\cos (\theta_4)$. Así, usando la ecuación \ref{Ec:09}:
-
-\begin{eqnarray}
-    p_3 \cos (\theta_3) = \gamma (p_3' \cos (\theta_3')+\beta E_3'/c)
-\end{eqnarray}
-despejando $\cos (\theta)$ obtenemos:
-
-\begin{equation}
-    \cos (\theta_3) = \frac{\gamma}{p_3} (p_3' \cos (\theta_3')+\beta E_3'/c)
-\end{equation}
-El cálculo de $p_4$ es exactamente igual, obteniendo
+Ventajas frente a otras reacciones de transferencia
+\begin{itemize}
+    \item A diferencia de otras como \({}^{9}\text{Li}(d,p){}^{10}\text{Li}\), la reacción \({}^{11}\text{Li}(d,t){}^{10}\text{Li}\) accede directamente a la estructura del halo en \({}^{11}\text{Li}\), no sólo a la existencia de resonancias en \({}^{10}\text{Li}\). \cite{CASAL2017307}. 
+    
+    \item El modelo DWBA aplicado en este tipo de estudios, junto con funciones de solapamiento derivadas de un modelo tridimensional, permite una comparación más directa y realista con datos experimentales. \cite{CASAL2017307}.
+\end{itemize}
 
 
-\begin{equation}
-    \cos (\theta_4) = \frac{\gamma}{p_4} (p_4' \cos (\theta_4')+\beta E_4'c)
-\end{equation}
+En resumen, la reacción \({}^{11}\text{Li}(d,t){}^{10}\text{Li}\) no sólo aporta datos sobre los estados de \({}^{10}\text{Li}\), sino que se convierte en una herramienta crucial para entender cómo se configura el halo en \({}^{11}\text{Li}\), permitiendo extraer porcentajes de contribuciones tipo \(s_{1/2}\) y \(p_{1/2}\), y estudiar la ruptura del cierre de capa en \(N=8\). Por ello, tiene una relevancia singular dentro de la física nuclear de sistemas exóticos.
 
 
 
-\subsection{Anexo}
-
-En esta sección procederemos de hacer el cálculo de las variables que no hemos desarrollado anteriormente, y aquellas que si hemos desarrollado pero no explícitamente. Estas son: $\gamma$, $\beta$; $E_3'$, $E_4'$, y $p_3$, $p_4$.
-
-\subsubsection{Cálculo de $\gamma$ y $\beta$}
-Para calcular los valores de $\gamma$ y $\beta$ partimos de la ecuación \ref{Ec:18}. Como podemos ver $E_{tot}'$ es una función de variables conocidas. Dado que podemos relacionar $P_1+P_2$ con $P_1'+P_2'$ usando la matriz de Lorentz $\Lambda$ (la suma de cuadrimomentos sigue siendo un cuadrimomento), tenemos que:
-
-\begin{eqnarray}
-    \frac{E_1}{c}+m_2c =  \gamma\left( \frac{E_1'}{c}+ \frac{E_2'}{c}\right)  \\
-    p_1 =  \gamma  \beta  \left( \frac{E_1'}{c}+ \frac{E_2'}{c}\right) 
-\end{eqnarray}
-o lo que es lo mismo
-
-\begin{equation}
-    E_{tot} = \gamma E_{tot}' \quad \quad  p_1 = \gamma \beta E_{tot}'
-\end{equation}
-Despejando podemos obtener tanto $\beta$ como $\gamma$ en función de variables conocidas
-
-\begin{equation}
-    \gamma = \frac{E_{tot}}{E_{tot}'} \quad \quad \beta = \frac{p_1}{E_{tot}}
-\end{equation}
-
-
-\subsubsection{Cálculo de $E_3'$ y $E_4'$}
-Para calcular estos valores usamos las ecuaciones siguientes:
-\begin{eqnarray}
-    E_3' + E_4' = E_{tot}' - E_{ex}  \\
-    E_3'^2 = m_3^2 c^4+ c^2 p_3'^2 \label{Ec:31} \\ 
-    E_4'^2 = m_4^2 c^4+ c^2 p_3'^2  \label{Ec:32}
-\end{eqnarray}
-de tal modo que restando \ref{Ec:31} y \ref{Ec:31} podamos obtener:
-
-\begin{eqnarray}
-    E_3'^2-(E_4')^2= m_3^2c^4 - m_4c^4
-\end{eqnarray}
-de tal modo que
-
-\begin{eqnarray}
-   (E_3'+E_4')(E_3'-E_4') =  m_3^2c^4 - m_4c^4
-\end{eqnarray}
-Esto es
-\begin{eqnarray}
-(E_3'-E_4') =  \dfrac{m_3^2c^4 - m_4c^4}{E_{tot}'}
-\end{eqnarray}
-de tal modo que, podamos obtener
-\begin{eqnarray}
-    E_3 ' & = & \frac{1}{2} \left( E_{c}' + \frac{m_3^2c^4- m_4^2c^4}{E_{c}'} \right) \\
-    E_4 ' & = & \frac{1}{2} \left( E_{c}' + \frac{m_4^2c^4- m_3^2c^4}{E_{c}'} \right) 
-\end{eqnarray}
-donde recordamos que $E_c'=E_{tot}'-E_{ex}$ es la energía total disponible para ``convertirse en energía cinética''
-
-\subsubsection{Calculo de $p_3$ y $p_4$}
-Como hemos visto hemos calculado $E_3'$ y $p_3'$ (esta segunda no la hemos obtenido explícitamente, pero es trivial conociendo $E_3'$). Lógicamente podremos relacionar estos valores con $E_3$, ya que la transformaciones de Lorentz \ref{Ec:08}, de tal modo que
-
-\begin{equation}
-    E_3 = \gamma (E_3'  + \beta c p_3' \cos (\theta_3'))
-\end{equation}
-y así:
-
-\begin{equation}
-    p_3 = \sqrt{m_3^2 c^4 + E_3^2/c^2}
-\end{equation}
-De manera análoga se calcula $p_4$.
-
-\begin{equation}
-    \begin{array}{ll}
-    E_4 \ = &\  \gamma (E_4'  + \beta c p_4' \cos (\theta_4')) \\[1em]
-    p_4 \ = & \ \sqrt{m_4 c^2 + E_4^2/c^2}
-    \end{array}
-\end{equation}
-
+\subsection{Modelo de capas}

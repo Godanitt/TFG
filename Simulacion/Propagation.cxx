@@ -111,7 +111,7 @@ Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROO
     double t3inSil0{srim.Slow("light", t3, silDist0)};
 
     if (incIdx == 0 || incIdx==1){
-        double t3inSil0=ApplyStraggling(&srim, "light", t3, silDist0);
+        t3inSil0=ApplyStraggling(&srim, "light", t3, silDist0);
     }
     
 
@@ -126,8 +126,8 @@ Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROO
     double dT3Sil0 {t3inSil0 - t3outSil0};
 
     if (incIdx == 0 || incIdx==1){
-        auto t3outSil0 =srim.SlowWithStraggling("lightInSil", t3inSil0, silThick0, thetaSil);
-        double dT3Sil0 = ApplySilResolution(t3inSil0 - t3outSil0);
+        t3outSil0 =srim.SlowWithStraggling("lightInSil", t3inSil0, silThick0, thetaSil);
+        dT3Sil0 = ApplySilResolution(t3inSil0 - t3outSil0);
     }
 
     // Vemos si la partícula se ha frenaado en el silicio y  si no se ha parado antes
@@ -135,8 +135,7 @@ Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROO
 
     // Vemos si la partícula se ha frenado antes del primer silicio
 
-    double rangeBeforeSil0{1000*(srim.EvalRange("lightInSil", t3))};
-
+    double rangeBeforeSil0{(srim.EvalRange("light", t3))};
     bool stoppedBeforeSil0{silDist0 > rangeBeforeSil0};
 
       
@@ -153,7 +152,7 @@ Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROO
     double t3inSil1{srim.Slow("light", t3outSil0, silDist1+0.001)};
 
     if (incIdx == 0 || incIdx==1){
-        double t3inSil1=ApplyStraggling(&srim, "light", t3outSil0, silDist1);
+        t3inSil1=ApplyStraggling(&srim, "light", t3outSil0, silDist1);
     }
 
     auto silThick1{sils->GetLayer("f1").GetUnit().GetThickness()};
@@ -166,8 +165,8 @@ Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROO
     // Aplicamos la resolución
     double dT3Sil1{t3inSil1 - t3outSil1};
     if (incIdx == 0 || incIdx==1){
-        auto t3outSil1 =srim.SlowWithStraggling("lightInSil", t3inSil1, silThick1, thetaSil);
-        double dT3Sil1=ApplySilResolution(t3inSil1 - t3outSil1);
+        t3outSil1 =srim.SlowWithStraggling("lightInSil", t3inSil1, silThick1, thetaSil);
+        dT3Sil1=ApplySilResolution(t3inSil1 - t3outSil1);
     }
 
 

@@ -62,8 +62,8 @@ TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigma
     c->cd(squareCanvas);
 
     // Ajustamos a una Voigt -> Convolución gauss+ briet-wigner
-    double xmin=Ex-1;
-    double xmax=Ex+1;
+    double xmin=Ex-5;
+    double xmax=Ex+5;
 
     TF1 *fitVoigt = new TF1("voigt", [](double *x, double *par) {
         return par[0] * TMath::Voigt(x[0] - par[1], par[2], par[3]);
@@ -77,7 +77,7 @@ TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigma
     }
 
     fitVoigt->SetParameters(10e6, Ex, sigmaInicial, gammaInicial); // estimación inicial
-    hClone->Fit(fitVoigt, "R");
+    hClone->Fit(fitVoigt, "RM");
     
     fitVoigt->SetLineColor(color-5); 
     fitVoigt->SetNpx(5000); // o más, por defecto es 100
@@ -86,6 +86,7 @@ TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigma
     hClone->Draw();
     fitVoigt->Draw("same");
 
+    
     
     // Parámetros:
     // par[0] = Amplitud

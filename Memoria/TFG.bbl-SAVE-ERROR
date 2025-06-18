@@ -19,27 +19,490 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
-    \entry{key}{article}{}
-      \name{author}{1}{}{%
-        {{hash=4d186321c1a7f0f354b297e8914ab240}{%
-           family={hola},
-           familyi={h\bibinitperiod}}}%
+    \entry{tanihata2023lowEnergyHalo}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=ffc84ac6cbd4ca03c713db6d126f2d3d}{%
+           family={C.\bibnamedelimi Signorini},
+           familyi={C\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={M.\bibnamedelimi Mazzocco},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=277b69b36f31ba4e48c9d1b34c43cd5f}{%
+           family={Pierroutsakou},
+           familyi={P\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
       }
-      \strng{namehash}{4d186321c1a7f0f354b297e8914ab240}
-      \strng{fullhash}{4d186321c1a7f0f354b297e8914ab240}
-      \strng{bibnamehash}{4d186321c1a7f0f354b297e8914ab240}
-      \strng{authorbibnamehash}{4d186321c1a7f0f354b297e8914ab240}
-      \strng{authornamehash}{4d186321c1a7f0f354b297e8914ab240}
-      \strng{authorfullhash}{4d186321c1a7f0f354b297e8914ab240}
-      \field{sortinit}{h}
-      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \name{editor}{3}{}{%
+        {{hash=70075be67ca39962ad1f82844d51e04a}{%
+           family={Tanihata},
+           familyi={T\bibinitperiod},
+           given={Isao},
+           giveni={I\bibinitperiod}}}%
+        {{hash=05fe8fe151a52b6812195a536156f850}{%
+           family={Toki},
+           familyi={T\bibinitperiod},
+           given={Hiroshi},
+           giveni={H\bibinitperiod}}}%
+        {{hash=1697b3c9aca04a1aa417672f2a880889}{%
+           family={Suzuki},
+           familyi={S\bibinitperiod},
+           given={Toshio},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Singapore}%
+      }
+      \list{publisher}{1}{%
+        {Springer Nature}%
+      }
+      \strng{namehash}{cdd92222d7794175d0b2fbf9f32901b6}
+      \strng{fullhash}{cdd92222d7794175d0b2fbf9f32901b6}
+      \strng{bibnamehash}{cdd92222d7794175d0b2fbf9f32901b6}
+      \strng{authorbibnamehash}{cdd92222d7794175d0b2fbf9f32901b6}
+      \strng{authornamehash}{cdd92222d7794175d0b2fbf9f32901b6}
+      \strng{authorfullhash}{cdd92222d7794175d0b2fbf9f32901b6}
+      \strng{editorbibnamehash}{8a5852f5673bf63bed0d9f121bd2a364}
+      \strng{editornamehash}{8a5852f5673bf63bed0d9f121bd2a364}
+      \strng{editorfullhash}{8a5852f5673bf63bed0d9f121bd2a364}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{hola}
-      \field{number}{hola}
-      \field{title}{hola}
-      \field{volume}{hola}
-      \field{year}{hola}
+      \field{booktitle}{Handbook of Nuclear Physics}
+      \field{chapter}{29}
+      \field{isbn}{978-981-15-8817-4}
+      \field{title}{Low Energy Halo Nuclei}
+      \field{year}{2023}
+      \field{pages}{1126\bibrangedash 1200}
+      \range{pages}{75}
+      \verb{doi}
+      \verb 10.1007/978-981-15-8818-1_25
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-981-15-8818-1_25
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-981-15-8818-1_25
+      \endverb
+    \endentry
+    \entry{CASAL2017307}{article}{}
+      \name{author}{3}{}{%
+        {{hash=2938665aac05c572a4a61c7b94cec197}{%
+           family={Casal},
+           familyi={C\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=905ab8fecbace6df25935333a5592ec3}{%
+           family={Gómez-Ramos},
+           familyi={G\bibinithyphendelim R\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c8d3859f06b26d0e1d7ddab706f5c2c3}{%
+           family={Moro},
+           familyi={M\bibinitperiod},
+           given={A.M.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{c1e0cfcf8cd5d7b3c24a426fdf5557fc}
+      \strng{fullhash}{c1e0cfcf8cd5d7b3c24a426fdf5557fc}
+      \strng{bibnamehash}{c1e0cfcf8cd5d7b3c24a426fdf5557fc}
+      \strng{authorbibnamehash}{c1e0cfcf8cd5d7b3c24a426fdf5557fc}
+      \strng{authornamehash}{c1e0cfcf8cd5d7b3c24a426fdf5557fc}
+      \strng{authorfullhash}{c1e0cfcf8cd5d7b3c24a426fdf5557fc}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Recent data on the differential angular distribution for the transfer reaction 11Li(p,d)10Li at E/A=5.7 MeV in inverse kinematics are analyzed within the DWBA reaction framework, using the overlap functions calculated within a three-body model of 11Li. The weight of the different 10Li configurations in the system's ground state is obtained from the structure calculations unambiguously. The effect of the 9Li spin in the calculated observables is also investigated. We find that, although all the considered models succeed in reproducing the shape of the data, the magnitude is very sensitive to the content of p1/2 wave in the 11Li ground-state wave function. Among the considered models, the best agreement with the data is obtained when the 11Li ground state contains a ∼31% of p1/2 wave in the n-9Li subsystem. Although this model takes into account explicitly the splitting of the 1+ and 2+ resonances due to the coupling of the p1/2 wave to the 3/2 spin of the core, a similar degree of agreement can be achieved with a model in which the 9Li spin is ignored, provided that it contains a similar p-wave content.}
+      \field{issn}{0370-2693}
+      \field{journaltitle}{Physics Letters B}
+      \field{title}{Description of the 11Li(p,d)10Li transfer reaction using structure overlaps from a full three-body model}
+      \field{volume}{767}
+      \field{year}{2017}
+      \field{pages}{307\bibrangedash 313}
+      \range{pages}{7}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.physletb.2017.02.017
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0370269317301077
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0370269317301077
+      \endverb
+      \keyw{Li,Transfer,DWBA,Overlaps,Three-body}
+    \endentry
+    \entry{SANETULLAEV2016481}{article}{}
+      \name{author}{33}{}{%
+        {{hash=10c2c65dd0f479d6758e166925b5aff2}{%
+           family={Sanetullaev},
+           familyi={S\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=9fb1a02b86d7ddc626e623735c8e58ab}{%
+           family={Kanungo},
+           familyi={K\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=b0bb662e992201bb61bd0c52f336b259}{%
+           family={Tanaka},
+           familyi={T\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3099948084b6182dbcf29e9e5d6b19c5}{%
+           family={Alcorta},
+           familyi={A\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b3d247102309121b579383fa8b31893f}{%
+           family={Andreoiu},
+           familyi={A\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=608b1d779f951f18de7f7f262a120ad3}{%
+           family={Bender},
+           familyi={B\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=43f0e665877b74a12c480e25c78bca41}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={A.A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2c6267fd3155df91c8f744416fa2bb6c}{%
+           family={Christian},
+           familyi={C\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=e7032bd83cd597d9132a33dd9f62d13d}{%
+           family={Davids},
+           familyi={D\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=1c250aca7fa0c4a947e7a2fdaf6bcbff}{%
+           family={Fallis},
+           familyi={F\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=8cc641eb76b54cf6c1a0ef9b14f4d25e}{%
+           family={Fortin},
+           familyi={F\bibinitperiod},
+           given={J.P.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=15d282c915493939062b960ac14e5bfc}{%
+           family={Galinski},
+           familyi={G\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=2b88f777eecebb8ca817c441abd3316c}{%
+           family={Gallant},
+           familyi={G\bibinitperiod},
+           given={A.T.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=07f07f7e310ad069489bc0e80060643d}{%
+           family={Garrett},
+           familyi={G\bibinitperiod},
+           given={P.E.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=0f67172d61c99255a438f7b209285aa0}{%
+           family={Hackman},
+           familyi={H\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=422ec8c818808466cd579430fa35f408}{%
+           family={Hadinia},
+           familyi={H\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=82e83a2168b971943735627799c5fe47}{%
+           family={Ishimoto},
+           familyi={I\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7469c34caa991fee8bc924b7b1bbb4bd}{%
+           family={Keefe},
+           familyi={K\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f06b6ffec94119fbe6e860e7a529b8c7}{%
+           family={Krücken},
+           familyi={K\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=4069c67ab9a7f5bac7d81f37ad914b0d}{%
+           family={Lighthall},
+           familyi={L\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=432f89fb95a0f91b3ecd72311c22f44b}{%
+           family={McNeice},
+           familyi={M\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=3bd445bb45ee0ec3ccf0d7e2d4ae7904}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=376b6acbe86e8092ca756c364143a612}{%
+           family={Purcell},
+           familyi={P\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=a4e7ebe87245144d6b0d5505e113aef4}{%
+           family={Randhawa},
+           familyi={R\bibinitperiod},
+           given={J.S.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e5e6233e5aff679a16965486b5766c67}{%
+           family={Roger},
+           familyi={R\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=c2a25103a7047c8d7de11e9e60b075d0}{%
+           family={Rojas},
+           familyi={R\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=809bfbf2a17c39e964b5870db2ad0281}{%
+           family={Savajols},
+           familyi={S\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=b9a9e7f5dd8cd1cf8cf2039c28693f8b}{%
+           family={Shotter},
+           familyi={S\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=d8bb0b60af6ee6f8e7ac6efa132e5c51}{%
+           family={Tanihata},
+           familyi={T\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=924a035187944e7464eef0b993c8fbf9}{%
+           family={Thompson},
+           familyi={T\bibinitperiod},
+           given={I.J.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=d3ad7b6c01ffc374feb154a3ca02ea6a}{%
+           family={Unsworth},
+           familyi={U\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=bb859fe4dc4b60f2b4541786dd31726c}{%
+           family={Voss},
+           familyi={V\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=cc4aadc875d7abdbaf96dfa4a83d8b77}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Z.},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{49c18b8e2d264cd9d98d2e713ac8d692}
+      \strng{fullhash}{f5b2efc60cecf00218f7b5ed575a3fab}
+      \strng{bibnamehash}{49c18b8e2d264cd9d98d2e713ac8d692}
+      \strng{authorbibnamehash}{49c18b8e2d264cd9d98d2e713ac8d692}
+      \strng{authornamehash}{49c18b8e2d264cd9d98d2e713ac8d692}
+      \strng{authorfullhash}{f5b2efc60cecf00218f7b5ed575a3fab}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The first measurement of the one-neutron transfer reaction 11Li(p,d)10Li performed using the IRIS facility at TRIUMF with a 5.7A MeV 11Li beam interacting with a solid H2 target is reported. The 10Li residue was populated strongly as a resonance peak with energy Er=0.62±0.04 MeV having a total width Γ=0.33±0.07 MeV. The angular distribution of this resonance is characterized by neutron occupying the 1p1/2 orbital. A DWBA analysis yields a spectroscopic factor of 0.67±0.12 for p1/2 removal strength from the ground state of 11Li to the region of the peak.}
+      \field{issn}{0370-2693}
+      \field{journaltitle}{Physics Letters B}
+      \field{title}{Investigation of the role of 10Li resonances in the halo structure of 11Li through the Li11(p,d)Li10 transfer reaction}
+      \field{volume}{755}
+      \field{year}{2016}
+      \field{pages}{481\bibrangedash 485}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1016/j.physletb.2016.02.060
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0370269316001568
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0370269316001568
+      \endverb
+      \keyw{Halo nucleus,Transfer reaction,Inverse kinematics,DWBA,Spectroscopic factor}
+    \endentry
+    \entry{tanihata2023halo}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=70075be67ca39962ad1f82844d51e04a}{%
+           family={Tanihata},
+           familyi={T\bibinitperiod},
+           given={Isao},
+           giveni={I\bibinitperiod}}}%
+        {{hash=2e43c85725f6b49eed6a3d4f3afb71fd}{%
+           family={Jonson},
+           familyi={J\bibinitperiod},
+           given={Björn},
+           giveni={B\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=70075be67ca39962ad1f82844d51e04a}{%
+           family={Tanihata},
+           familyi={T\bibinitperiod},
+           given={Isao},
+           giveni={I\bibinitperiod}}}%
+        {{hash=05fe8fe151a52b6812195a536156f850}{%
+           family={Toki},
+           familyi={T\bibinitperiod},
+           given={Hiroshi},
+           giveni={H\bibinitperiod}}}%
+        {{hash=1697b3c9aca04a1aa417672f2a880889}{%
+           family={Suzuki},
+           familyi={S\bibinitperiod},
+           given={Toshio},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Singapore}%
+      }
+      \list{publisher}{1}{%
+        {Springer Nature}%
+      }
+      \strng{namehash}{95182a2e453cc452d210aed37665b88d}
+      \strng{fullhash}{95182a2e453cc452d210aed37665b88d}
+      \strng{bibnamehash}{95182a2e453cc452d210aed37665b88d}
+      \strng{authorbibnamehash}{95182a2e453cc452d210aed37665b88d}
+      \strng{authornamehash}{95182a2e453cc452d210aed37665b88d}
+      \strng{authorfullhash}{95182a2e453cc452d210aed37665b88d}
+      \strng{editorbibnamehash}{8a5852f5673bf63bed0d9f121bd2a364}
+      \strng{editornamehash}{8a5852f5673bf63bed0d9f121bd2a364}
+      \strng{editorfullhash}{8a5852f5673bf63bed0d9f121bd2a364}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Handbook of Nuclear Physics}
+      \field{chapter}{25}
+      \field{isbn}{978-981-15-8817-4}
+      \field{title}{Halo Nuclei}
+      \field{year}{2023}
+      \field{pages}{986\bibrangedash 1025}
+      \range{pages}{40}
+      \verb{doi}
+      \verb 10.1007/978-981-15-8818-1_25
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-981-15-8818-1_25
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-981-15-8818-1_25
+      \endverb
+    \endentry
+    \entry{THIELEMANN2011346}{article}{}
+      \name{author}{15}{}{%
+        {{hash=2fffdd891d764a6a802efddefc09d6f1}{%
+           family={Thielemann},
+           familyi={T\bibinitperiod},
+           given={F.-K.},
+           giveni={F\bibinithyphendelim K\bibinitperiod}}}%
+        {{hash=78d41c60038273cb55ac854ad112903b}{%
+           family={Arcones},
+           familyi={A\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=308a40102a1effe50504bf1d3e20e8a7}{%
+           family={Käppeli},
+           familyi={K\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=2ef87a2846f8deca468604e061119c25}{%
+           family={Liebendörfer},
+           familyi={L\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=fb321fc551c1577540a05517f166712e}{%
+           family={Rauscher},
+           familyi={R\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=2ba374d8f322a25efe2117f5f3524b0e}{%
+           family={Winteler},
+           familyi={W\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=8dc026ed9bcc30d72058be433a496d1c}{%
+           family={Fröhlich},
+           familyi={F\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=9741617ee7efd1415823dd0ea0291393}{%
+           family={Dillmann},
+           familyi={D\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=34c075ceeec8b2c80c46c267f1668595}{%
+           family={Fischer},
+           familyi={F\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=d8fcd7b93e3b70fecd95401ba079f5c1}{%
+           family={Martinez-Pinedo},
+           familyi={M\bibinithyphendelim P\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=b0b735667d3320a404c8dea74db29ace}{%
+           family={Langanke},
+           familyi={L\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=8e4fc762972b13705726293ac2e4eeb3}{%
+           family={Farouqi},
+           familyi={F\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=42c308b3edc4583c8f2c0ad494a236a8}{%
+           family={Kratz},
+           familyi={K\bibinitperiod},
+           given={K.-L.},
+           giveni={K\bibinithyphendelim L\bibinitperiod}}}%
+        {{hash=3e1d8b54ca6635379b0bc70fbdfa7238}{%
+           family={Panov},
+           familyi={P\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=7fb49f4113645311c0910e2896adcd20}{%
+           family={Korneev},
+           familyi={K\bibinitperiod},
+           given={I.K.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{fb927a56dbdbdab3f2c225fe219f3028}
+      \strng{fullhash}{1c121760187fb3677f5418dbea7038c9}
+      \strng{bibnamehash}{fb927a56dbdbdab3f2c225fe219f3028}
+      \strng{authorbibnamehash}{fb927a56dbdbdab3f2c225fe219f3028}
+      \strng{authornamehash}{fb927a56dbdbdab3f2c225fe219f3028}
+      \strng{authorfullhash}{1c121760187fb3677f5418dbea7038c9}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This article addresses three of the four nucleosynthesis processes involved in producing heavy nuclei beyond Fe (with a main focus on the r-process). Opposite to the fourth process (the s-process), which operates in stellar evolution during He- and C-burning, they are all related to explosive burning phases, (presumably) linked to core collapse supernova events of massive stars. The (classical) p-process is identified with explosive Ne/O-burning in outer zones of the progenitor star. It is initiated by the passage of the supernova shock wave and acts via photodisintegration reactions like a spallation process which produces neighboring (proton-rich) isotopes from pre-existing heavy nuclei. The reproduction of some of the so-called lighter p-isotopes with A<100 faces problems in this environment. The only recently discovered νp-process is related to the innermost ejecta, the neutrino wind expelled from the hot proto-neutron star after core collapse and the supernova explosion. This neutrino wind is proton-rich in its early phase, producing nuclei up to 64Ge. Reactions with neutrinos permit to overcome decay/reaction bottlenecks for the flow beyond 64Ge, thus producing light p-isotopes, which face problems in the classical p-process scenario. The understanding of the r-process, being identified for a long time with rapid neutron captures and passing through nuclei far from stability, is still experiencing major problems. These are on the one hand related to nuclear uncertainties far from stability (masses, half-lives, fission barriers), affecting the process speed and abundance peaks. On the other hand the site is still not definitely located, yet. (i) Later, possibly neutron-rich, high entropy phases of the neutrino wind (if they materialize!) could permit its operation. (ii) Other options include the ejection of very neutron-rich neutron star-like matter, occurring possibly in neutron star mergers or core collapse supernova events with jets, related to prior stellar evolution with high rotation rates and magnetic fields. Two different environments are required for a weak and a main/strong r-process, witnessed by observations of low metallicity stars and meteoritic inclusions, which could possibly be identified with the two options listed above, i.e. the weak r-process could be related to the neutrino wind when changing from p-rich to n-rich conditions.}
+      \field{issn}{0146-6410}
+      \field{journaltitle}{Progress in Particle and Nuclear Physics}
+      \field{note}{Particle and Nuclear Astrophysics}
+      \field{number}{2}
+      \field{title}{What are the astrophysical sites for the r-process and the production of heavy elements?}
+      \field{volume}{66}
+      \field{year}{2011}
+      \field{pages}{346\bibrangedash 353}
+      \range{pages}{8}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.ppnp.2011.01.032
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0146641011000330
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0146641011000330
+      \endverb
+      \keyw{Nucleosynthesis,-process,-process,-process,-process,Supernovae}
     \endentry
   \enddatalist
 \endrefsection

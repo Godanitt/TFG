@@ -1,7 +1,7 @@
 
 % Autor y título
 
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
 
@@ -44,6 +44,10 @@
 \usepackage{listings}
 \usepackage{courier}
 \usepackage{color}
+\usepackage[normalem]{ulem} % para subrayado
+\usepackage{soul}
+\sethlcolor{red!30}
+
 
 \AtBeginEnvironment{table}{\scriptsize} % cambia \small por \footnotesize, \scriptsize, etc.
 
@@ -334,13 +338,15 @@
 \input{Cuerpo/Sec_01.tex}
 \input{Cuerpo/Sec_02.tex}
 \input{Cuerpo/Sec_03.tex}
+\input{Cuerpo/Sec_04.tex}
+\input{Cuerpo/Sec_05.tex}
 
 
 
 \newpage
-\appendix
-\input{Cuerpo/Ap_01.tex}
-\newpage 
+%\appendix
+%\input{Cuerpo/Ap_01.tex}
+%\newpage 
 
 \printbibliography
 \addcontentsline{toc}{section}{Referencias}
