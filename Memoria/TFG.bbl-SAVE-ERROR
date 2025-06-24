@@ -113,7 +113,7 @@
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Recent data on the differential angular distribution for the transfer reaction 11Li(p,d)10Li at E/A=5.7 MeV in inverse kinematics are analyzed within the DWBA reaction framework, using the overlap functions calculated within a three-body model of 11Li. The weight of the different 10Li configurations in the system's ground state is obtained from the structure calculations unambiguously. The effect of the 9Li spin in the calculated observables is also investigated. We find that, although all the considered models succeed in reproducing the shape of the data, the magnitude is very sensitive to the content of p1/2 wave in the 11Li ground-state wave function. Among the considered models, the best agreement with the data is obtained when the 11Li ground state contains a ∼31% of p1/2 wave in the n-9Li subsystem. Although this model takes into account explicitly the splitting of the 1+ and 2+ resonances due to the coupling of the p1/2 wave to the 3/2 spin of the core, a similar degree of agreement can be achieved with a model in which the 9Li spin is ignored, provided that it contains a similar p-wave content.}
+      \field{abstract}{Recent data on the differential angular distribution for the transfer reaction 11Li(p,d)10Li at E/A=5.7 MeV in inverse kinematics are analyzed within the DWBA reaction framework, using the overlap functions calculated within a three-body model of 11Li. The weight of the different 10Li configurations in the system's ground state is obtained from the structure calculations unambiguously. The effect of the 9Li spin in the calculated observables is also investigated. We find that, although all the considered models succeed in reproducing the shape of the data, the magnitude is very sensitive to the content of p1/2 wave in the 11Li ground-state wave function. Among the considered models, the best agreement with the data is obtained when the 11Li ground state contains approximately 31\% of p1/2 wave in the n-9Li subsystem. Although this model takes into account explicitly the splitting of the 1+ and 2+ resonances due to the coupling of the p1/2 wave to the 3/2 spin of the core, a similar degree of agreement can be achieved with a model in which the 9Li spin is ignored, provided that it contains a similar p-wave content.}
       \field{issn}{0370-2693}
       \field{journaltitle}{Physics Letters B}
       \field{title}{Description of the 11Li(p,d)10Li transfer reaction using structure overlaps from a full three-body model}
@@ -122,7 +122,7 @@
       \field{pages}{307\bibrangedash 313}
       \range{pages}{7}
       \verb{doi}
-      \verb https://doi.org/10.1016/j.physletb.2017.02.017
+      \verb 10.1016/j.physletb.2017.02.017
       \endverb
       \verb{urlraw}
       \verb https://www.sciencedirect.com/science/article/pii/S0370269317301077
@@ -131,6 +131,262 @@
       \verb https://www.sciencedirect.com/science/article/pii/S0370269317301077
       \endverb
       \keyw{Li,Transfer,DWBA,Overlaps,Three-body}
+    \endentry
+    \entry{Knoll:1300754}{book}{}
+      \name{author}{1}{}{%
+        {{hash=6658b3a0dc8d44502ea2cda983468088}{%
+           family={Knoll},
+           familyi={K\bibinitperiod},
+           given={Glenn\bibnamedelima F},
+           giveni={G\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY}%
+      }
+      \list{publisher}{1}{%
+        {Wiley}%
+      }
+      \strng{namehash}{6658b3a0dc8d44502ea2cda983468088}
+      \strng{fullhash}{6658b3a0dc8d44502ea2cda983468088}
+      \strng{bibnamehash}{6658b3a0dc8d44502ea2cda983468088}
+      \strng{authorbibnamehash}{6658b3a0dc8d44502ea2cda983468088}
+      \strng{authornamehash}{6658b3a0dc8d44502ea2cda983468088}
+      \strng{authorfullhash}{6658b3a0dc8d44502ea2cda983468088}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Radiation detection and measurement; 4th ed.}}
+      \field{year}{2010}
+      \verb{urlraw}
+      \verb https://cds.cern.ch/record/1300754
+      \endverb
+      \verb{url}
+      \verb https://cds.cern.ch/record/1300754
+      \endverb
+    \endentry
+    \entry{Leo:302344}{book}{}
+      \name{author}{1}{}{%
+        {{hash=a80848957bddae12c3f76ac11f3b52c3}{%
+           family={Leo},
+           familyi={L\bibinitperiod},
+           given={William\bibnamedelima R},
+           giveni={W\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{a80848957bddae12c3f76ac11f3b52c3}
+      \strng{fullhash}{a80848957bddae12c3f76ac11f3b52c3}
+      \strng{bibnamehash}{a80848957bddae12c3f76ac11f3b52c3}
+      \strng{authorbibnamehash}{a80848957bddae12c3f76ac11f3b52c3}
+      \strng{authornamehash}{a80848957bddae12c3f76ac11f3b52c3}
+      \strng{authorfullhash}{a80848957bddae12c3f76ac11f3b52c3}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Techniques for nuclear and particle physics experiments: a how-to approach; 2nd ed.}}
+      \field{year}{1994}
+      \verb{doi}
+      \verb 10.1007/978-3-642-57920-2
+      \endverb
+      \verb{urlraw}
+      \verb https://cds.cern.ch/record/302344
+      \endverb
+      \verb{url}
+      \verb https://cds.cern.ch/record/302344
+      \endverb
+    \endentry
+    \entry{MAUSS2019498}{article}{}
+      \name{author}{31}{}{%
+        {{hash=15cd92b14228dc0f3f6f621be47d56a6}{%
+           family={Mauss},
+           familyi={M\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=7bf4b0263462fc3446470a91a1e38506}{%
+           family={Morfouace},
+           familyi={M\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=e5e6233e5aff679a16965486b5766c67}{%
+           family={Roger},
+           familyi={R\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=0fc583489c08a7ef85c85687b694b19d}{%
+           family={Pancin},
+           familyi={P\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9c4004eb1f2453f27cf98e552fd58e84}{%
+           family={Grinyer},
+           familyi={G\bibinitperiod},
+           given={G.F.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=9d7f6c0d00fb7bbbcd685c21b07fc1fc}{%
+           family={Giovinazzo},
+           familyi={G\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=6132d9aecfa42b9d2b69ab819efa77ce}{%
+           family={Alcindor},
+           familyi={A\bibinitperiod},
+           given={V.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=7840b89a8a00c4b7cefd2696ea98872c}{%
+           family={Álvarez-Pol},
+           familyi={Á\bibinithyphendelim P\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=dff1adcaf043901011fd2ad1c14502d6}{%
+           family={Arokiaraj},
+           familyi={A\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=59c638ff0972c9f3da87f3d3a64cd587}{%
+           family={Babo},
+           familyi={B\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9a70896e707bde382ad40263d8a6d2d8}{%
+           family={Bastin},
+           familyi={B\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=56d4594c17107e741d3990da0b6dc530}{%
+           family={Borcea},
+           familyi={B\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=b6f35c7c6c29530ce4b9a97e6c00862e}{%
+           family={Caamaño},
+           familyi={C\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cce1f5305e500ac68ac1d43cc9296bd8}{%
+           family={Ceruti},
+           familyi={C\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c9bb2bd5151d26816e5534c8fff38afd}{%
+           family={Fernández-Domínguez},
+           familyi={F\bibinithyphendelim D\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=6b4cd8be0f2e121c5cc64e4daf6c53cc}{%
+           family={Foulon-Moret},
+           familyi={F\bibinithyphendelim M\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=02314a5fdc8ed5b56eb5b03816e22da8}{%
+           family={Gangnant},
+           familyi={G\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=4426beab20e229a5b0835788a9d3a50f}{%
+           family={Giraud},
+           familyi={G\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ffd2815c8a673c2d53c57b312eddb30b}{%
+           family={Laffoley},
+           familyi={L\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=63cde4358e355d364aa25b322eaae2a6}{%
+           family={Mantovani},
+           familyi={M\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=9d653184943a15cb5037d88a1eeb01b0}{%
+           family={Marchi},
+           familyi={M\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=1826bb698050c2a0ff0c086072e881c6}{%
+           family={Monteagudo},
+           familyi={M\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=74ab1104c23141f9499380d36ee5f939}{%
+           family={Pibernat},
+           familyi={P\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=204dd4a7f979f65acfbb6f2ebfb7b14d}{%
+           family={Poleshchuk},
+           familyi={P\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+        {{hash=a2c56fc986fde933a4c123b67934c53c}{%
+           family={Raabe},
+           familyi={R\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=d83f69a8649fee84794f323a20db65b7}{%
+           family={Refsgaard},
+           familyi={R\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=02ad608af03dbf96624cb266e67f5204}{%
+           family={Revel},
+           familyi={R\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=513fd81fa6d7a1045f038f2ee2a75360}{%
+           family={Saillant},
+           familyi={S\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=5904a8a651d65c7772f007cc9fb3fd19}{%
+           family={Stanoiu},
+           familyi={S\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b384a18eef7bf08b2af176877b981344}{%
+           family={Wittwer},
+           familyi={W\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+        {{hash=51e5fb9f55c5b5d1edb17aea3861c908}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{a043529a4e22e833d13c53d3fc4575c5}
+      \strng{fullhash}{d8d9fa3d4bb97290cacbd5708e784976}
+      \strng{bibnamehash}{a043529a4e22e833d13c53d3fc4575c5}
+      \strng{authorbibnamehash}{a043529a4e22e833d13c53d3fc4575c5}
+      \strng{authornamehash}{a043529a4e22e833d13c53d3fc4575c5}
+      \strng{authorfullhash}{d8d9fa3d4bb97290cacbd5708e784976}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The ACtive TARget and Time Projection Chamber (ACTAR TPC) is a novel gas-filled detector that has recently been constructed at GANIL. This versatile detector is a gaseous thick target that allows the tracking of charged particles in three dimensions and provides a precise reaction energy reconstruction from the vertex position. A commissioning experiment using resonant scattering of a 3.2MeV/nucleon 18O beam on an isobutane gas (proton) target was performed. The beam and the heavy scattered ions were stopped in the gas volume, while the light recoil left the active volume and were stopped in auxiliary silicon detectors. A dedicated tracking algorithm was applied to determine the angle of emission and the length of the trajectory of the ions, to reconstruct the reaction kinematics used to built the excitation functions of the 1H(18O, 18O)1H and 1H(18O, 15N)4He reactions. In this article, we describe the design of the detector and the data analysis, that resulted in center of mass reaction energy resolutions of 38(4)keV FWHM and 54(9)keV FWHM for the proton and alpha channels, respectively.}
+      \field{issn}{0168-9002}
+      \field{journaltitle}{Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equipment}
+      \field{title}{Commissioning of the ACtive TARget and Time Projection Chamber (ACTAR TPC)}
+      \field{volume}{940}
+      \field{year}{2019}
+      \field{pages}{498\bibrangedash 504}
+      \range{pages}{7}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.nima.2019.06.067
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S016890021930912X
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S016890021930912X
+      \endverb
+      \keyw{ACtive TARget,Time Projection Chamber,,Resonant scattering}
     \endentry
     \entry{SANETULLAEV2016481}{article}{}
       \name{author}{33}{}{%

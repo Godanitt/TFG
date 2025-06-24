@@ -59,6 +59,12 @@
 \newtcolorbox{Anotacion}{colback=red!5!white,
 	colframe=red!75!red}
 
+%##############################################################################
+%#########  caption ###########################################
+%##############################################################################
+\captionsetup{font=small, justification=centering, skip=6pt, labelfont={bf,small}, textfont={small}}
+
+
 
 %##############################################################################
 %######### Ponemos el decimal con . ###########################################
@@ -67,7 +73,7 @@
 \sisetup{output-decimal-marker={.},
 	% exponentes ------------------------
 	exponent-mode=threshold,
-	exponent-thresholds=-3:4, % non usar exponentes 10^{-2,-1, 0, 1,2,3}
+	exponent-thresholds=-4:4, % non usar exponentes 10^{-2,-1, 0, 1,2,3}
 	% redondear -------------------------
 	% round-mode=figures, % cifras sig
 	% round-mode=places, % cantos decimales
@@ -173,7 +179,7 @@
 
 \usepackage[colorlinks=true, linkcolor=Blue, citecolor=ForestGreen, urlcolor=BrickRed]{hyperref} % Crea las
 \usepackage[nameinlink]{cleveref}
-\crefname{figure}{fig.}{Figs.}
+\crefname{figure}{fig.}{figs.}
 \crefname{table}{tab.}{Tabs.}
 
 %##############################################################################
@@ -335,11 +341,23 @@
 
 \setlength{\parskip}{2.2mm} % Cambia el espacio entre párrafos
 
+
+\begin{Anotacion}
+\textcolor{red}{Tenemos que comentar: 
+\begin{itemize}
+    \item \textbf{Características del núcleo 10Li:} energía de exitación, estado resonante, modelo de capas aplicado a este...
+    \item \textbf{Incertidumbre del ángulo.} Origen, como la parametrizamos...
+    \item \textbf{Tratamiendo más exsahustivo de la incertidumbre:} hablar de $\chi^2$ de las gaussianas, relacion de $\sigma_{tot}$ con las otras incertidumbres, como se relacionan entre ellas...
+    \item \textbf{Comentario sobre las incertidumbres $\sigma_0$}: cual es su origem, significado, que podemos extraer de eso... parece interesante.
+\end{itemize}}
+\end{Anotacion}
+
 \input{Cuerpo/Sec_01.tex}
 \input{Cuerpo/Sec_02.tex}
 \input{Cuerpo/Sec_03.tex}
 \input{Cuerpo/Sec_04.tex}
 \input{Cuerpo/Sec_05.tex}
+\input{Cuerpo/Sec_06.tex}
 
 
 

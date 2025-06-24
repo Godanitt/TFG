@@ -113,9 +113,14 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     auto *hKinL1{new TH2D{"hKinL1", "#theta_{3} vs T_{3} Sampleado; #theta_{3};T_{3};Contas", 220, 0, 80, 220, -5, 80}};
     auto *hImpactSilF0{new TH2D{"hImpactSilF0", "Impactos Silicio Layer f0; y[mm];z[mm];Contas", 200, -25, 275, 200, 0, 175*2-100}};
     auto *hImpactSilF1{new TH2D{"hImpactSilF1", "Impactos Silicio Layer f1; y[mm];z[mm];Contas", 200, -25, 275, 200, 0, 175*2-100}};
-    auto *hImpactSilL0{new TH2D{"hImpactSilL0", "Impactos Silicio Layer l0; y[mm];z[mm];Contas", 250, -200, 400, 200, -50, 175*2-100}};
-    auto *hImpactSilR0{new TH2D{"hImpactSilR0", "Impactos Silicio Layer r0; y[mm];z[mm];Contas", 250, -200, 400, 200, -50, 175*2-100}};
+    auto *hImpactSilL0{new TH2D{"hImpactSilL0", "Impactos Silicio Layer l0; x[mm];z[mm];Contas", 250, -200, 400, 200, -50, 175*2-100}};
+    auto *hImpactSilR0{new TH2D{"hImpactSilR0", "Impactos Silicio Layer r0; x[mm];z[mm];Contas", 250, -200, 400, 200, -50, 175*2-100}};
     auto *hRangeTheta{new TH2D{"hRangeTheta", "Rango vs #theta_{3}; #theta_{3};R [mm];Contas", 220, 0, 80, 220, 0, 400}};
+    
+    auto* hInteractionXY{new TH2D{"hImpactSilF0", "; x[mm];z[mm];Cuentas", 250, 0, 255, 200, 0, 175*2-100}};
+    auto* hInteractionYZ{new TH2D{"hImpactSilF0", "I; y[mm];z[mm];Cuentas", 200, 100, 155, 200,100, 155}};;
+
+    
     // TH1D
     auto *hThetaCMSampled{new TH1D{"hThetaCMSampled", "#theta_{CM} sampled; #theta; Contas", 180, 0, 180}};
     auto *hThetaCMRec{new TH1D{"hThetaCMRec", "#theta_{CM} rec;  #theta; Contas", 180, 0, 180}};
@@ -123,6 +128,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     auto* hThetaCM {new TH1D {"hThetaCM", "CM;#theta_{CM};C400ounts", 300, 0, 180}};
     auto* hRange {new TH1D {"hRangue", "Rangue;#Rangue [mm];Counts", 300, 0, 255}};
 
+    auto* hExSampled {new TH1D {"hExSampled", ";E_{x} [MeV];Cuentas", 300, -5, 5}};
 
     // Saving con Trees 
     auto* outfile {new TFile {TString::Format("./Outputs/tree_Ex_%.2f_incIdx%i.root", ExOg,incIdx), "recreate"}};
@@ -152,22 +158,22 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
         xs.ReadFile("Inputs/xs/p12_p1i.dat");
     }
 
-
+    double lim{10};
     // Simulacion core
     for (int i=0; i<interacciones; i++){
         if (ExOg==0.0) {
             Gamma=0.1;
             Ex=gRandom->BreitWigner(ExOg, Gamma);
-            if (Ex<ExOg-5 || Ex>ExOg+5){
+            if (Ex<ExOg-lim || Ex>ExOg+lim){
                 continue;
             }
             //kin=new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex); // cinemática
         }
 
         if (ExOg==0.2) {
-            Gamma=0.3;
+            Gamma=0.2;
             Ex=gRandom->BreitWigner(ExOg, Gamma);
-            if (Ex<ExOg-5 || Ex>ExOg+5){
+            if (Ex<ExOg-lim || Ex>ExOg+lim){
                 continue;
             }
             //kin=new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex); // cinemática
@@ -290,6 +296,10 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
         hThetaCMSampled->Fill(thetaCM*TMath::RadToDeg());
         hKinSampled->Fill(theta3*TMath::RadToDeg(),t3);
 
+        hExSampled->Fill(Ex);
+        hInteractionXY->Fill(vertex.X(), vertex.Y());
+        hInteractionYZ->Fill(vertex.Y(), vertex.Z());
+
         if (isInSil0 || isInSil1) {
             // Rellenamos: 
             hKinMeasured->Fill(theta3*TMath::RadToDeg(),recT3);
@@ -409,7 +419,23 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     c3->SaveAs(TString::Format("Graficas/Impacts/Impacts_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
 
+    auto *c4{new TCanvas{"c4", "Vertex"}};
 
+    c4->DivideSquare(2);
+    c4->cd(1);
+    hInteractionXY->Draw("colz");
+    c4->cd(2);
+    hInteractionYZ->Draw("colz");
+    c4->SaveAs(TString::Format("Graficas/Kinematics/Vertex_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+
+    auto *c5{new TCanvas{"c5", "ExSampled"}};
+    hExSampled->Draw();
+    c5->SaveAs(TString::Format("Graficas/ExHisto/ExSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    
+    auto *c6{new TCanvas{"c6", "kinSampled"}};
+    hKinSampled->Draw();
+    c6->SaveAs(TString::Format("Graficas/Kinematics/KinSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    
 
 }   
 //####################################################### 

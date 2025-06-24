@@ -16,26 +16,21 @@ Entrada:
 Posible implementaciones para el futuro:
 - Nombre pdf
 */   
-void SampleoCinematica(Particula p1, Particula p2, Particula  p3, Particula p4, ActPhysics::Kinematics* Li10, double tbeam, double Ex) {
+void Sampleo() {
+    
 
-auto* gother10 {new TGraph};
-auto* gother3 {new TGraph};
-auto* g3Li10 {Li10->GetKinematicLine3()};
-auto* g4Li10 {Li10->GetKinematicLine4()};
-
+auto* kinEx0 {new ActPhysics::Kinematics("11Li", "d", "t",11 * 7.5, 0.0)}; // cinemática
+auto* kinEx2 {new ActPhysics::Kinematics("11Li", "d", "t",11 * 7.5, 0.2)}; // cinemática
 
 
-// Queremos representar todas las posibilidades -> Recorremos todos los ángulos
-for(double thetaCM = 0; thetaCM <= 180; thetaCM += 1)
-{       
-    auto [T3,Theta3] {valores3(p1, p2, p3, p4, p1.get_A()*tbeam,thetaCM * TMath::DegToRad(),Ex)};
-    auto [T4,Theta4] {valores4(p1, p2, p3, p4, p1.get_A()*tbeam,thetaCM * TMath::DegToRad(),Ex)};
-    // std::cout << "Theta4: " << Theta4 << " T4 : " << T4 << '\n';
-    if(std::isfinite(Theta4) && std::isfinite(T4))
-        gother10->SetPoint(gother10->GetN(), Theta4 * TMath::RadToDeg(), T4);
-    if(std::isfinite(Theta3) && std::isfinite(T3))
-        gother3->SetPoint(gother3->GetN(), Theta3 * TMath::RadToDeg(), T3);
-}
+auto* g3Li10Ex0 {kinEx0->GetKinematicLine3()};
+auto* g4Li10Ex0 {kinEx0->GetKinematicLine4()};
+
+auto* g3Li10Ex2 {kinEx2->GetKinematicLine3()};
+auto* g4Li10Ex2 {kinEx2->GetKinematicLine4()};
+
+
+
 
 auto* canvas10 {new TCanvas {"canvas10", "Li10"}};
 
@@ -43,48 +38,44 @@ SetEstiloPublicacion();
 canvas10->DivideSquare(2);
 canvas10->cd(1);
 SetEstiloPublicacion();
-g3Li10->SetLineColor(kBlue);
-g3Li10->SetLineWidth(4);
-gother3->SetLineColor(kGray+1);
-gother3->SetLineWidth(1);
-gother3->SetMarkerStyle(45);
-gother3->SetMarkerColor(kRed);
-gother3->SetMarkerSize(0.5);  // Un pelín más grandes
-g3Li10->Draw("al");
-gother3->Draw("l same"); 
+g3Li10Ex0->SetLineColor(kBlue);
+g3Li10Ex0->SetLineWidth(2);
+g3Li10Ex2->SetLineColor(kRed);
+g3Li10Ex2->SetLineWidth(2);
 
-auto legend = new TLegend(0.7,0.7,0.95,0.95);
-legend->AddEntry(gother3,"Cinematica","l");
-legend->AddEntry(g3Li10,"ActPhysics","l");
+g3Li10Ex0->Draw("al");
+g3Li10Ex2->Draw("l same");
+
+auto legend = new TLegend(0.8,0.8,0.95,0.95);
+
+legend->AddEntry(g3Li10Ex0,"Ex=0.0","l");
+legend->AddEntry(g3Li10Ex2,"Ex=0.2","l");
 legend->Draw();
-g3Li10->SetTitle("Cinematica 11Li(d,t);#theta_{3Lab} [#circ];E_{3Lab}");
+g3Li10Ex0->SetTitle("Cinematica 11Li(d,t);#theta_{3Lab} [#circ];E_{3Lab}");
 
 canvas10->RedrawAxis();         // Redibuja los ejes, opcional
-
-canvas10->RedrawAxis();
 canvas10->cd(2);
 
 SetEstiloPublicacion();
 canvas10->Update();
-canvas10->SaveAs(TString::Format("Graficas/Graficas T vs theta (sampleada)/Cinematica.pdf"));
+canvas10->SaveAs(TString::Format("Graficas/Cinematica.pdf"));
 
 canvas10->cd(2);
 SetEstiloPublicacion();
-g4Li10->SetLineColor(kBlue);
-g4Li10->SetLineWidth(4);
-gother10->SetLineColor(kGray+1);
-gother10->SetLineWidth(1);
-gother10->SetMarkerStyle(45);
-gother10->SetMarkerColor(kRed);
-gother10->SetMarkerSize(0.5);  // Un pelín más grandes
-g4Li10->Draw("al");
-gother10->Draw("l same"); 
+g4Li10Ex0->SetLineColor(kBlue);
+g4Li10Ex0->SetLineWidth(2);
+g4Li10Ex2->SetLineColor(kRed);
+g4Li10Ex2->SetLineWidth(2);
 
-auto legend2 = new TLegend(0.7,0.7,0.95,0.95);
-legend2->AddEntry(gother10,"Cinematica","l");
-legend2->AddEntry(g4Li10,"ActPhysics","l");
+g4Li10Ex0->Draw("al");
+g4Li10Ex2->Draw("l same");
+
+auto legend2 = new TLegend(0.8,0.8,0.95,0.95);
+
+legend2->AddEntry(g4Li10Ex0,"Ex=0.0","l");
+legend2->AddEntry(g4Li10Ex2,"Ex=0.2","l");
 legend2->Draw();
-g4Li10->SetTitle(TString::Format("Cinematica Sampleada Ex=%.2f;#theta_{3Lab} [#circ];E_{3Lab}",Ex));
+g4Li10Ex0->SetTitle(TString::Format("Cinematica Sampleada;#theta_{4Lab} [#circ];E_{4Lab}"));
 
 canvas10->RedrawAxis();         // Redibuja los ejes, opcional
 
@@ -93,6 +84,6 @@ canvas10->cd(2);
 
 SetEstiloPublicacion();
 canvas10->Update();
-canvas10->SaveAs(TString::Format("Graficas/Cinematica Sampleada/Cinematica_%.2fEx.pdf",Ex));
+canvas10->SaveAs(TString::Format("Graficas/Cinematica.pdf"));
 
 }

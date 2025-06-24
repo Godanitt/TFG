@@ -11,39 +11,47 @@
 #include "TH1.h"
 void xs()
 {
-    auto* gs {new TGraphErrors {"Inputs/xs/s12_p1i.dat", "%lg %lg"}};
+    auto *gs{new TGraphErrors{"Inputs/xs/s12_p1i.dat", "%lg %lg"}};
     gs->SetTitle("s_{1/2}");
-    auto* gp {new TGraphErrors {"Inputs/xs/p12_p1i.dat", "%lg %lg"}};
+    auto *gp{new TGraphErrors{"Inputs/xs/p12_p1i.dat", "%lg %lg"}};
     gp->SetTitle("p_{1/2}");
 
-    auto* mg {new TMultiGraph};
+    auto *mg{new TMultiGraph};
     mg->SetTitle(";#theta_{CM} [#circ];d#sigma/d#Omega [mb/sr]");
-    for(auto* g : {gs, gp})
+
+    TLegend *leg = new TLegend(0.7, 0.75, 0.9, 0.9); // esquina superior derecha
+
+    std::vector<std::string> name = {"Ex=0, s12", "Ex=0.2, p12"};
+    int i{1};
+
+    std::vector<TGraphErrors *> graphs = {gs, gp};
+    for (size_t j = 0; j < graphs.size(); ++j)
     {
-        g->SetLineWidth(2);
-        mg->Add(g);
+        graphs[j]->SetLineWidth(2);
+        graphs[j]->SetLineColor(j + 1); // 1 = negro, 2 = rojo
+        leg->AddEntry(graphs[j], name[j].c_str(), "l");
+        mg->Add(graphs[j]);
     }
 
     // Sampling
-    ActSim::CrossSection xs {};
+    ActSim::CrossSection xs{};
     xs.ReadFile("Inputs/xs/p12_p1i.dat");
     xs.Draw();
 
-    auto* hThetaCM {new TH1D {"hThetaCM", "CM;#theta_{CM};Counts", 300, 0, 180}};
-    for(int i = 0; i < 1000000; i++)
+    auto *hThetaCM{new TH1D{"hThetaCM", "CM;#theta_{CM};Counts", 300, 0, 180}};
+    for (int i = 0; i < 10000000; i++)
     {
         hThetaCM->Fill(xs.SampleHist());
     }
 
+    auto *c0{new TCanvas{"c0", "xs canvas"}};
+    // c0->DivideSquare(2);
+    // c0->cd(1);
 
-    auto* c0 {new TCanvas {"c0", "xs canvas"}};
-    c0->DivideSquare(2);
-    c0->cd(1);
-    mg->Draw("apl plc pmc");
-    c0->cd(2);
-    hThetaCM->Draw();
+    mg->Draw("apl");
+    leg->Draw();
+    // c0->cd(2);
+    // hThetaCM->Draw();
 
     c0->SaveAs(TString::Format("Graficas/Seccion_Eficaz.pdf"));
-
-
 }

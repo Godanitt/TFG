@@ -42,8 +42,7 @@ ROOT::Math::XYZPoint SampleVertex(double xACTAR, double yACTAR, double zACTAR)
 
     ROOT::Math::XYZPoint verticeUsual{verticeCentrado.X() * 10 + xACTAR / 2,
                                   verticeCentrado.Y() * 10 + yACTAR / 2,
-                                  //verticeCentrado.Z() * 10 + 175
-                                  135
+                                  verticeCentrado.Z() * 10 +  zACTAR / 2
                                 };
 
     return verticeUsual;
