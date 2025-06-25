@@ -18,10 +18,11 @@ int main() {
     */
     int uncertaintySelector[4] = {0,1,2,3};
 
+    SetMyStyle();
     for (int i = 0; i < 4; i++) {
         std::cout << "Seleccionamos incertidumbre: "  << uncertaintySelector[i] << "\n";
-        Simulation(7.5, 0.0, 10000000,uncertaintySelector[i]);
-        Simulation(7.5, 0.20,10000000,uncertaintySelector[i]);
+        Simulation(7.5, 0.0, 1000000,uncertaintySelector[i]);
+        Simulation(7.5, 0.20,1000000,uncertaintySelector[i]);
     }
 
 

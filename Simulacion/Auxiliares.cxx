@@ -47,3 +47,32 @@ ROOT::Math::XYZPoint SampleVertex(double xACTAR, double yACTAR, double zACTAR)
 
     return verticeUsual;
 }
+
+//####################################################### 
+/*
+La entrada es i. Si i=1 -> Se elimina el título.
+*/
+void SetMyStyle() {
+    // Elimina el panel de estadísticas
+    gStyle->SetOptStat(0);
+
+    // Margenes: 
+    gStyle->SetPadLeftMargin(0.12);
+    gStyle->SetPadRightMargin(0.2);
+    gStyle->SetPadTopMargin(0.08);
+
+    // Grosor de los ejes
+    gStyle->SetLineWidth(2);      // Más grueso el eje X
+    gStyle->SetLineWidth(2);      // Más grueso el eje Y
+
+    // Grosor de los labels
+    gStyle->SetLabelSize(0.05,"XYZ");  // Tamaño de los números en el eje X
+    gStyle->SetLabelFont(62,"XYZ");
+    gStyle->SetTitleSize(0.05,"XYZ");  // Tamaño de los números en el eje X
+    gStyle->SetTitleFont(62);      // Sin segundo argumento → título general
+    gStyle->SetTitleFont(62,"XYZ");
+    gStyle->SetTitleSize(0.05); 
+
+
+
+}

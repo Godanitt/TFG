@@ -35,9 +35,6 @@ void ExportSigmasToCSV(const double sigma[2][4],const double usigma[2][4], const
         }
         file << "\n";
     }
-
-    file.close();
-    std::cout << "Archivo sigmas.csv exportado correctamente.\n";
 }
 
 TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigmaOut, double& usigmaOut,EColor color = kBlue, int incIdx=0) {
@@ -110,8 +107,8 @@ void Read_tree_aux(int incIdx, double sigma[2],double usigma[2]){
 
     gStyle->SetOptStat(0);  // Desactiva globalmente
     auto* c0 {new TCanvas {"c0", "c0"}};
-    auto* c1 {new TCanvas {"c1", "c1"}};
-    auto* hs = new THStack("hs", ";E_{x} [MeV];Counts");
+    auto* c1 {new TCanvas {"c1", "c1",750, 300}};
+    auto* hs = new THStack("hs", ";E_{x} [MeV];Cuentas");
     c0->DivideSquare(4);
 
     // Guardamos los histogramas 
@@ -133,6 +130,22 @@ void Read_tree_aux(int incIdx, double sigma[2],double usigma[2]){
         hSum->Add(h);
     }
     
+    gStyle->SetLabelSize(0.05,"XYZ");  // Tamaño de los números en el eje X
+    gStyle->SetLabelFont(62,"XYZ");
+    gStyle->SetTitleSize(0.05,"XYZ");  // Tamaño de los números en el eje X
+    gStyle->SetTitleFont(62);      // Sin segundo argumento → título general
+    gStyle->SetTitleFont(62,"XYZ");
+    gStyle->SetTitleSize(0.05); 
+    // Margenes: 
+    gStyle->SetPadLeftMargin(0.10);
+    gStyle->SetPadRightMargin(0.10);
+    gStyle->SetPadTopMargin(0.05);
+    gStyle->SetPadBottomMargin(0.14);
+
+    // Grosor de los ejes
+    gStyle->SetLineWidth(2);      // Más grueso el eje X
+    gStyle->SetLineWidth(2);      // Más grueso el eje Y
+
 
     c1->cd();
     c1->DivideSquare(2);
@@ -174,14 +187,14 @@ void Read_tree_aux(int incIdx, double sigma[2],double usigma[2]){
     hSum->GetXaxis()->SetRangeUser(-0.3, 0.6);  // Solo muestra de -0.2 a 0.6 en X
     hs_clean->Draw("nostack same");
 
-    legend->AddEntry(hSum, "Apilada", "f");
+    legend->AddEntry(hSum, "Suma", "f");
     legend->Draw();
 
     // Guardamos
     c0->Update();
     
     //c0->SaveAs(TString::Format("Graficas/ExHisto/Rec_incIdx%i.pdf",incIdx));
-    c1->SaveAs(TString::Format("Graficas/ExHisto/Rec_incIdx%i_single.pdf",incIdx));
+    c1->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Rec_incIdx%i_single.pdf",incIdx));
 
 }
 
@@ -203,4 +216,39 @@ void Read_tree(){
     }
     ExportSigmasToCSV(sigma,usigma,"SigmasTab.csv");
 
+
+    std::cout << "Archivo sigmas.csv exportado correctamente.\n";
+
+    std::ifstream csv("SigmasTab.csv");
+    std::ofstream tex("/home/daniel/GitHub/TFG/Memoria/Cuerpo/SigmasTab.tex");
+
+    tex << "\\begin{tabular}{llll} \\hline\n";  // ajusta columnas según el CSV
+
+    tex << "\\toprule \n";  // ajusta columnas según el CSV
+
+    std::string linea;
+    bool primera = true;
+    bool isPrimero=true;
+    while (std::getline(csv, linea)) {
+        std::istringstream ss(linea);
+        std::string valor;
+        bool primero = true;
+
+        
+
+        while (std::getline(ss, valor, ',')) {
+            if (!primero) tex << " & ";
+            tex << valor;
+            primero = false;
+        }
+        if (isPrimero==true){tex << " \\\\ \\midrule \n";}
+        else {tex << "\\\\ \n";}
+
+        isPrimero=false;
+
+    }
+    tex << " \\bottomrule \n";
+
+
+    tex << "\\end{tabular}\n";
 }

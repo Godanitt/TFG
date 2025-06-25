@@ -7,14 +7,14 @@ En esta parte de la memoria presentamos el funcionamiento de la simulación, bas
     \item  Debido a la naturaleza de estado no ligado del $^{10}$Li este aparece como una resonancia, por lo que manera intrínseca la energía de excitación del núcleo sigue una distribución de Breit-Wigner, que tendremos que tener en cuenta. Así pues, con cada interacción generaremos a partir de la energía resonante media $E^*$ y la anchura de la resonancia $\Gamma(E^*)$ un valor aleatorio que siga dicha distribución, como se puede ver en \cref{Fig:04-Ex0} y \cref{Fig:04-Ex2}.
     
 
-    \begin{minipage}{0.45\linewidth} \centering
-        \includegraphics[width=1\linewidth]{Imagenes/ExSampled_Ex0.00_incIdx0.pdf} 
+    \begin{minipage}{0.49\linewidth} \centering
+        \includegraphics[width=1.0\linewidth]{Imagenes/ExHisto/ExSampled_Ex0.00_incIdx0.pdf} 
         \captionof{figure}{Distribución de las energías de excitación sampleadas $E^*=0.0$ MeV y $\Gamma=0.1$ MeV.}
 
         \label{Fig:04-Ex0}
     \end{minipage} \hfill
-    \begin{minipage}{0.45\linewidth}
-        \includegraphics[width=1\linewidth]{Imagenes/ExSampled_Ex0.20_incIdx0.pdf} 
+    \begin{minipage}{0.49\linewidth}
+        \includegraphics[width=1.0\linewidth]{Imagenes/ExHisto/ExSampled_Ex0.20_incIdx0.pdf} 
         \captionof{figure}{Distribución de las energías de excitación sampleadas $E^*=0.2$ MeV y $\Gamma=0.3$ MeV.}
 
         \label{Fig:04-Ex2}
@@ -27,8 +27,8 @@ En esta parte de la memoria presentamos el funcionamiento de la simulación, bas
 
 
     \begin{center}
-        \includegraphics[width=0.65\linewidth]{Imagenes/Vertex_Ex0.00_incIdx0.pdf}
-        \captionof{figure}{Distribución de las colisiones en las 4 layers. En este caso la energía de excitación del $^{10}$Li es $0$ MeV.}
+        \includegraphics[width=1\linewidth]{Imagenes/Kinematics/Vertex_Ex0.00_incIdx0.pdf}
+        \captionof{figure}{Distribuciones de los vértices de impactos a lo largo de los ejes.}
         \label{Fig:04-Vertex}
     \end{center}
     
@@ -45,14 +45,14 @@ En esta parte de la memoria presentamos el funcionamiento de la simulación, bas
     
     A través de las ecuaciones del apartado \ref{Subsec:03-cinematica} podremos obtener $T_{lab}$ y la dirección del tritio en el sistema laboratorio. Podemos ver en la \cref{Fig:04-kinSampled0} y \cref{Fig:04-kinSampled2} el valor de la energía cinética del tritio y el ángulo de salida, en un gráfico denominada cinemática de la reacción, en función de la energía de excitación.
     
-    \begin{minipage}{0.45\linewidth} \centering
-        \includegraphics[width=1\linewidth]{Imagenes/KinSampled_Ex0.00_incIdx0.pdf} 
+    \begin{minipage}{0.49\linewidth} \centering
+        \includegraphics[width=1\linewidth]{Imagenes/Kinematics/KinSampled_Ex0.00_incIdx0.pdf} 
         \captionof{figure}{Cinemática sampleada para $E^*=0.0$ MeV.}
 
         \label{Fig:04-kinSampled0}
     \end{minipage} \hfill
-    \begin{minipage}{0.45\linewidth}
-        \includegraphics[width=1\linewidth]{Imagenes/KinSampled_Ex0.20_incIdx0.pdf}
+    \begin{minipage}{0.49\linewidth}
+        \includegraphics[width=1\linewidth]{Imagenes/Kinematics/KinSampled_Ex0.20_incIdx0.pdf}
         \captionof{figure}{Cinemática sampleada para $E^*=0.2$ MeV.}
 
         \label{Fig:04-kinSampled2}
@@ -66,7 +66,7 @@ En esta parte de la memoria presentamos el funcionamiento de la simulación, bas
     Cuando una partícula llega con una energía suficientemente grande como para atravesar, la energía depositada será muy pequeña, ya que la ecuación de Bethe nos dice que la energía depositada es inversamente proporcional a la energía cinética de la partícula. Por tanto, si la partícula atraviesa el silicio no podremos reconstruir su trayectoria, y por tanto no podremos reconstruir la cinemática de la reacción. 
 
     \begin{center}
-        \includegraphics[width=0.8\linewidth]{Imagenes/Impacts_Ex0.00_incIdx0.pdf}
+        \includegraphics[width=0.95\linewidth]{Imagenes/Impacts/Impacts_Ex0.00_incIdx0.pdf}
         \captionof{figure}{Distribución de los impactos en las 4 layers de silicios. }
 
         \label{Fig:04-Impacts}

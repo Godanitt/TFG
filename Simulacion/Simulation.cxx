@@ -10,6 +10,7 @@
 #include "TString.h"
 #include "TEfficiency.h"
 #include "TGraphAsymmErrors.h"
+#include "TROOT.h"
 
 #include "TVector3.h" 
 #include "Math/Point3D.h"
@@ -34,6 +35,8 @@ Como argumentos:
 
 void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int incIdx = 0)
 {
+    TStyle *oldStyle = (TStyle*)gStyle->Clone("oldStyle");
+
     double ExOg {Ex};
     // Definimos las particulas
     Particula li11;
@@ -108,24 +111,24 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
 
     // Histogramas y Gráficas:
     // TH2D: "Nombres","numero bins eje x", "minimo x", "maximo x", "numero bins y", "minimo y", "maximo y"
-    auto *hKinSampled{new TH2D{"hKinSampled", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3}", 220, 0, 80,220,-5,80}};
-    auto *hKinMeasured{new TH2D{"hKinMeasured", "#theta_{3} vs T_{3} Recostrued; #theta_{3};T_{3};Contas", 220, 0, 80, 220, -5, 80}};
-    auto *hKinL1{new TH2D{"hKinL1", "#theta_{3} vs T_{3} Sampleado; #theta_{3};T_{3};Contas", 220, 0, 80, 220, -5, 80}};
-    auto *hImpactSilF0{new TH2D{"hImpactSilF0", "Impactos Silicio Layer f0; y[mm];z[mm];Contas", 200, -25, 275, 200, 0, 175*2-100}};
-    auto *hImpactSilF1{new TH2D{"hImpactSilF1", "Impactos Silicio Layer f1; y[mm];z[mm];Contas", 200, -25, 275, 200, 0, 175*2-100}};
-    auto *hImpactSilL0{new TH2D{"hImpactSilL0", "Impactos Silicio Layer l0; x[mm];z[mm];Contas", 250, -200, 400, 200, -50, 175*2-100}};
-    auto *hImpactSilR0{new TH2D{"hImpactSilR0", "Impactos Silicio Layer r0; x[mm];z[mm];Contas", 250, -200, 400, 200, -50, 175*2-100}};
-    auto *hRangeTheta{new TH2D{"hRangeTheta", "Rango vs #theta_{3}; #theta_{3};R [mm];Contas", 220, 0, 80, 220, 0, 400}};
+    auto *hKinSampled{new TH2D{"hKinSampled", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3} [MeV];Cuentas", 220, 0, 80,220,-5,80}};
+    auto *hKinMeasured{new TH2D{"hKinMeasured", "#theta_{3} vs T_{3} Recostrued; #theta_{3};T_{3} [MeV];Cuentas", 220, 0, 80, 220, -5, 80}};
+    auto *hKinL1{new TH2D{"hKinL1", "#theta_{3} vs T_{3} Sampleado; #theta_{3};T_{3};Cuentas", 220, 0, 80, 220, -5, 80}};
+    auto *hImpactSilF0{new TH2D{"hImpactSilF0", "f0; y[mm];z[mm];Cuentas", 200, -25, 275, 200, 0, 175*2-100}};
+    auto *hImpactSilF1{new TH2D{"hImpactSilF1", "f1; y[mm];z[mm];Cuentas", 200, -25, 275, 200, 0, 175*2-100}};
+    auto *hImpactSilL0{new TH2D{"hImpactSilL0", "l0; x[mm];z[mm];Cuentas", 250, -200, 400, 200, -50, 175*2-100}};
+    auto *hImpactSilR0{new TH2D{"hImpactSilR0", "r0; x[mm];z[mm];Cuentas", 250, -200, 400, 200, -50, 175*2-100}};
+    auto *hRangeTheta{new TH2D{"hRangeTheta", "Rango vs #theta_{3}; #theta_{3} [^{#circ}];R [mm];Cuentas", 220, 0, 80, 220, 0, 400}};
     
-    auto* hInteractionXY{new TH2D{"hImpactSilF0", "; x[mm];z[mm];Cuentas", 250, 0, 255, 200, 0, 175*2-100}};
+    auto* hInteractionXY{new TH2D{"hImpactSilF0", "; x[mm];z[mm];Cuentas", 250, 0, 256, 200, 0, 175*2-100}};
     auto* hInteractionYZ{new TH2D{"hImpactSilF0", "I; y[mm];z[mm];Cuentas", 200, 100, 155, 200,100, 155}};;
 
     
     // TH1D
-    auto *hThetaCMSampled{new TH1D{"hThetaCMSampled", "#theta_{CM} sampled; #theta; Contas", 180, 0, 180}};
-    auto *hThetaCMRec{new TH1D{"hThetaCMRec", "#theta_{CM} rec;  #theta; Contas", 180, 0, 180}};
+    auto *hThetaCMSampled{new TH1D{"hThetaCMSampled", "#theta_{CM} sampled; #theta [^{#circ}]; Cuentas", 180, 0, 180}};
+    auto *hThetaCMRec{new TH1D{"hThetaCMRec", "#theta_{CM} rec;  #theta [^{#circ}]; Cuentas", 180, 0, 180}};
     auto* hEx {new TH1D {"hEx", "Rec Ex;E_{x} [MeV];Counts", 300, -5, 5}};
-    auto* hThetaCM {new TH1D {"hThetaCM", "CM;#theta_{CM};C400ounts", 300, 0, 180}};
+    auto* hThetaCM {new TH1D {"hThetaCM", "CM;#theta_{CM} [^{#circ}];C400ounts", 300, 0, 180}};
     auto* hRange {new TH1D {"hRangue", "Rangue;#Rangue [mm];Counts", 300, 0, 255}};
 
     auto* hExSampled {new TH1D {"hExSampled", ";E_{x} [MeV];Cuentas", 300, -5, 5}};
@@ -345,7 +348,12 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     tree->Write();
 
 
+
+
     // Graficamos el T3 vs theta3 measured
+    /*
+    SetMyStyle(1);
+
     auto *c1{new TCanvas{"c1", "T3_vs_theta"}};
     gStyle->SetPadRightMargin(0.15); 
 
@@ -372,38 +380,26 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
 
     c1->cd(6);
     hRange->Draw();
-
-
-    c1->SaveAs(TString::Format("Graficas/Completo_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
-
-    //eff->GetPaintedGraph()->GetXaxis()->SetTitle("#theta_{CM}");
-    //eff->GetPaintedGraph()->GetYaxis()->SetTitle("Eficiencia");
-
-    // Dibujamos Angulos
-
-    /*
-    auto *c2{new TCanvas{"c2", "theta cm"}};
-    c2->cd();
-    static int colorIndex = 2;  // Empieza en 2 (rojo)
-    hThetaCMSampled->Draw();
-    hThetaCMSampled->SetFillColor(colorIndex);
-    hThetaCMRec->Draw("same");
-    hThetaCMRec->SetFillColor(colorIndex+1);
-    c2->Update();
-    c2->SaveAs(TString::Format("Graficas/ThetaCM_Ex%.2f.pdf", Ex));
-    c2->SaveAs(TString::Format("Graficas/ThetaCM_Ex%.2f.eps", Ex));
     */
 
 
+    //c1->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Completo_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+
+
     // Dibujamos puntos de impacto
+
+    SetMyStyle();
+    gROOT->ForceStyle();
     auto *c3{new TCanvas{"c3", "T3_vs_theta"}};
     c3->DivideSquare(4);
     c3->cd(1);
     hImpactSilF0->Draw("colz");
+    c3->cd(1)->SetBottomMargin(0.15);
     sils->GetLayer("f0").GetSilMatrix()->Draw();
 
     c3->cd(2);
     hImpactSilF1->Draw("colz");
+    c3->cd(2)->SetBottomMargin(0.15);
     sils->GetLayer("f1").GetSilMatrix()->Draw();
 
     c3->cd(3);
@@ -413,29 +409,51 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     c3->cd(4);
     hImpactSilR0->Draw("colz");
     sils->GetLayer("r0").GetSilMatrix()->Draw();
-        c1->cd(4);
-        hEx->Draw();
 
-    c3->SaveAs(TString::Format("Graficas/Impacts/Impacts_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    c3->Update();
+    c3->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Impacts/Impacts_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
 
-    auto *c4{new TCanvas{"c4", "Vertex"}};
+    SetMyStyle();
+    auto *c4{new TCanvas{"c4", "Vertex",900, 300}};
 
     c4->DivideSquare(2);
-    c4->cd(1);
-    hInteractionXY->Draw("colz");
-    c4->cd(2);
-    hInteractionYZ->Draw("colz");
-    c4->SaveAs(TString::Format("Graficas/Kinematics/Vertex_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
-
-    auto *c5{new TCanvas{"c5", "ExSampled"}};
-    hExSampled->Draw();
-    c5->SaveAs(TString::Format("Graficas/ExHisto/ExSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
     
-    auto *c6{new TCanvas{"c6", "kinSampled"}};
-    hKinSampled->Draw();
-    c6->SaveAs(TString::Format("Graficas/Kinematics/KinSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    c4->cd(1);
+    hInteractionXY->SetTitle("");
+    hInteractionXY->Draw("colz");
+    c4->cd(1)->SetLeftMargin(0.15);
+    c4->cd(1)->SetRightMargin(0.15);
+    
+    c4->cd(2);
+    hInteractionYZ->SetTitle("");
+    hInteractionYZ->Draw("colz");
+    c4->cd(2)->SetLeftMargin(0.15);
+    c4->cd(2)->SetRightMargin(0.1);
+    c4->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Kinematics/Vertex_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+
+    auto *c5{new TCanvas{"c5", "ExSampled",600,440}};
+
+    hExSampled->SetTitle("");
+    hExSampled->SetLineWidth(2); 
+    hExSampled->GetXaxis()->SetRangeUser(-2, 2);
+    hExSampled->Draw();
+    c5->SetRightMargin(0.01);
+    c5->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/ExHisto/ExSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    
+
+    kin->SetBeamEnergyAndEx(tBeam*11,ExOg);
+    auto* g3 {kin->GetKinematicLine3()};
+    SetMyStyle();
+    auto *c6{new TCanvas{"c6", "kinSampled",550, 330}};
+    c6->SetRightMargin(0.15);
+    hKinSampled->SetTitle("");
+    hKinSampled->Draw("colz");
+    g3->Draw("l same");
+
+
+
+    c6->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Kinematics/KinSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
     
 
 }   
-//####################################################### 
