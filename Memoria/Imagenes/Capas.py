@@ -34,7 +34,7 @@ Nombre_sin_energia2 = [
 mpl.rcParams['font.size'] = 20  # Cambia este valor a lo que necesites
 
 
-def Modelo_Capas(A,Z,nombre,Energias=Energias1):
+def Modelo_Capas(A,Z,nombre,Energias=Energias1,flag=False):
     N=A-Z   
     fig,ax= plt.subplots()
     
@@ -178,6 +178,21 @@ def Modelo_Capas(A,Z,nombre,Energias=Energias1):
         spine.set_visible(False)
     ax.tick_params(left=False, bottom=False, labelleft=False, labelbottom=False)
     
+    if (flag==True):
+        ax.annotate(
+                '',
+                xy=(2,9.2), xycoords='data',
+                xytext=(2,19.8), textcoords='data',
+                arrowprops=dict(
+                    arrowstyle='->,head_width=0.8,head_length=1',
+                    connectionstyle='arc3,rad=0.3',
+                    linewidth=5,
+                    color=(0.2, 0.2, 0.2, 0.5)  # gris oscuro y 50% opacidad
+                ),
+                fontsize=12,
+                color='black'
+        )
+        
     plt.annotate("Protones",xy=(-4.2,-3))
     plt.annotate("Neutrones",xy=(1.4,-3))
     ax.set_ylim(-4,21)
@@ -189,5 +204,9 @@ def Modelo_Capas(A,Z,nombre,Energias=Energias1):
 fig,ax=Modelo_Capas(10,3,Nombre_sin_energia)
 fig.savefig("/home/daniel/GitHub/TFG/Memoria/Imagenes/Capas_10Li.pdf",bbox_inches="tight")
 
-fig,ax=Modelo_Capas(10,3,Nombre_sin_energia2,Energias=Energias2)
+fig,ax=Modelo_Capas(10,3,Nombre_sin_energia2,Energias=Energias2,flag=True)
+i=5
+ax.plot([1,5],[19.8,19.8],color="black",linestyle="--",alpha=0.1)
+ax.plot([-5,-1],[19.8,19.8],color="black",linestyle="--",alpha=0.1)
+ax.annotate("$2s_{1/2}$",xy=(-0.75,19.8-0.2),alpha=0.3)
 fig.savefig("/home/daniel/GitHub/TFG/Memoria/Imagenes/Capas_10Li2.pdf",bbox_inches="tight")

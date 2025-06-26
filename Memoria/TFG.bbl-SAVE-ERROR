@@ -19,6 +19,195 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{Arnold:180144}{article}{}
+      \name{author}{8}{}{%
+        {{hash=b895d6b7975821f93aa35f2e1b8f87ae}{%
+           family={Arnold},
+           familyi={A\bibinitperiod},
+           given={E},
+           giveni={E\bibinitperiod}}}%
+        {{hash=d6045a282b9a5706f26b10279ddae2da}{%
+           family={Bonn},
+           familyi={B\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod}}}%
+        {{hash=cd2df95b5399ee9caedac2f2ac0d9785}{%
+           family={Gegenwart},
+           familyi={G\bibinitperiod},
+           given={R},
+           giveni={R\bibinitperiod}}}%
+        {{hash=69e20b1fc8b2da85e4e5c326eef819fc}{%
+           family={Neu},
+           familyi={N\bibinitperiod},
+           given={W},
+           giveni={W\bibinitperiod}}}%
+        {{hash=2ad453242cd89fb4be99e948bdd631a4}{%
+           family={Neugart},
+           familyi={N\bibinitperiod},
+           given={R},
+           giveni={R\bibinitperiod}}}%
+        {{hash=bfb77a29b4da0cb7af75e00a32888453}{%
+           family={Otten},
+           familyi={O\bibinitperiod},
+           given={E\bibnamedelima W},
+           giveni={E\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=22464bfa6bae597910a418be5726f582}{%
+           family={Ulm},
+           familyi={U\bibinitperiod},
+           given={G},
+           giveni={G\bibinitperiod}}}%
+        {{hash=4f273d6fd8ccc6f895c4409f6393c695}{%
+           family={Wendt},
+           familyi={W\bibinitperiod},
+           given={K},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{a617a8413dec560f409c777bc84c5f0a}
+      \strng{fullhash}{a92ed9e05d82347894170612978a8aae}
+      \strng{bibnamehash}{a617a8413dec560f409c777bc84c5f0a}
+      \strng{authorbibnamehash}{a617a8413dec560f409c777bc84c5f0a}
+      \strng{authornamehash}{a617a8413dec560f409c777bc84c5f0a}
+      \strng{authorfullhash}{a92ed9e05d82347894170612978a8aae}
+      \field{extraname}{1}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Phys. Lett. B}
+      \field{title}{{Nuclear spin and magnetic moment of $^{11}$Li}}
+      \field{volume}{197}
+      \field{year}{1987}
+      \field{pages}{311\bibrangedash 314}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1016/0370-2693(87)90390-X
+      \endverb
+      \verb{urlraw}
+      \verb https://cds.cern.ch/record/180144
+      \endverb
+      \verb{url}
+      \verb https://cds.cern.ch/record/180144
+      \endverb
+    \endentry
+    \entry{ARNOLD199216}{article}{}
+      \name{author}{9}{}{%
+        {{hash=b895d6b7975821f93aa35f2e1b8f87ae}{%
+           family={Arnold},
+           familyi={A\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=d6045a282b9a5706f26b10279ddae2da}{%
+           family={Bonn},
+           familyi={B\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=29d45a9eb0ebe08234f6b49e7858f2ef}{%
+           family={Klein},
+           familyi={K\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2ad453242cd89fb4be99e948bdd631a4}{%
+           family={Neugart},
+           familyi={N\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=beab2265fa1f3b0bcc6edc1ee2bfad08}{%
+           family={Neuroth},
+           familyi={N\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=bfb77a29b4da0cb7af75e00a32888453}{%
+           family={Otten},
+           familyi={O\bibinitperiod},
+           given={E.W.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=c8f7ec4dc77fcd6d716d921dbae68e8e}{%
+           family={Lievens},
+           familyi={L\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=637a90b67eadac30db8d640779aa9ff7}{%
+           family={Reich},
+           familyi={R\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=b7740ea600ea793ae435146f7d7c46be}{%
+           family={Widdra},
+           familyi={W\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{a617a8413dec560f409c777bc84c5f0a}
+      \strng{fullhash}{b77dd6efe937b13e8c1c5afd99b1780f}
+      \strng{bibnamehash}{a617a8413dec560f409c777bc84c5f0a}
+      \strng{authorbibnamehash}{a617a8413dec560f409c777bc84c5f0a}
+      \strng{authornamehash}{a617a8413dec560f409c777bc84c5f0a}
+      \strng{authorfullhash}{b77dd6efe937b13e8c1c5afd99b1780f}
+      \field{extraname}{2}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The quadrupole coupling constants of 11Li and 9Li in LiNBO3 have been measured by β-NMR spectroscopy on implanted lithium nuclei. These were polarized by optical pumping on a fast beam of neutral atoms. The deduced ratio of quadrupole moments, |Q(11Li)/Q(9Li)|=1.14(16), is in accordance with the current models describing the 11Li nucleus as being clustered into a 9Li core and halo of two loosely bound neutrons.}
+      \field{issn}{0370-2693}
+      \field{journaltitle}{Physics Letters B}
+      \field{number}{1}
+      \field{title}{Quadrupole moment of 11Li}
+      \field{volume}{281}
+      \field{year}{1992}
+      \field{pages}{16\bibrangedash 19}
+      \range{pages}{4}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0370-2693(92)90266-7
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0370269392902667
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0370269392902667
+      \endverb
+    \endentry
+    \entry{Broglia}{book}{}
+      \name{author}{2}{}{%
+        {{hash=fc8f37feac5e8b6e9041b1480e21292e}{%
+           family={Broglia},
+           familyi={B\bibinitperiod},
+           given={Ricardo\bibnamedelima A},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=28e60b2413be48ff2fff873d3048892d}{%
+           family={Zelevinsky},
+           familyi={Z\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {WORLD SCIENTIFIC}%
+      }
+      \strng{namehash}{533f1c4b413e7b4f53a8034b2cb4ec1e}
+      \strng{fullhash}{533f1c4b413e7b4f53a8034b2cb4ec1e}
+      \strng{bibnamehash}{533f1c4b413e7b4f53a8034b2cb4ec1e}
+      \strng{authorbibnamehash}{533f1c4b413e7b4f53a8034b2cb4ec1e}
+      \strng{authornamehash}{533f1c4b413e7b4f53a8034b2cb4ec1e}
+      \strng{authorfullhash}{533f1c4b413e7b4f53a8034b2cb4ec1e}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Fifty Years of Nuclear BCS}
+      \field{year}{2013}
+      \verb{doi}
+      \verb 10.1142/8526
+      \endverb
+      \verb{eprint}
+      \verb https://www.worldscientific.com/doi/pdf/10.1142/8526
+      \endverb
+      \verb{urlraw}
+      \verb https://www.worldscientific.com/doi/abs/10.1142/8526
+      \endverb
+      \verb{url}
+      \verb https://www.worldscientific.com/doi/abs/10.1142/8526
+      \endverb
+    \endentry
     \entry{tanihata2023lowEnergyHalo}{incollection}{}
       \name{author}{2}{}{%
         {{hash=ffc84ac6cbd4ca03c713db6d126f2d3d}{%
@@ -131,6 +320,44 @@
       \verb https://www.sciencedirect.com/science/article/pii/S0370269317301077
       \endverb
       \keyw{Li,Transfer,DWBA,Overlaps,Three-body}
+    \endentry
+    \entry{JONSON20041}{article}{}
+      \name{author}{1}{}{%
+        {{hash=2e43c85725f6b49eed6a3d4f3afb71fd}{%
+           family={Jonson},
+           familyi={J\bibinitperiod},
+           given={Björn},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{2e43c85725f6b49eed6a3d4f3afb71fd}
+      \strng{fullhash}{2e43c85725f6b49eed6a3d4f3afb71fd}
+      \strng{bibnamehash}{2e43c85725f6b49eed6a3d4f3afb71fd}
+      \strng{authorbibnamehash}{2e43c85725f6b49eed6a3d4f3afb71fd}
+      \strng{authornamehash}{2e43c85725f6b49eed6a3d4f3afb71fd}
+      \strng{authorfullhash}{2e43c85725f6b49eed6a3d4f3afb71fd}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Experimental studies of light dripline nuclei are reviewed. Progress in the production of very short lived nuclei and the development of radioactive nuclear beams has given this field the necessary tools for detailed studies of the most exotic nuclei. A well-known feature for some of the light dripline nuclei is that under certain circumstances they may form a neutron or a proton halo with a dilute mass distribution extending far outside the core of the nucleus. The first observation of halo states was made in the middle of the 1980s and it generated an interest in dripline physics, both experimentally and theoretically, that has gone far beyond the study of halo states. The experimental results for halo states are starting to give a fairly complete understanding of their structure in many cases. The data include masses, spins, moments, reaction data over a wide energy range and beta-decays. There are two main classes of halo state: the two-body halos with one nucleon surrounding the core, like the one-neutron halos 11Be and 19C and the one-proton halo 8B; and the Borromean three-body halos with two valence nucleons around the core, the key examples being 6He, 11Li and 14Be. Experimental information about systems lying just outside the dripline play an important rôle in understanding the structure of the halo states, examples being 10Li and 13Be, which form two-body subsystems of 11Li and 14Be, respectively. Unbound resonance states that correspond to exotic unbound quantum systems like 5H, 7H and 9He have been identified. There are continuum states existing above the particle separation threshold as well as spectra indicating cluster or molecular structure. The traditional magic numbers valid for more stable nuclei have been found to disappear and be replaced with new ones in the dripline regions. The beta-decays in these regions may give access to halos in excited states and the associated beta-delayed particle decay modes provide information about coupling to the continuum. After a short historical overview, examples on the most recent experimental results from this rapidly growing field of nuclear physics will be given.}
+      \field{issn}{0370-1573}
+      \field{journaltitle}{Physics Reports}
+      \field{number}{1}
+      \field{title}{Light dripline nuclei}
+      \field{volume}{389}
+      \field{year}{2004}
+      \field{pages}{1\bibrangedash 59}
+      \range{pages}{59}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.physrep.2003.07.004
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0370157303003259
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0370157303003259
+      \endverb
+      \keyw{Dripline nuclei,Radioactive beams,Nuclear halos,Unbound nuclei,Reaction experiments,Beta decay}
     \endentry
     \entry{Knoll:1300754}{book}{}
       \name{author}{1}{}{%
@@ -388,6 +615,36 @@
       \endverb
       \keyw{ACtive TARget,Time Projection Chamber,,Resonant scattering}
     \endentry
+    \entry{Nilsson:212345}{report}{}
+      \name{author}{1}{}{%
+        {{hash=8dac9507ce0713ce492daa98175fb8ab}{%
+           family={Nilsson},
+           familyi={N\bibinitperiod},
+           given={Sven\bibnamedelima Gösta},
+           giveni={S\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{8dac9507ce0713ce492daa98175fb8ab}
+      \strng{fullhash}{8dac9507ce0713ce492daa98175fb8ab}
+      \strng{bibnamehash}{8dac9507ce0713ce492daa98175fb8ab}
+      \strng{authorbibnamehash}{8dac9507ce0713ce492daa98175fb8ab}
+      \strng{authornamehash}{8dac9507ce0713ce492daa98175fb8ab}
+      \strng{authorfullhash}{8dac9507ce0713ce492daa98175fb8ab}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{This document exists only as a journal publication: it is not in the CERN Official Collection bound volume}
+      \field{number}{16}
+      \field{title}{{Binding states of individual nucleons in strongly deformed nuclei}}
+      \field{type}{techreport}
+      \field{year}{1955}
+      \verb{urlraw}
+      \verb https://cds.cern.ch/record/212345
+      \endverb
+      \verb{url}
+      \verb https://cds.cern.ch/record/212345
+      \endverb
+    \endentry
     \entry{SANETULLAEV2016481}{article}{}
       \name{author}{33}{}{%
         {{hash=10c2c65dd0f479d6758e166925b5aff2}{%
@@ -585,6 +842,110 @@
       \endverb
       \keyw{Halo nucleus,Transfer reaction,Inverse kinematics,DWBA,Spectroscopic factor}
     \endentry
+    \entry{PhysRevLett.101.202501}{article}{}
+      \name{author}{14}{}{%
+        {{hash=e44f09a2d84db823a77079697cf1a851}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c37a071cead685d6d846fe9f9ec782bb}{%
+           family={Brodeur},
+           familyi={B\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=41b502cb38a552b7dbd9b78b4aad2238}{%
+           family={Brunner},
+           familyi={B\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+        {{hash=d8247e7b3d2edcd233ec97ab7b224cf6}{%
+           family={Ettenauer},
+           familyi={E\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2a140febb9298042921c8d8b436f5a46}{%
+           family={Lapierre},
+           familyi={L\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod}}}%
+        {{hash=005a595b4d6e810cb13f1727dc316842}{%
+           family={Ringle},
+           familyi={R\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ad704f8919b56058c732e03be9063e00}{%
+           family={Ryjkov},
+           familyi={R\bibinitperiod},
+           given={V.\bibnamedelimi L.},
+           giveni={V\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=efe4e516b3382c6dea7aace263a1f0c5}{%
+           family={Ames},
+           familyi={A\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=6ef89b2bb9fbb3646fa3f17c25fc8519}{%
+           family={Bricault},
+           familyi={B\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=e706dde8ba71a84aa05cc8f19913101e}{%
+           family={Drake},
+           familyi={D\bibinitperiod},
+           given={G.\bibnamedelimi W.\bibnamedelimi F.},
+           giveni={G\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=9aa006661af42954c50e0d0fdd154448}{%
+           family={Delheij},
+           familyi={D\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=8f2f1075e87886bfbb9d393b208b7ca7}{%
+           family={Lunney},
+           familyi={L\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=01229619d9f77f3bca645ce30de39843}{%
+           family={Sarazin},
+           familyi={S\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=99e7893c64fd798189d4e4298942cdf8}{%
+           family={Dilling},
+           familyi={D\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{b9552a6b71370fad70b0ac8c005e56d9}
+      \strng{fullhash}{d279b85c2ba6cf0ed9f726cf59b6a14b}
+      \strng{bibnamehash}{b9552a6b71370fad70b0ac8c005e56d9}
+      \strng{authorbibnamehash}{b9552a6b71370fad70b0ac8c005e56d9}
+      \strng{authornamehash}{b9552a6b71370fad70b0ac8c005e56d9}
+      \strng{authorfullhash}{d279b85c2ba6cf0ed9f726cf59b6a14b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{20}
+      \field{journaltitle}{Phys. Rev. Lett.}
+      \field{month}{11}
+      \field{title}{First Penning-Trap Mass Measurement of the Exotic Halo Nucleus $^{11}\mathrm{Li}$}
+      \field{volume}{101}
+      \field{year}{2008}
+      \field{pages}{202501}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevLett.101.202501
+      \endverb
+      \verb{urlraw}
+      \verb https://link.aps.org/doi/10.1103/PhysRevLett.101.202501
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevLett.101.202501
+      \endverb
+    \endentry
     \entry{tanihata2023halo}{incollection}{}
       \name{author}{2}{}{%
         {{hash=70075be67ca39962ad1f82844d51e04a}{%
@@ -759,6 +1120,55 @@
       \verb https://www.sciencedirect.com/science/article/pii/S0146641011000330
       \endverb
       \keyw{Nucleosynthesis,-process,-process,-process,-process,Supernovae}
+    \endentry
+    \entry{ZIEGLER20101818}{article}{}
+      \name{author}{3}{}{%
+        {{hash=02fcb1875bee6a43de13e427c6f33116}{%
+           family={Ziegler},
+           familyi={Z\bibinitperiod},
+           given={James\bibnamedelima F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=31878b0dbbe33ba1ca942aef1c993d92}{%
+           family={Ziegler},
+           familyi={Z\bibinitperiod},
+           given={M.D.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9ed0a8ca2e9adf1307b845ba03e4a82e}{%
+           family={Biersack},
+           familyi={B\bibinitperiod},
+           given={J.P.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{6f5f621c3f3f73d704ff9b1202ecda37}
+      \strng{fullhash}{6f5f621c3f3f73d704ff9b1202ecda37}
+      \strng{bibnamehash}{6f5f621c3f3f73d704ff9b1202ecda37}
+      \strng{authorbibnamehash}{6f5f621c3f3f73d704ff9b1202ecda37}
+      \strng{authornamehash}{6f5f621c3f3f73d704ff9b1202ecda37}
+      \strng{authorfullhash}{6f5f621c3f3f73d704ff9b1202ecda37}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{SRIM is a software package concerning the Stopping and Range of Ions in Matter. Since its introduction in 1985, major upgrades are made about every six years. Currently, more than 700 scientific citations are made to SRIM every year. For SRIM-2010, the following major improvements have been made: (1) About 2800 new experimental stopping powers were added to the database, increasing it to over 28,000 stopping values. (2) Improved corrections were made for the stopping of ions in compounds. (3) New heavy ion stopping calculations have led to significant improvements on SRIM stopping accuracy. (4) A self-contained SRIM module has been included to allow SRIM stopping and range values to be controlled and read by other software applications. (5) Individual interatomic potentials have been included for all ion/atom collisions, and these potentials are now included in the SRIM package. A full catalog of stopping power plots can be downloaded at www.SRIM.org. Over 500 plots show the accuracy of the stopping and ranges produced by SRIM along with 27,000 experimental data points. References to the citations which reported the experimental data are included.}
+      \field{issn}{0168-583X}
+      \field{journaltitle}{Nuclear Instruments and Methods in Physics Research Section B: Beam Interactions with Materials and Atoms}
+      \field{note}{19th International Conference on Ion Beam Analysis}
+      \field{number}{11}
+      \field{title}{SRIM – The stopping and range of ions in matter (2010)}
+      \field{volume}{268}
+      \field{year}{2010}
+      \field{pages}{1818\bibrangedash 1823}
+      \range{pages}{6}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.nimb.2010.02.091
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0168583X10001862
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0168583X10001862
+      \endverb
+      \keyw{SRIM,Ion stopping,Stopping power,Stopping force,Ion range}
     \endentry
   \enddatalist
 \endrefsection

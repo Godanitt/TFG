@@ -385,8 +385,25 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
 
     //c1->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Completo_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
+    // Escalamos todas las gráficas: 
 
-    // Dibujamos puntos de impacto
+    double factorHisto{double(interacciones)};
+    std::cout<<"factorHisto="<<factorHisto<<"\n";
+
+    if (ExOg==0.00) {factorHisto=336920/double(interacciones);}
+
+    if (ExOg==0.20) {factorHisto=259406/double(interacciones);}
+
+    
+    hImpactSilF0->Scale(factorHisto);   
+    hImpactSilF1->Scale(factorHisto);  
+    hImpactSilR0->Scale(factorHisto); 
+    hImpactSilL0->Scale(factorHisto);   
+    hKinSampled->Scale(factorHisto);
+    hExSampled->Scale(factorHisto);
+    hInteractionXY->Scale(factorHisto);
+    hInteractionYZ->Scale(factorHisto);
+
 
     SetMyStyle();
     gROOT->ForceStyle();
@@ -437,7 +454,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     hExSampled->SetTitle("");
     hExSampled->SetLineWidth(2); 
     hExSampled->GetXaxis()->SetRangeUser(-2, 2);
-    hExSampled->Draw();
+    hExSampled->Draw("h");
     c5->SetRightMargin(0.01);
     c5->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/ExHisto/ExSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
     

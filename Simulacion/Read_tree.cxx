@@ -45,6 +45,18 @@ TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigma
     
     auto hEx {df.Histo1D({"hEx", TString::Format("Rec Ex=%.2f;E_{x} [MeV];Counts", Ex), 200, -2.5, 3}, "exrec")};
     
+    double factorHisto{0};
+
+    double interacciones{1000000};
+
+    if (Ex==0.0) {factorHisto=336920/interacciones;}
+
+    if (Ex==0.2) {factorHisto=259406/interacciones;}
+
+    
+    hEx->Scale(factorHisto);   
+
+
     // Clona el histograma
     auto* hClone = (TH1*) hEx->Clone();
 
@@ -122,7 +134,7 @@ void Read_tree_aux(int incIdx, double sigma[2],double usigma[2]){
 
 
     // Crea la leyenda
-    auto* legend = new TLegend(0.7, 0.7, 0.9, 0.9);  // (xmin, ymin, xmax, ymax)
+    auto* legend = new TLegend(0.64, 0.75, 0.95, 0.95);  // (xmin, ymin, xmax, ymax)
     auto* hSum {new TH1D {"hEx", ";E_{x} [MeV];Counts", 200, -2.5, 3}};
 
     for (auto& [h, ex] : hList) {
@@ -137,8 +149,8 @@ void Read_tree_aux(int incIdx, double sigma[2],double usigma[2]){
     gStyle->SetTitleFont(62,"XYZ");
     gStyle->SetTitleSize(0.05); 
     // Margenes: 
-    gStyle->SetPadLeftMargin(0.10);
-    gStyle->SetPadRightMargin(0.10);
+    gStyle->SetPadLeftMargin(0.14);
+    gStyle->SetPadRightMargin(0.05);
     gStyle->SetPadTopMargin(0.05);
     gStyle->SetPadBottomMargin(0.14);
 
@@ -152,8 +164,11 @@ void Read_tree_aux(int incIdx, double sigma[2],double usigma[2]){
 
     c1->cd(1);
     
-    hs->Draw("nostack");
-    hs->GetXaxis()->SetRangeUser(-0.3, 0.6);  // Solo muestra de -0.2 a 0.6 en X
+    hs->Draw("hist nostack");
+    hs->GetXaxis()->SetRangeUser(-0.4, 0.8);  // Solo muestra de -0.2 a 0.6 en X
+    
+    legend->SetTextSize(0.05);  // Tamaño del texto
+    legend->SetTextFont(62);     // Fuente en negrita
     legend->Draw();
 
 
@@ -162,6 +177,7 @@ void Read_tree_aux(int incIdx, double sigma[2],double usigma[2]){
 
     TIter next(hs->GetHists());
     TH1* h = nullptr;
+    
 
     while ((h = (TH1*)next())) {
         TH1* hclone = (TH1*) h->Clone();  // Crea copia
@@ -185,7 +201,7 @@ void Read_tree_aux(int incIdx, double sigma[2],double usigma[2]){
 
     hSum->Draw("hist");  // sin "same" porque es primero
     hSum->GetXaxis()->SetRangeUser(-0.3, 0.6);  // Solo muestra de -0.2 a 0.6 en X
-    hs_clean->Draw("nostack same");
+    hs_clean->Draw("hist nostack same");
 
     legend->AddEntry(hSum, "Suma", "f");
     legend->Draw();

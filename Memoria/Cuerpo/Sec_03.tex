@@ -125,7 +125,7 @@ El cálculo de $p_4$ es exactamente igual, obteniendo
 En la siguiente gráfica \ref{Fig:04-Kin} podemos ver la dependencia entre el ángulo $\theta_3$ y $\theta_4$ y la energía cinética de salida, en la que podemos ver una función que las relaciona unequívocamente.
 
 \begin{figure}[H] \centering
-	\includegraphics[width=0.7\linewidth]{Imagenes/Cinematica.pdf}
+	\includegraphics[width=0.9\linewidth]{Imagenes/Cinematica.pdf}
 	\caption{Cinemática de la reacción $^{11}\text{Li}(d,t)^{10}\text{Li}$, donde se muestra la energía cinética del tritio (izquierda) y del $^{10}$Li (derecha) frente su ángulo de salida.}
 
 	\label{Fig:04-Kin}
@@ -185,3 +185,56 @@ Las especificaciones técnicas de los silicios están detalladas en   \cite{MAUS
 \subsection{Sttragling Angular}
 
 Gracias a la TPC podemos reconstruir la traza del tritio que nos da información acerca del ángulo $\theta_{lab}$ de las partículas resultantes de una interacción. También podemos obtenerla  a partir del vértice de interacción, la dirección del haz y el punto de interacción con el impacto del silicio. Debido a las dimensiones del pad en los que se recoge la carga y la propia resolución del silicio, en ambos casos se tiene una resolución similar. La distribución de cada medida de $\theta_{lab}$ sería una gaussiana con FWHM = 1$^{\circ}$, que será, tal y como veremos, el factor que generá mas anchura $\sigma$ en las distribuciones de energía.
+
+\subsection{Estadística real vs simulada}
+
+En nuestra simulacióm emitimos una cantidad de partículas arbitrarias individualmente, número que no se corresponde con el experimento real. Ni siquiera todas las partículas del beam interaccionan con el gas de la TPC según la reacción de interés $^{11} \text{Li}(d,t)^{10}\text{Li}$. Tenemos, de alguna forma, que obtener una relación entre el número de cuentas procedentes del experimento con el que nos queremos comparar y la simulación, de tal modo que podamos relacionar los resultados entre ambas. Así:
+
+\begin{equation}
+	N_{\text{eventos}}  = N_{\text{beam }} \cdot N_{\text{targets}} \cdot \sigma \cdot \epsilon \label{Ec:3.21}
+\end{equation}
+doinde $\sigma$ es la sección eficaz total integrada en todo el ángulo solido y $\epsilon$ es la eficiencia. La sección eficaz es diferente para cada excitación, tal y como podemos ver en la \cref{Fig:04-seccion_eficaz}, por lo que el factor dependerá de que energía de excitación estemos tabulando.
+
+\begin{center}
+	\includegraphics[width=0.7\linewidth]{Imagenes/Seccion_Eficaz.pdf}
+	\captionof{figure}{Sección eficaz teórica que usaremos para ambas excitaciones.}
+	\label{Fig:04-seccion_eficaz}
+\end{center}
+
+Por otro lado para la simulación todos las partícuals de entrada experimentarán dicha reacción con un 100\% de probabilidad, teniendo en cuenta la sección eficaz más como una distribución del ángulo de salida que como un factor de probabilidad de  que suceda la reacción. En la simulación el número de eventos es, denotándolo con una prima:
+
+\begin{equation}
+	N'_{\text{eventos}} = N_{\text{iter}} \cdot \epsilon
+\end{equation}
+siendo $\epsilon$ la misma eficiencia que la de la \cref{Ec:3.21}. Lógicamente en ambos casos tendremos la misma eficienia será la misma, ya que el número de partículas que llega a los detectores de silicio y que se parán en el gas es la misma. Es decir, los factores geométricos y factores relaciondos interacción haz-materia y haz-silicios, que son los que influyen en esta eficiencia, al ser tenidos en cuenta en la smulación ambas efiencias deben ser iguales.
+
+Para recuperar los eventos reales tendremos que multiplicar por un factor $\alpha$ calculado a través de la división de los valores anteriores: 
+\begin{equation}
+	\alpha=\frac{N_{\text{eventos}}}{N_ {\text{eventos}'}} = \frac{N_{\text{beam}} \cdot N_{\text{targets}} \cdot \sigma}{N_{\text{iter}}}
+\end{equation}
+Para poder realcionar correctamente un histograma de la simulación y el histograma rela bastará con multiplicarla por este factor $\alpha$, tal que:
+
+\begin{equation}
+	\text{Histo real} =  \alpha \cdot \text{Histo simulado }
+\end{equation}
+Ahora tenemos que calcular de alguna forma este $\alpha$. Primero debemos de hacer la integral de $\sigma$, la cual se hace a de diferentes métodos de integración, obteniendo: 
+
+\begin{table}[H] \centering
+	\input{Cuerpo/SeccionEficaz.tex}
+	\caption{Valores de la sección eficaz tota para ambos métodos y ambas excitaciones.}
+\end{table}
+Nosotros usaremos el procedente de la regla del trapecio ya que los puntos no son equidistantes. Los resultado que nostros usaremos tendrán en cuent un haz de $^{11}$Li con una intensidad de 3000 partículas por segundo que durará 6 días, por lo que
+
+\begin{equation}
+	N_{\text{beam}} = 3110400000 
+\end{equation}
+Para calcular el número de partículas del gas en la dirección incidente usamos:
+
+\begin{equation}
+	N_{\text{targets}} = f_{d}N_{\text{gas}} l_x
+\end{equation}
+donde hemos usado que la fracciń de deutero es 78.26\%, la densidad del gas es $N_{\text{gas}}=\num{4.9945E+19}$ átomos/cm$^{3}$ y que $l_x=25.5$ cm \cite{ZIEGLER20101818}. Así podemos obtener un valor $\alpha$:
+
+\begin{equation}
+	\input{Cuerpo/alphas.tex}
+\end{equation}
