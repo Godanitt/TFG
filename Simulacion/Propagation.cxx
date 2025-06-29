@@ -87,103 +87,99 @@ struct Resultado
 Resultado Propagation(double t3, double theta3, ROOT::Math::XYZPoint vertex, ROOT::Math::XYZVector direction, ActPhysics::SRIM &srim, ActPhysics::SilSpecs *sils, int incIdx)
 {
     Resultado res;
-
-    int silIndex0 {-1};
-    ROOT::Math::XYZPoint silPoint0 {};
-    std::string layer0 {};
-    for(const auto& layer : {"f0","l0","r0"})
-    {
-        auto [idx, point] = sils->FindSPInLayer(layer, vertex, direction);
-        if(idx != -1)
+      int silIndex0 {};
+        ROOT::Math::XYZPoint silPoint0 {};
+        std::string layer0 {};
+        for(const auto& layer : {"f0", "l0", "r0"})
+        // for(const auto& layer : {"f0"})
         {
-            silIndex0 = idx;
-            silPoint0 = point;
-            layer0 = layer;
-            break;
+            auto [idx, point] = sils->FindSPInLayer(layer, vertex, direction);
+            if(idx != -1)
+            {
+                silIndex0 = idx;
+                silPoint0 = point;
+                layer0 = layer;
+                break;
+            }
         }
-    }
+        // Continue if no silicon is reached geometrically
 
-    // Estudiamos el silicio 1: 
-    //auto [silIndex0, silPoint0]{sils->FindSPInLayer("f0", vertex, direction)};
+        // Propagate to it
+        auto dist0 {(vertex - silPoint0).R()};
+        auto TAtSil0 {srim.Slow("light", t3, dist0)};
 
-    auto silDist0{(vertex - silPoint0).R()};
+        if (incIdx==0 ||  incIdx==1 ){        
+            TAtSil0=srim.SlowWithStraggling("light", t3, dist0);
+        }
 
-    double t3inSil0{srim.Slow("light", t3, silDist0)};
+        ///////////// SILICON 0 ///////////////////
+        // Angle with normal
+        auto thick0 {sils->GetLayer(layer0).GetUnit().GetThickness()};
+        auto normal {sils->GetLayer(layer0).GetNormal()};
+        auto angleNormal0 {TMath::ACos(direction.Unit().Dot(normal.Unit()))};
+        // Eloss
+        auto TAfterSil0 {srim.Slow("lightInSil", TAtSil0, thick0, angleNormal0)};
+        auto eloss0 {TAtSil0 - TAfterSil0};
 
-    if (incIdx == 0 || incIdx==1){
-        t3inSil0=ApplyStraggling(&srim, "light", t3, silDist0);
-    }
-    
+        if (incIdx==0 ||  incIdx==1 ){
+            TAfterSil0=srim.SlowWithStraggling("lightInSil", TAtSil0, thick0, angleNormal0);
+            eloss0 = ApplySilResolution(TAtSil0 - TAfterSil0) ;
+        }
 
-    // Aplicamos straggling y perdidadas de energía a la partícula 3
-    auto silThick0{sils->GetLayer(layer0).GetUnit().GetThickness()};
-    //std::cout<<"error slow 1 \t"<< silThick0 << " \t t3:" << t3inSil0 <<" \t theta3:" << theta3  << " \n ";
+        // std::cout << "TAtSil0 : " << TAtSil0 << '\n';
+        // std::cout << "thick0 : " << thick0 << '\n';
+        // std::cout << "angleNormal0 : " << angleNormal0 << '\n';
+        // std::cout << "eloss0 : " << eloss0 << '\n';
 
-    auto normal {sils->GetLayer(layer0).GetNormal()};
-    double thetaSil{TMath::ACos(direction.Unit().Dot(normal.Unit()))};
+        //////////// SILICON 1 ////////////////////
+        // only if layer0 == "f0"
+        int silIndex1 {};
+        ROOT::Math::XYZPoint silPoint1 {};
+        double dist1 {};
+        double TAtSil1 {};
+        double eloss1 {};
+        double TAfterSil1 {};
+        if(layer0 == "f0" && TAfterSil0 > 0)
+        {
+            // Propagate to sil1
+            std::tie(silIndex1, silPoint1) = sils->FindSPInLayer("f1", vertex, direction);
+            // Eloss in intergas = region between f0 and f1
+            dist1 = (silPoint0 - silPoint1).R();
+            TAtSil1 = srim.Slow("light", TAfterSil0, dist1);
+            
+            if (incIdx==0 ||  incIdx==1 ){        
+                TAtSil1=srim.SlowWithStraggling("light", TAfterSil0, dist1);
+            }
 
-    auto t3outSil0 {srim.Slow("lightInSil", t3inSil0, silThick0+0.001, thetaSil)};
-    double dT3Sil0 {t3inSil0 - t3outSil0};
+            auto thick1 {sils->GetLayer("f1").GetUnit().GetThickness()};
+            auto normal1 {sils->GetLayer("f1").GetNormal()};
+            auto angleNormal1 {TMath::ACos(direction.Unit().Dot(normal.Unit()))};
+            TAfterSil1 = srim.Slow("lightInSil", TAtSil1, thick1, angleNormal1);
+            eloss1 = TAtSil1 - TAfterSil1;
 
-    if (incIdx == 0 || incIdx==1){
-        t3outSil0 =srim.SlowWithStraggling("lightInSil", t3inSil0, silThick0, thetaSil);
-        dT3Sil0 = ApplySilResolution(t3inSil0 - t3outSil0);
-    }
+            if (incIdx==0 ||  incIdx==1  ){
+                TAfterSil1=srim.SlowWithStraggling("lightInSil", TAtSil1, thick1, angleNormal1);
+                eloss1 = ApplySilResolution(TAtSil1 - TAfterSil1) ;
+            }
+        }
 
-    // Vemos si la partícula se ha frenaado en el silicio y  si no se ha parado antes
-    bool isInSil0{silIndex0 != -1 && 0 < t3inSil0 && t3outSil0 < 0.000001};
-
-    // Vemos si la partícula se ha frenado antes del primer silicio
-
-    double rangeBeforeSil0{(srim.EvalRange("light", t3))};
-    bool stoppedBeforeSil0{silDist0 > rangeBeforeSil0};
-
-      
-    
-    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    // Estudiamos el silicio 2:
-    auto [silIndex1, silPoint1]{sils->FindSPInLayer("f1", vertex, direction)};
-
-    // Calculemos las distancias 
-    auto silDist1{(silPoint0 - silPoint1).R()};
-
-    // Aplicamos straggling al t3
-
-    double t3inSil1{srim.Slow("light", t3outSil0, silDist1+0.001)};
-
-    if (incIdx == 0 || incIdx==1){
-        t3inSil1=ApplyStraggling(&srim, "light", t3outSil0, silDist1);
-    }
-
-    auto silThick1{sils->GetLayer("f1").GetUnit().GetThickness()};
-    
-    // Aplicamos straggling y perdidadas de energía a la partícula 3
-
-
-    double t3outSil1{srim.Slow("lightInSil", t3inSil1, silThick1, thetaSil * TMath::DegToRad())};
-
-    // Aplicamos la resolución
-    double dT3Sil1{t3inSil1 - t3outSil1};
-    if (incIdx == 0 || incIdx==1){
-        t3outSil1 =srim.SlowWithStraggling("lightInSil", t3inSil1, silThick1, thetaSil);
-        dT3Sil1=ApplySilResolution(t3inSil1 - t3outSil1);
-    }
-
-
-    bool isInSil1{silIndex0 != -1 && 0 < t3inSil0 && 0 < t3inSil1 && silIndex1!=-1 && t3outSil1<0.000001};
     //%%%%%%%%%%%layer0%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     // Guardamos los datos: 
 
-    res.dt3sil0=dT3Sil0;
-    res.dt3sil1=dT3Sil1;
-    res.sildist0=silDist0;
-    res.sildist1=silDist1;
+
+    bool isInSil0{silIndex0 != -1 && 0 < TAtSil0 && !(TAfterSil0>0)};
+    bool isInSil1{!(TAtSil1 <= 0) && silIndex0 != -1  && silIndex1!=-1 &&  !(TAfterSil1>0)};
+
+    res.dt3sil0=eloss0;
+    res.dt3sil1=eloss1;
+    res.sildist0=dist0;
+    res.sildist1=dist1;
     res.isInSil0=isInSil0;
     res.isInSil1=isInSil1;
     res.silPoint1=silPoint0;
 
-    res.stoppedBeforeSil0=stoppedBeforeSil0;
-    res.rangeBeforeSil0=rangeBeforeSil0;
+    res.stoppedBeforeSil0=-1;
+    res.rangeBeforeSil0=-1;
    /*
     if (isInSil1){
     std::cout<< "silDist1" << silDist1 << "\n";

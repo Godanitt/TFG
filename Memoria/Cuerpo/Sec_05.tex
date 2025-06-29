@@ -2,6 +2,19 @@
 
 En esta sección vamos a analizar los resultados obtenidos en la simulación, centrándonos principalmente en las diferentes anchuras de la energía de excitación recostruida. Dado que tendremos dos anchuras, en función de la energía de excitación vamos a usar la notación $\sigma(E^*)$ como anchura del ajuste gaussiano a la distribución de energía de excitación recostruida para $E^*$.  
 
+\subsection{Recostrucción sin fuentes de incertidumbre y sin Briet-Wigner}
+
+En este apartado presentamos los datos de $\sigma$ sin ninguna fuente de incertidumbre y sin aplicar las distribuciones de la energía de excitación Briet-Wigner.
+
+\vspace*{-0.25cm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Imagenes/Rec_incIdx4_single.pdf}
+    \caption{Energía de excitación sin incertidumbre.}
+    \label{Fig:05-RecExcIdx3}
+\end{figure}
+
+
 \subsection{Recostrucción sin fuentes de incertidumbre}
 
 En primer lugar vamos a analizar la recostrucción de la energía de excitación sin considerar ninguna fuente de incertidumbre de las aquí modeladas, que como ya mencionamos son el sttragling, la dispersión angular y la resolución de los silicios. Como podemos ver en la imagen \cref{Fig:05-RecExcIdx3}, obtenemos prácticamente una distribución Briet-Wigner, con 
@@ -91,10 +104,12 @@ e, igual que en el caso anterior, no podemos distiguir los picos del histograma 
 
 \subsection{Resumen de resultados}
 
-
+En la \cref{Tab:05-ExcRec} mostramos los resultados de todas las $\sigma$ para las distribuciones gaussianas o voigt obtenidas en la simulación. Como podemos comprobar las $\sigma$ (y por tanto la FWHM)  si tenemos en cuenta todas las fuentes de incertidumbre y la anchura de la resonancia, de cada una de las distribuciones es mucho más grande que la distancia entre las energías del estado fundamental y el primer excitado, por lo que no vampos a poder distinguirlas experimentalmente, a no ser que seamos capaces de reducir considerablemente la mayor fuente de incertidumbre que es la resolución angular. 
 
 \begin{table}[H] \centering 
 \input{Cuerpo/SigmasTab.tex}
 \caption{$\sigma$ del ajuste gaussiano a la distribución de energía de excitación recostruida.}
 \label{Tab:05-ExcRec}
 \end{table}
+
+Debemos encontrar otro método para obtener los resultados esperados con una resolución que permita diferenciar los estados del litio 10.

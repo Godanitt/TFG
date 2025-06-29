@@ -34,7 +34,7 @@ gROOT->ForceStyle();
 
 
 auto* kinEx0 {new ActPhysics::Kinematics("11Li", "d", "t",11 * 7.5, 0.0)}; // cinemática
-auto* kinEx2 {new ActPhysics::Kinematics("11Li", "d", "t",11 * 7.5, 0.2)}; // cinemática
+auto* kinEx2 {new ActPhysics::Kinematics("11Li", "d", "t",11 * 7.5, 4)}; // cinemática
 
 
 auto* g3Li10Ex0 {kinEx0->GetKinematicLine3()};
@@ -56,9 +56,9 @@ canvas10->DivideSquare(2);
 canvas10->cd(1);
 
 g3Li10Ex0->SetLineColor(kBlue);
-g3Li10Ex0->SetLineWidth(1.5);
+g3Li10Ex0->SetLineWidth(2);
 g3Li10Ex2->SetLineColor(kRed);
-g3Li10Ex2->SetLineWidth(1.5);
+g3Li10Ex2->SetLineWidth(2);
 
 g3Li10Ex0->Draw("al");
 g3Li10Ex2->Draw("l same");
@@ -70,7 +70,7 @@ legend->SetTextFont(62);     // Fuente en negrita
 
 
 legend->AddEntry(g3Li10Ex0,"E_{x}=0.0 MeV","l");
-legend->AddEntry(g3Li10Ex2,"E_{x}=0.2 MeV","l");
+legend->AddEntry(g3Li10Ex2,"E_{x}=4 MeV","l");
 legend->Draw();
 g3Li10Ex0->SetTitle(";#theta_{3Lab} [#circ];E_{3Lab} [MeV]");
 
@@ -96,7 +96,7 @@ legend2->SetTextSize(0.05);  // Tamaño del texto
 legend2->SetTextFont(62);     // Fuente en negrita
 
 legend2->AddEntry(g4Li10Ex0,"E_{x}=0.0 MeV","l");
-legend2->AddEntry(g4Li10Ex2,"E_{x}=0.2 Mev","l");
+legend2->AddEntry(g4Li10Ex2,"E_{x}=4 Mev","l");
 legend2->Draw();
 g4Li10Ex0->SetTitle(TString::Format(";#theta_{4Lab} [#circ];E_{4Lab} [MeV]"));
 

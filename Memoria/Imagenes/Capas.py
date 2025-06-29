@@ -9,6 +9,10 @@ mpl.rcParams['lines.linewidth'] = 2.5  # o el valor que desees
 Energias1=np.array([0,6.2,9.8,16.2,19.8,21.4,26.4,31.8,34.4,36.6,39.2,49.8,52.2,55.2,57.6,59.6,72.2,75.0,77.8,79.6,81.6])
 Energias2=np.array([0,6.2,9.2,12.5,17.0,21.4,26.4,31.8,34.4,36.6,39.2,49.8,52.2,55.2,57.6,59.6,72.2,75.0,77.8,79.6,81.6])
 
+
+EnergiasMagicos=np.array([3.1,13.0])
+NombreMagicos=np.array(["2","8"])
+
 Degeneracion=np.array([2,4,2,6,2,4,8,4,6,2,10,8,6,4,2,12,10,8,6,4,2])
 Nombre=["1s1/2  [0MeV]","1p3/2 [6.2MeV]","1p1/2 [9.8MeV]","1d5/2 [16.2MeV]",    "2s1/2 [19.8MeV]",  "1d3/2 [21.4MeV]",    "1f7/2 [26.4MeV]", 
         "2p3/2 [31.8MeV]",   "1f5/2 [34.4MeV]",    "2p1/2 [36.6MeV]",   "1g9/2 [39.2MeV]",    "1g7/2 [49.8 MeV]", 
@@ -202,6 +206,25 @@ def Modelo_Capas(A,Z,nombre,Energias=Energias1,flag=False):
     return fig,ax
 
 fig,ax=Modelo_Capas(10,3,Nombre_sin_energia)
+for i in range(len(NombreMagicos)):
+        ax.annotate(
+                NombreMagicos[i],
+                xy=(-3.0,EnergiasMagicos[i]), 
+                fontsize=16,
+                color='black',     ha="center", va="center",
+                bbox=dict(boxstyle="circle",
+                      fc="lightblue", ec="steelblue", lw=2)
+        )
+        ax.annotate(
+                NombreMagicos[i],
+                xy=(3,EnergiasMagicos[i]), 
+                fontsize=16,
+                color='black',   
+                ha="center", va="center",
+                bbox=dict(boxstyle="circle",
+                      fc="lightblue", ec="steelblue", lw=2)  
+        )
+        
 fig.savefig("/home/daniel/GitHub/TFG/Memoria/Imagenes/Capas_10Li.pdf",bbox_inches="tight")
 
 fig,ax=Modelo_Capas(10,3,Nombre_sin_energia2,Energias=Energias2,flag=True)

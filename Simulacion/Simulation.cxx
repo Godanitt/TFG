@@ -15,10 +15,13 @@
 #include "TVector3.h" 
 #include "Math/Point3D.h"
 #include "Math/Vector3D.h"
+#include "TLine.h"
 
 #include "Sampleo.cxx"
 #include "Propagation.cxx"
 #include "Auxiliares.cxx"
+#include "TriggerL1.cxx"
+#include "Rango.cxx"
 
 /*
 Esta es la función principal que se encarga de decir si efectivamente se ha producido la colisión y de obtener histogramas y gráficas
@@ -33,7 +36,7 @@ Como argumentos:
     3: ninguna fuente de incertidumbre
  */
 
-void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int incIdx = 0)
+std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int incIdx = 0)
 {
     TStyle *oldStyle = (TStyle*)gStyle->Clone("oldStyle");
 
@@ -112,16 +115,26 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     // Histogramas y Gráficas:
     // TH2D: "Nombres","numero bins eje x", "minimo x", "maximo x", "numero bins y", "minimo y", "maximo y"
     auto *hKinSampled{new TH2D{"hKinSampled", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3} [MeV];Cuentas", 220, 0, 80,220,-5,80}};
+    
+    // Measured para Trigger l1
+    auto *hKinMeasuredL1{new TH2D{"hKinMeasuredL1", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3} [MeV];Cuentas", 220, 0, 80,220,-5,80}};
+    auto *hKinReallyMeasuredL1{new TH2D{"hKinReallyMeasuredL1", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3} [MeV];Cuentas", 220, 0, 80,220,-5,80}};
+
     auto *hKinMeasured{new TH2D{"hKinMeasured", "#theta_{3} vs T_{3} Recostrued; #theta_{3};T_{3} [MeV];Cuentas", 220, 0, 80, 220, -5, 80}};
     auto *hKinL1{new TH2D{"hKinL1", "#theta_{3} vs T_{3} Sampleado; #theta_{3};T_{3};Cuentas", 220, 0, 80, 220, -5, 80}};
     auto *hImpactSilF0{new TH2D{"hImpactSilF0", "f0; y[mm];z[mm];Cuentas", 200, -25, 275, 200, 0, 175*2-100}};
     auto *hImpactSilF1{new TH2D{"hImpactSilF1", "f1; y[mm];z[mm];Cuentas", 200, -25, 275, 200, 0, 175*2-100}};
     auto *hImpactSilL0{new TH2D{"hImpactSilL0", "l0; x[mm];z[mm];Cuentas", 250, -200, 400, 200, -50, 175*2-100}};
     auto *hImpactSilR0{new TH2D{"hImpactSilR0", "r0; x[mm];z[mm];Cuentas", 250, -200, 400, 200, -50, 175*2-100}};
-    auto *hRangeTheta{new TH2D{"hRangeTheta", "Rango vs #theta_{3}; #theta_{3} [^{#circ}];R [mm];Cuentas", 220, 0, 80, 220, 0, 400}};
     
+    
+    auto *hExTheta{new TH2D{"hExTheta", "Ex vs #theta_{3}; #theta_{3} [^{#circ}];Ex [MeV];Cuentas", 220, 0, 90, 220, -1, 1}};
+
     auto* hInteractionXY{new TH2D{"hImpactSilF0", "; x[mm];z[mm];Cuentas", 250, 0, 256, 200, 0, 175*2-100}};
     auto* hInteractionYZ{new TH2D{"hImpactSilF0", "I; y[mm];z[mm];Cuentas", 200, 100, 155, 200,100, 155}};;
+
+
+    auto *hRangeTheta{new TH2D{"hRangeTheta", "Rango vs #theta_{3}; #theta_{3} [^{#circ}];R [mm];Cuentas", 220, 0, 80, 220, 0, 300}};
 
     
     // TH1D
@@ -145,7 +158,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
 
 
     // Cinemática
-    auto* kin {new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex)}; // cinemática
+    auto* kin {new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, ExOg)}; // cinemática
 
     // Anchura de la Briet-Wigner: 
     double Gamma{0.01}; // en MeV
@@ -164,7 +177,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     double lim{10};
     // Simulacion core
     for (int i=0; i<interacciones; i++){
-        if (ExOg==0.0) {
+        if (ExOg==0.0 && incIdx!=4) {
             Gamma=0.1;
             Ex=gRandom->BreitWigner(ExOg, Gamma);
             if (Ex<ExOg-lim || Ex>ExOg+lim){
@@ -173,7 +186,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
             //kin=new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex); // cinemática
         }
 
-        if (ExOg==0.2) {
+        if (ExOg==0.2 && incIdx!=4) {
             Gamma=0.2;
             Ex=gRandom->BreitWigner(ExOg, Gamma);
             if (Ex<ExOg-lim || Ex>ExOg+lim){
@@ -181,8 +194,9 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
             }
             //kin=new ActPhysics::Kinematics("11Li", "d", "t", p1.get_A() * tBeam, Ex); // cinemática
         }
-        
-        kin->SetEx(Ex);
+        if (incIdx!=4){        
+            kin->SetEx(Ex);
+        }
 
         // Definimos el vértice
         ROOT::Math::XYZPoint vertex{SampleVertex(xActar, yActar, zActar)};
@@ -208,8 +222,11 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
 
         // Calculamos la cinemática
         kin->ComputeRecoilKinematics(thetaCM, phiCM);
+        
         double t3 {kin->GetT3Lab()};
         double theta3 {kin->GetTheta3Lab()};
+
+       
 
         // Aplicamos resolución angular
         if (incIdx == 0 || incIdx == 2) {
@@ -244,6 +261,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
         // Propagamos (véase Propagation.cxx)
         
         Resultado propagacion = Propagation(t3, theta3, vertex, direction, srim, sils,incIdx);
+        ResultadoTriggerL1 triggerL1 = TriggerL1(t3, theta3, vertex, direction, srim);
 
 
         // Perdidas de energia
@@ -269,10 +287,17 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
         bool stoppedBeforeSil0=propagacion.stoppedBeforeSil0;
         double rangeBeforeSil0=propagacion.rangeBeforeSil0;
 
+        ////////////////////////////////
+        // Guardamos los eventos del trigger L1
+        bool hasStoppedInTPC=triggerL1.hasStoppedInTPC;
+        double range=triggerL1.range;
+
         //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         // Recostruimos:
 
         double recT3;
+        double recT3sil0;
+        double recT3sil1;
         double recEx;
         double recThetaCM{0.0};
 
@@ -284,14 +309,31 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
         }
         
         if (isInSil1) {
-            double recT3sil0{srim.EvalInitialEnergy("light", dT3Sil0, silDist0)};
-            double recT3sil1{srim.EvalInitialEnergy("light", dT3Sil1, silDist1)};
+            recT3sil0=srim.EvalInitialEnergy("light", dT3Sil0, silDist0);
+            recT3sil1=srim.EvalInitialEnergy("light", dT3Sil1, silDist1);
 
             recT3=recT3sil0+recT3sil1;
 
             recEx =kin->ReconstructExcitationEnergy(recT3, theta3);
             recThetaCM =kin->ReconstructTheta3CMFromLab(recT3, theta3);
         }      
+
+
+        // Reconstruct
+        double recTAtSil0 {};
+        if(isInSil1)
+        {
+            auto recTAfterSil0 {srim.EvalInitialEnergy("light", dT3Sil1, silDist1)};
+            recTAtSil0 = dT3Sil0 + recTAfterSil0;
+        }
+        if (isInSil0) {
+            recTAtSil0 = dT3Sil0;
+        }
+        
+        recT3 =srim.EvalInitialEnergy("light", recTAtSil0, silDist0);
+        recEx =kin->ReconstructExcitationEnergy(recT3, theta3);
+        recThetaCM =kin->ReconstructTheta3CMFromLab(recT3, theta3);
+
 
         //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         // Enchemos 
@@ -308,6 +350,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
             hKinMeasured->Fill(theta3*TMath::RadToDeg(),recT3);
             hThetaCMRec->Fill(thetaCM*TMath::RadToDeg());
             hEx->Fill(recEx);
+            hExTheta->Fill(theta3*TMath::RadToDeg(),recEx);
 
             // Rellenamos tree
             t3rec_tree = recT3;
@@ -342,6 +385,16 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
             //std::cout << "Silpoit r0 \t" << silPoint0 << "\n";
             hImpactSilR0->Fill(silPoint0.X(),silPoint0.Z());
         }
+
+        // Guardamos los eventos del trigger L1
+        if (hasStoppedInTPC) {
+            hKinMeasuredL1->Fill(theta3*TMath::RadToDeg(),t3);
+            hRangeTheta->Fill(theta3*TMath::RadToDeg(),range);
+            if (range>=20) { hKinReallyMeasuredL1->Fill(theta3*TMath::RadToDeg(),t3);}
+        }
+
+
+
     }
 
     outfile->cd();
@@ -351,8 +404,7 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
 
 
     // Graficamos el T3 vs theta3 measured
-    /*
-    SetMyStyle(1);
+
 
     auto *c1{new TCanvas{"c1", "T3_vs_theta"}};
     gStyle->SetPadRightMargin(0.15); 
@@ -372,18 +424,17 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
 
     c1->cd(4);
     //hThetaCMSampled->Draw();
-    hRangeTheta->Draw("colz");
+    hEx->Draw();
 
     c1->cd(5);
     //hEx->Draw();
-    hKinL1->Draw("colz");
-
+    hExTheta->Draw("colz");
+   
     c1->cd(6);
-    hRange->Draw();
-    */
+    hKinMeasuredL1->Draw("colz");
 
 
-    //c1->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Completo_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    c1->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Simulacion/Graficas/Completo_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
     // Escalamos todas las gráficas: 
 
@@ -401,8 +452,11 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     hImpactSilL0->Scale(factorHisto);   
     hKinSampled->Scale(factorHisto);
     hExSampled->Scale(factorHisto);
+    hKinMeasuredL1->Scale(factorHisto);
     hInteractionXY->Scale(factorHisto);
     hInteractionYZ->Scale(factorHisto);
+    hKinReallyMeasuredL1->Scale(factorHisto);
+    hRangeTheta->Scale(factorHisto);
 
 
     SetMyStyle();
@@ -468,9 +522,60 @@ void Simulation(double tBeam=7.5,double Ex=0.0, int interacciones = 1000000, int
     hKinSampled->Draw("colz");
     g3->Draw("l same");
 
+    c6->SaveAs(TString::Format("/home/daniel/GitHub/dTFG/Memoria/Imagenes/Kinematics/KinSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
 
-    c6->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Kinematics/KinSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+
+    auto *c7{new TCanvas{"c7", "kinMeasuredL1",700,440}};
+    hKinReallyMeasuredL1->SetTitle("");
+    hKinReallyMeasuredL1->Draw("colz");
+    c7->SetRightMargin(0.15);
+    g3->Draw("l same");
+    if (incIdx==0) {
+    c7->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Trigger/EkinMeasuredL1_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    }
+
+
+    TGraph* plotRangeTheta {Rango(kin,srim)};
+ 
+
+    auto *c8{new TCanvas{"c8", "hRangeTheta",700,440}};
     
+    hRangeTheta->SetTitle("");
+
+    TLine* line = new TLine(0, 20, 80, 20);  // línea de (0,1) a (10,6)
+    TLegend* legend = new TLegend(0.15, 0.75, 0.45, 0.9);
+    line->SetLineColor(kRed);
+    line->SetLineWidth(3);
+    plotRangeTheta->SetLineWidth(3);
+    legend->AddEntry(line, "20 mm", "l");
+
+    legend->AddEntry(plotRangeTheta, "Rango Teorico", "l");
+    legend->SetTextSize(0.05);  // Tamaño del texto
+    legend->SetTextFont(62);     // Fuente en negrita
+
+    c8->SetRightMargin(0.15);
+
+    hRangeTheta->Draw("colz");
+    line->Draw("same");
+    plotRangeTheta->Draw("l same");
+    legend->Draw("same");
+    
+
+    if (incIdx==0) {
+    c8->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Trigger/RangeTheta_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    }
+
+    // Sacamos el número de particulas del trigger L1 para hacer una tabla con Ex 
+
+
+
+    double totalEntriesL1 = hKinMeasuredL1->GetEntries();
+    double measuredEntriesL1 = hKinReallyMeasuredL1->GetEntries();
+    
+
+    std::vector<double> entries = {totalEntriesL1, measuredEntriesL1};
+
+    return entries;
 
 }   

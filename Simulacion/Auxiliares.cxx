@@ -37,8 +37,8 @@ ROOT::Math::XYZPoint SampleVertex(double xACTAR, double yACTAR, double zACTAR)
 {
     ROOT::Math::XYZPoint verticeCentrado{
     gRandom->Uniform(-xACTAR / 2, xACTAR / 2) * 0.1,
-    gRandom->Gaus(0, 5) * 0.1,
-    gRandom->Gaus(0, 5) * 0.1};
+    gRandom->Gaus(0, 3) * 0.1,
+    gRandom->Gaus(0, 3) * 0.1};
 
     ROOT::Math::XYZPoint verticeUsual{verticeCentrado.X() * 10 + xACTAR / 2,
                                   verticeCentrado.Y() * 10 + yACTAR / 2,

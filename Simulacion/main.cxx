@@ -5,6 +5,10 @@ En este programa ejecutamos el main, aunque simulation puede ejcutar los archivo
 */
 
 # include "Simulation.cxx"
+#include <fstream>
+#include <vector>
+#include <string>
+#include <iostream>
 
 
 int main() {
@@ -15,15 +19,52 @@ int main() {
     - 1: Solo straggling
     - 2: Solo theta
     - 3: ninguna fuente de incertidumbre
+    - 4: ninguna fuente de incertidumbre ni briet wigner
     */
-    int uncertaintySelector[4] = {0,1,2,3};
+    int uncertaintySelector[5] = {0,1,2,3,4};
+
+    std::vector<double> entries = {0.0, 0.0};
+
+
+    double entriesMatrix[2][2] {0};
+
 
     SetMyStyle();
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 1; i++) {
         std::cout << "Seleccionamos incertidumbre: "  << uncertaintySelector[i] << "\n";
-        Simulation(7.5, 0.0, 1000000,uncertaintySelector[i]);
-        Simulation(7.5, 0.20,1000000,uncertaintySelector[i]);
+        entries=Simulation(7.5, 0.0, 100000,uncertaintySelector[i]);
+
+        if (i==0){
+            entriesMatrix[0][0] = entries[0];
+            entriesMatrix[0][1] = entries[1];
+            
+        }
+
+        entries=Simulation(7.5, 0.20,100000,uncertaintySelector[i]);
+
+        if (i==0){
+            entriesMatrix[1][0] = entries[0];
+            entriesMatrix[1][1] = entries[1];
+            
+        }
     }
+    
+    std::ofstream tex("/home/daniel/GitHub/TFG/Memoria/Cuerpo/TriggerL1.tex");
+
+    tex << "\\begin{tabular}{llll} \\hline\n";  // ajusta columnas según el CSV
+
+    tex << "\\toprule \n";  // ajusta columnas según el CSV
+    tex << "$E_{x}=0.0$ MeV & $E_{x}=0.20$ MeV \\\\ \n \\midrule \n";
+    std::string linea;
+    bool primera = true;
+    bool isPrimero=true;
+    for (int i=0; i<2; i++) {
+        tex<<TString::Format(" %.4f",100.0*entriesMatrix[i][1]/entriesMatrix[i][0])+"\\% &";
+    }
+    tex << "\\\\ \n\\bottomrule \n";
+
+
+    tex << "\\end{tabular}\n";
 
 
 
