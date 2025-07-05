@@ -150,7 +150,7 @@ void xs()
     // c0->cd(2);
     // hThetaCM->Draw();
     
-
+    c0->SetLogy();
     c0->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Seccion_Eficaz.pdf"));
 
     // Ahora vamos a integrar 
@@ -231,7 +231,7 @@ void xs()
 
     std::ofstream tex("/home/daniel/GitHub/TFG/Memoria/Cuerpo/alphas.tex");
     std::cout<<"sigma="<<sigma[0][0]<<"\n";
-    tex<<"\\alpha (0.0)= \\frac{"<<alpha1<<"}{N_{\\text{inter}}} \\qquad  \n";
-    tex<<"\\alpha (0.2)=\\frac{"<<alpha2<<"}{N_{\\text{inter}}}  \n";
+    tex<<"\\alpha (0.0)={"<<alpha1/1000000.0<<"} \\qquad  \n";
+    tex<<"\\alpha (0.2)={"<<alpha2/1000000.0<<"}  \n";
 
     }

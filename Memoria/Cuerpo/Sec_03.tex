@@ -1,33 +1,66 @@
 \section{Metodología}
 
 
-\subsection{ACTAR TCP}
+\subsection{ACTAR TPC}
 
-El detector ACTAR TPC (\textit{ACtive TARget and Time Projection Chamber}) es un detector diseñado para estudiar núcleos exóticos con tiempos de vida medios muy cortos, que con detectores tradicionales (en los que serían las partículas ligeras las que se acelerarían para bombardear al núcleo de ineterés) sería muy complicado.
+El detector ACTAR TPC (\textit{ACtive TARget and Time Projection Chamber}) es un detector diseñado para estudiar núcleos exóticos con tiempos de vida medios muy cortos, que con detectores tradicionales (en los que serían las partículas ligeras las que se acelerarían para bombardear al núcleo de interés) sería muy complicado.
 
-Este detector funciona con cinemática inversa, de tal modo que el núcleo pesado es el haz, lo que hace que la cinemática del centro de masas y del laboratorio sea muy diferente, y por tanto su estudio de gran importancia. Además ACTAR TPC es un detector gaseoso, en el que el gas es el medio activo (eseto es, que participa directamente en la reacción de interés). Es gaseoso por varios motivos: el primero es poder usar la ionización de la partícula a través del gas para obtener trazas a partir del rastro de ionización que deja el haz (que sería la parte de la TPC). Bajo la presencia un campo eléctrico los electrones de la ionización derivan hacia el ánodo, recogido por un detector segmentado en pads donde se ampliﬁca su carga. El tiempo de llegada de los electrones $\Delta t$ sirve de estimación de la posición $z$. Otro de los motivos es que las pérdidas de energía son bien conocidas y por tanto corregir errores fácilmente.
+Esto se debe a su funcionamiento en cinemática inversa, de tal modo que el núcleo pesado es el haz, lo que hace que la cinemática del centro de masas y del laboratorio sea muy diferente a la cinemática directa habitual, y por tanto su estudio de gran importancia. 
 
-Es decir, ACTAR TCP nos permite construcción tridimensionalmente el recorrido de la partícula dentro de la cámara de gas (siendo una de las dimensiones la temporal). Esta recostrucción 3D es la que permite obtener el vértice de la reacción y aplicar correciones por propagación.
+De esta forma, el gas que llena ACTAR TPC participa directamente en la reacción de interés y también como medio de detección (tal y como veremos mas adelante), confiriéndole su carácter de \textit{detector activo}. Es gaseoso por varios motivos: uno de ellos es poder usar la ionización de la partícula a través del gas para obtener trazas a partir del rastro de ionización que dejan todas las partículas cargadas. Bajo la presencia un campo eléctrico, los electrones de la ionización derivan hacia el ánodo, constituído por un detector segmentado en \textit{pads} donde se ampliﬁca su carga. El tiempo de llegada de los electrones $\Delta t$ sirve de estimación de la posición $z$, conocida da velocidad de deriva del gas, un parámetro inherente a su presión y composición. Otro de los motivos es que conocemos con precisión el punto en el que sucedió la reacción (vértice), lo que no podríamos hacer en un experimento donde el \textit{target} fuera un sólido. Como las pérdidas de energía son bien conocidas \cite{ZIEGLER20101818}, conociendo el punto de inicio, el punto final de la partícula y la energía final, podemos obtener la energía de la partícula de salida en el vértice, lo cual nos permitirá calcular las variables cinemáticas (energías y ángulos) con gran precisión.
 
-Hablando de las características técnicas, la ACTAR TPC tiene una dimensión de $606 \times 606 \times 335 $ mm$^3$, con una caja en el interior de dimensión $295 \times 295 \times 255 $ mm$^3$ llamada cámara de deriva que es precisamente donde está el campo eléctrico  que nos permite recolectar los electrones ionizados (en la parte superior) con detectores de $2 \times 2$ mm$^2$. Nosotros lo llenaremos con una mezcla de dos gases: 90\% D$_2$ e 10\% CF$_4$ a 900 mb (deuterio molecular y tetrafluorometano).
+%En resumen, ACTAR TCP nos permite reconstruír tridimensionalmente el recorrido de la partícula dentro de la cámara de gas. Esta recostrucción 3D es la que permite obtener el vértice de la reacción y aplicar correciones por propagación.
 
-Debido a las pérdidas de energía, existe una cierta probabilidad de que algunas partícuals (principalmente las ligeras) tengan suficiente energía como para atravesar el gas sin pararse, perdiendo información sobre las colisiones. Por eso se disponen a lo largo de los lados de ACTAR y dos muros de silicios justo enfrente a la salida del haz. Los siliiocios tienen un tamaño $5 \times 5$ cm$^2$ $\times 1.5$ mm, y se puede ver la disposición usada en \cref{Fig:Geo_Actar}. Estos silicios tuvieron que colocarse a una distancia prudencial de ACTAR, ya que aunque disminuya la eficiencia de los silicios es posible que el campo eléctrico de los mismos distorsione el campo eléctrico de deriva. Consideraremos la notación l0 y r0 para los silicios de la izquierda y derecha respectivamente y f0  y f1 para la doble capa de silicios en la parte frontal.
+Hablando de las características técnicas, ACTAR TPC tiene una dimensión de $606 \times 606 \times 335 $ mm$^3$, que sería toda la estructura azul violácea de la \cref{Fig:ACTAR}; con una caja en el interior de dimensiones $256 \times 256 \times 255 $ mm$^3$, llamada cámara de deriva, que es precisamente donde está el campo eléctrico que nos permite recolectar los electrones ionizados (en la parte superior) con detectores de $2 \times 2$ mm$^2$, y que en la \cref{Fig:ACTAR} sería la caja negra que está en el interior de la azul-violácea. Para nuestro experimento el interior lo llenaremos con una mezcla de dos gases: 90\% D$_2$ e 10\% CF$_4$ a una presión de 900 mbar (deuterio molecular y tetrafluorometano).
+
+Debido a la cinemática de la reacción, existe una cierta probabilidad de que algunas partículas tengan suficiente energía como para atravesar el gas sin pararse, siendo imposible entonces reconstruir su energía en el vértice. Por eso se disponen a lo largo de los lados de ACTAR cuatro muros de silicios: dos en frente, en la dirección perpendicular al haz, y otros dos distribuidos a izquierda y derecha, como se ve en  \cref{Fig:Geo_Actar}. Cada muro está consituído por alrededor 10 unidades, de dimensiones $5 \times 5$ cm$^2$ $\times 1.5$ mm. Facilitan la medición de la energía residual de la partícula a la salida de la región activa, y su mecanismo de funcionamiento se describirá más adelante.
+
+Se puede ver la disposición de los silicios usada en la \cref{Fig:Geo_Actar}. Estos silicios tuvieron que colocarse a una distancia prudencial de ACTAR $\sim 16.5$ cm, ya que aunque disminuya la eficiencia geométrica es posible que el campo eléctrico de los mismos distorsione el campo eléctrico de deriva. Consideraremos la notación l0 y r0 para los silicios de la izquierda y derecha respectivamente y f0  y f1 para la doble capa de silicios en la parte frontal.
 
 \begin{minipage}{0.48\linewidth} \centering
 	\includegraphics[width=1\linewidth]{Imagenes/ACTAR.png}
-	\captionof{figure}{Dibujo en 3D asistido por ordenador (CAD) de (ACTAR TPC). Imagen de \cite{MAUSS2019498}.}
+	\captionof{figure}{Dibujo en 3D asistido por ordenador (CAD) de ACTAR TPC. Imagen de \cite{MAUSS2019498}.}
 	\label{Fig:ACTAR}
 \end{minipage}
 \hfill
 \begin{minipage}{0.458\linewidth} \centering
 	\includegraphics[width=1\linewidth]{Imagenes/Actar.pdf}
-	\captionof{figure}{Dibujo de la geometría implementada en la simulacion.}
+	\captionof{figure}{Dibujo de la geometría implementada en la simulación.}
 	\label{Fig:Geo_Actar}
 \end{minipage}
 
+
+\subsection{Detectores de Silicio}
+
+Los detectores de silicio están formados por uniones PN en los que la partícula incidente genera pares de electrones-hueco. Gracias a la presencia de una pequeña diferencia de potenicial externa introducida para que la unión esté en inversa, generando una amplia zona de vaciamiento que ocupa gran parte del detector, estos electrones derivan por acción del campo E intrínseco a la unión. Recogidos en unos conectores, la corriente eléctrica generada por ellos será directamente proporcional a su número, y este a la energía depositada por la partícula.
+%, que es precisamente donde se encuentra el campo eléctrico. Es decir, aumenta el área efectiva del detector.  La intensidad de la corriente generada estará relacionada con la energía depositada.
+
+
+La \textbf{resolución energética intrínseca} $R$ es una propiedad característica del dector y tiene en cuenta, entre otros factores, las fluctuaciones estadísticas en el número de partes electrón hueco generados. La resolución relacionada con el FWHM de la distribución estadística de la energía depositada en el silicio y con la energía de la propia partícula, tal que
+
+\begin{equation}
+	\text{FWHM} = R \cdot E
+\end{equation}
+y dado que $\sigma = 2.35 \cdot \text{FWHM} $, tenemos que la $\sigma$ de la distribución gaussiana que parece seguir la energía depositada es:
+
+\begin{equation}
+	\sigma  = \frac{R \cdot E}{2.35}
+\end{equation}
+La \textbf{resolución esperada} es \cite{Leo:302344}
+
+\begin{equation}
+	R = 2.35 \sqrt{\frac{0.12 w}{E}}
+\end{equation}
+donde \( w \) es la energía promedio para la creación de un par electrón-hueco en el semiconductor. El valor de la creación de un par electrón-hueco depende del tipo de semiconductor y de la temperatura. Por ejemplo para el silicio tenemos $w=3.62$ eV para una $T=$300K y $w=3.81$ eV si $T=77$ K, por lo que es muy importante tener controlado el ambiente. Nosotros usamos valores experimentales para obtener la $\sigma$ de la distribución \cite{Leo:302344}. En particular nosotros sabemos que para una energía de 5.5 MeV de nuestras partículas al atravesar el semiconductor contamos con una resolución de $50$ keV, tal que la $\sigma$ que vamos a usar en la simulación para parametrizar la energía depositada en los silicios viene dada por:
+
+\begin{equation}
+	\sigma = \frac{0.0213}{2.35} \sqrt{E} \ \unit{MeV} \label{Ec:03-resolucion}
+\end{equation}
+Podemos ver una dependencia con la raíz cuadrada de $\sigma$ con $E$, lo que nos dice que a mayor energía peor resolución. Los silicios tendrán un tamaño de $5 \times 5 \times 0.15 \ \text{cm}^{3}$, suficientemente gruesos como para parar gran parte de las partículas incidentes. Un término muy importante que se suele usar cuando hablamos de detectores de silicio es \textbf{\textit{el punch-through}}. Decimos que ocurre punch-through cuando la partícula atraviesa completamente el detector/medio sin depositar toda su energía en él.  En nuestro caso, que detectaremos tritios con los silicioes, el \textit{punch-through} sucede a partir de la energía de 24.42 MeV, que pudimos obtener a partir de una interpolación lineal de los valores experimentales \cite{ZIEGLER20101818}. 
+
 \subsection{Cinemática} \label{Subsec:03-cinematica}
 
-En este apartado trataremos de resolver la cinemática de la reacción de interés $^{11}\text{Li}(d,t)^{10}\text{Li}$. Resolver la cinemática basicamente implica obtener los ángulos de las partículas salientes y sus energías en función de: la energía cinética de la partícula incidente en el sistema laboratorio, el ángulo del centro de masas (que es el afectado por la sección eficaz) y la energía de exctiación de la partícula $^{10}$Li (o la energía de excitación en general que podrá llevar también la ligera).
+En este apartado trataremos de resolver la cinemática de la reacción de interés $^{11}\text{Li}(d,t)^{10}\text{Li}$. Resolver la cinemática basicamente implica obtener los ángulos de las partículas salientes y sus energías en función de: la energía cinética de la partícula incidente en el sistema laboratorio, que en nuestro experimento será de 7.5 MeV/A (MeV por nucleón, i.e. 82.5 MeV), el ángulo del centro de masas (que es el afectado por la sección eficaz) y la energía de excitación de la partícula $^{10}$Li.
 
 La cinemática responde únicamente a las leyes de conservación de la energía-momento, por lo que no tendremos que tener en cuenta ni interacciones electromagnéticas ni nucleares. La sección eficaz que influye en el ángulo de salida, que encierra la física nuclear de la interacción, será discutida más adelante.
 
@@ -71,10 +104,14 @@ Dado que en función del sistema de referencia tendremos un valor de momento u o
 	\end{center}
 \end{minipage}
 
-\subsubsection{Cálculo de los ángulos}
-En esta sección trataremos de obtener los ángulos de salida de las partículas 3 y 4 (y sus energías) en función de las variables conocidas: energía cinética y masas de las partículas. Para esto necesitaremos calcular las energías de las partículas en el sistema centro de masas, ya que las relaciones de conservación de la energía es mucho mas sencilla en este sistema referencial. Luego podremos recuperarlas usando la \textit{transformada de Lorentz}.
+\subsubsection{Cálculo de los ángulos y energías}
+En este apartado trataremos de obtener los ángulos de salida de las partículas 3 y 4 (y sus energías) en función de las variables conocidas: energía cinética y masas de las partículas. Para esto necesitaremos calcular las energías de las partículas en el sistema centro de masas, ya que las relaciones de conservación de la energía es mucho mas sencilla en este sistema referencial. Luego podremos recuperarlas usando la \textit{transformada de Lorentz}.
 
-Como podemos ver en las figuras, en el sistema laboratorio la partícula 1 está en movimiento mientras que la partícula 2 está en reposo. Eso nos lleva a que sus momentos, en el sistema de referencia del laboratorio:
+Como podemos ver en las figuras, en el sistema laboratorio la partícula 1 está en movimiento mientras que la partícula 2 está en reposo. Recordamos que la \textbf{masa de una partícula excitada} $i$ viene dada por
+\begin{equation}
+    m_i = m_{i,g.s} + E_{ex}
+\end{equation}
+donde $E_{ex}$ es la energía de excitación y $m_{i,g.s}$ la energía en su estado fundamental. Esto nos lleva a que sus momentos, en el sistema de referencia del laboratorio:
 
 \begin{eqnarray}
 	P_1 = (E_1/c,\pn_1) & \quad P_2 = (m_2c,0) \\
@@ -86,114 +123,87 @@ Por otro lado, los momentos en el sistema de referencia del centro de masas vend
 	P_1' = (E_1'/c,\pn_1') \quad P_2 = (E_2'/c,-\pn_1') \\
 	P_3' = (E_3'/c,\pn_3') \quad P_4 = (E_4'/c,-\pn_3')
 \end{eqnarray}
-Asumiremos que la partícula 1 incidente se mueve únicamente en el eje $x$ tal que $\pn_1=(p_1,0,0)$. En ese caso el sistema centro de masas se moverá respecto al sistema laboratorio en el eje $x$, por lo que habrá que aplicar la transformaciones de Lorentz (\ref{Ec:04} y \ref{Ec:05}) siendo válidas para \textit{cualquier cuadrimomento}. Definimos las energías totales como $E_{tot}=E_1+E_2$ y como  $E_{tot}'=E_1'+E_2'$, siendo esta última la \textit{energía del centro de masas}, que verifica que
+Asumiremos que la partícula 1 incidente se mueve únicamente en el eje $x$ tal que $\pn_1=(p_1,0,0)$. En ese caso el sistema centro de masas se moverá respecto al sistema laboratorio en el eje $x$, por lo que habrá que aplicar la transformaciones de Lorentz, siendo válidas para \textit{cualquier cuadrimomento}. Definimos las energías totales como $E_{tot}=E_1+E_2$ y como  $E_{tot}'=E_1'+E_2'$, siendo esta última la \textit{energía del centro de masas}, que verifica que
 \begin{equation}
 	E_{tot}' \equiv E_{CM} = E_{tot}^2 - c^2p_1^2 \label{Ec:18}
 \end{equation}
-Tanto $E_{tot}$ como $E_{tot}'$ son variables conocidas. Nos interesa calcular las energías $E_3'$ y $E_4'$, que usando la transformación de Lorentz nos servirán para estudiar las energías $E_3$ y $E_4$, así como los momentos. Las relaciones se pueden calcular como
-
-\begin{equation}
-	E_c' = E_{tot}' - E_{ex}
-\end{equation}
-siendo $E_{ex}$ la parte de la energía inicial que se convierte en energía de estados excitados de las partículas 3 y 4. Así pues:
+Tanto $E_{tot}$ como $E_{tot}'$ son variables conocidas. Nos interesa calcular las energías $E_3'$ y $E_4'$, que usando la transformación de Lorentz nos servirán para estudiar las energías $E_3$ y $E_4$, así como los momentos.  Así pues:
 \begin{eqnarray}
-	E_3 ' & = & \frac{1}{2} \left( E_{c}' + \frac{m_3^2c^4- m_4^2c_4}{E_{c}'} \right) \\
-	E_4 ' & = & \frac{1}{2} \left( E_{c}' + \frac{m_4^2c^4- m_3^2c_4}{E_{c}'} \right)
+	E_3 ' & = & \frac{1}{2} \left( E_{tot}' + \frac{m_3^2c^4- m_4^2c_4}{E_{tot}'} \right) 
 \end{eqnarray}
-A partir de estos valores de $E_3'$ y $E_4'$ podemos calcular el valor de los momentos $p_3'$ y $p_4'$ (en módulo). Podemos suponer sin ningún tipo de problema que la coordenada $x$ de los momentos vienen dadas por
+A partir de estos valores de $E_3'$ podemos calcular el valor de los momentos $p_3'$  (en módulo). Podemos suponer sin ningún tipo de problema que la coordenada $x$ de los momentos vienen dadas por
+
 
 \begin{eqnarray}
-	p_{3x}' = p_3' \cos (\theta_3') \\
-	p_{4x}' = p_4' \cos (\theta_4')
+	p_{3x}' = p_3' \cos (\theta_3') 
 \end{eqnarray}
+
 de este modo podemos aplicar las transformaciones de Lorentz para hallar los valores del $\cos (\theta_3)$ y $\cos (\theta_4)$. Así:
 
-\begin{eqnarray}
+\begin{minipage}{0.48\linewidth}
+\begin{equation}
 	p_3 \cos (\theta_3) = \gamma (p_3' \cos (\theta_3')+\beta E_3'/c)
-\end{eqnarray}
+\end{equation}
 despejando $\cos (\theta)$ obtenemos:
-
 \begin{equation}
 	\cos (\theta_3) = \frac{\gamma}{p_3} (p_3' \cos (\theta_3')+\beta E_3'/c)
 \end{equation}
-El cálculo de $p_4$ es exactamente igual, obteniendo
-
-
-\begin{equation}
-	\cos (\theta_4) = \frac{\gamma}{p_4} (p_4' \cos (\theta_4')+\beta E_4'c)
-\end{equation}
-En la siguiente gráfica \ref{Fig:04-Kin} podemos ver la dependencia entre el ángulo $\theta_3$ y $\theta_4$ y la energía cinética de salida, en la que podemos ver una función que las relaciona unequívocamente.
-
-\begin{figure}[H] \centering
-	\includegraphics[width=0.9\linewidth]{Imagenes/Cinematica.pdf}
-	\caption{Cinemática de la reacción $^{11}\text{Li}(d,t)^{10}\text{Li}$, donde se muestra la energía cinética del tritio (izquierda) y del $^{10}$Li (derecha) frente su ángulo de salida.}
+El cálculo de $p_4$ es completamente análogo. En la siguiente \cref{Fig:04-Kin} podemos ver la dependencia entre el ángulo $\theta_3$ y $\theta_4$ y la energía cinética de salida, en la que podemos ver una función que las relaciona inequívocamente. Podemos observar que a medida que aumentamos la energía de excitación se comprime el ángulo y el rango de las energías cinéticas que abarca la cinemática. Cabe destacar que en la figura usamos una energía de excitación que no se corresponde con una excitación física del \litioDiez, buscando que se vea el efecto de la energía de excitación en al cinemática. 
+\end{minipage}
+\hfill 
+\begin{minipage}{0.48\linewidth} \centering
+	\includegraphics[width=1\linewidth]{Imagenes/Cinematica.pdf}
+	\captionof{figure}{Cinemática de la reacción $^{11}\text{Li}(d,t)^{10}\text{Li}$ para energía incidente de $7.5$ MeV/A, donde se muestra la energía cinética del tritio (izquierda) frente su ángulo de salida.}
 
 	\label{Fig:04-Kin}
-\end{figure}
+\end{minipage}
 
 
-\subsection{Pérdidas de energía en el Gas}
+\subsection{Pérdidas de energía en la materia}
 
-Las pérdidas de energía en el gas son sumamente importantes en el estudio de un dector gaseoso, ya que tendrán que ser tenidas en cuenta a la hora de recuperar la energía en el centro de masas de las partículas ligeras, fundamental para saber si el litio está en un estado excitado. La mejor manera de caracterizar la pérdida de energía de una partícula por un medio gaseoso viene dada por la \textbf{ecuación de Bethe} (en nuestro caso usarmeos la aproximación no relativista), que nos dice que el poder de frenado lineal $S$, definido como la pérdida de energía de la partícula dividida por la longitud diferencial de la trayectoria  \cite{Knoll:1300754}
-
+Las pérdidas de energía por culpa de la interacción con la materia son sumamente importantes en el estudio de cualquier detector, ya que tendrán que ser tenidas en cuenta a la hora de recuperar la energía en el laboratorio de las partículas ligeras. La mejor manera de caracterizar la pérdida de energía de una partícula en un medio viene dada por la \textbf{ecuación de Bethe-Bloch} (en nuestro caso usarmeos la aproximación no relativista), que nos dice que el poder de frenado lineal $S$, definido como la pérdida de energía de la partícula dividida por la longitud diferencial de la trayectoria  \cite{Knoll:1300754}
 
 \begin{equation}
 	S = - \frac{dE}{dx} \simeq \frac{4 \pi e^4}{m_e} \left( \rho \frac{N_A}{M} \right) \frac{z^2 Z}{v^2} \ln \left( \frac{2 m_e v^2}{I} \right)
 \end{equation}
-donde $z$ es el número atómico incidente, $Z$ la de la partícula absorbente, $v$ la velocidad de la partícula incidente, $N_A$ el número de avogadro, $M$ la masa atómica del gas, $\rho$ su densidad (por lo que dependerá de la presión, un input interesante) e $I$  representa el potencial promedio de excitación e ionización del absorbedor. Se trata como un parámetro determinado experimentalmente para cada elemento.
+donde $z$ es el número atómico incidente, $Z$ la de la partícula absorbente, $v$ la velocidad de la partícula incidente, $N_A$ el número de avogadro, $M$ la masa atómica del gas, $\rho$ su densidad (por lo que dependerá de la presión, un parámetro importante) e $I$  representa el potencial promedio de excitación e ionización del absorbente. Se trata como un parámetro determinado experimentalmente para cada elemento cuyo orden de magnitud se sitúa alrededor de unas decenas de eV.
 
-Dado que nuestra cámara de gas estará formada por una mezcla de gases, la ecuación de la pérdida no será exactamente la anterior, si no que responderá a la \textit{regla de Bragg-Kleeman} \cite{Knoll:1300754}
-
+Entrando ya en nuestro detector, mientras que para describir la interacción partículas-silicio esta ecuación es suficiente, ACTAR TPC contendrá  una mezcla de gases, por lo que la ecuación de la pérdida no será exactamente la anterior, si no que responderá a la \textbf{regla de Bragg-Kleeman} \cite{Knoll:1300754}
 \begin{equation}
 	\frac{1}{N_c} \left( \frac{dE}{dx} \right)_c = \sum_i W_i \, \frac{1}{N_i} \left( \frac{dE}{dx} \right)_i
 \end{equation}
-siendo $W_i$ el peso del gas $i$ y $N_i$ la densidad atómica tal que $N_i = \rho N_A
-	/ M_i$.
+siendo $W_i$ el peso del gas $i$ y $N_i$ la densidad atómica tal que $N_i = \rho N_A	/ M_i$.
 
-El valor de \( -dE/dx \) a lo largo de la trayectoria de una partícula también se llama su \textit{pérdida específica de energía}, una ``tasa'' de pérdida de energía. En realidad esta ecuación es puramente estadística, ya que cada colisión entre el átomo y los electrónes del gas es pequeña, y por tanto nosotros usamos promedios. Al ser un fenómeno estadístico, existe un error indefectible tanto en la simulación como en la recuperación de la energía cinética. A estas fluctuaciones debido a su naturaleza estocástica en la energía cinética las llamadmos \textbf{straggling}, lo que hace que no todas las partículas con una misma energía se paren a la misma distancia. Este straggling tendrá que ser tenido muy en cuenta ya que son un factor de incertidumbre de la energía cinética muy grande. Otras definición de interés es el \textbf{rango}, que para una energía perdida conocida nos permite calcular la distancia media recorrida y el \textbf{punch-trough}, que nos da para una energía inicial de la partícula la distancia máxima que puede recorrer en ese medio.
+\begin{minipage}{0.48 \linewidth}
+El valor de \( -dE/dx \) a lo largo de la trayectoria de una partícula también se llama su \textit{pérdida específica de energía}, una ``tasa'' de pérdida de energía. En realidad esta ecuación nos habla de un promedio, ya que la interacción partícula-partícula es un fenómeno estadístico que es muy poco probable. Debido precisamente a esta baja probabilidad, cada partícula, pese a que tenga una energía inicial idéntica, recorrerá una distancia diferente (o lo que es lo mismo, para un mismo rango recorrido dos partícuals no tendrán porque tener la misma enerǵia inicial). Estas fluctuaciones debido a su naturaleza estocástica en la energía cinética las llamamos \textbf{\textit{straggling}}. Este \textit{straggling} nos lleva a un error indefectible en la recuperación de la energía cinética experimental y simulada cuando aplicamos esta ecuación. 
+
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\linewidth}
+    \centering
+    \includegraphics[width=1\linewidth]{Imagenes/RangoEnergiaTeo.pdf}
+    \captionof{figure}{Rango para cada energía para el tritio en el gas.}
+    \label{Fig:03-RangoTheta}
+\end{minipage}
+
+El \textbf{rango} se define como la distancia para la cual las partículas se paran en el medio. El rango depende de la energía inicial, por lo que existe una relación uno a uno del rango y la energía inicial, tal y como podemos ver en la \cref{Fig:03-RangoTheta}. Además el fenómeno estadístico nos dice que cada rango tendrá una distribución de probabilidad única (i.e., un \textit{straggling}). Así pues, conociendo el vértice de interacción y el momento en el que se frena, podremos obtener el rango de la partícula, que al tener una relación uno a uno con la energía podremos usar para extraer información de la energía de la partícula en el vértice.  
 
 
-\subsection{Detectores}
+\subsection{Resolución angular}
 
-Los detectores de silicio están formadas por uniones PN en los que la partícula incidente genera pares de electrones-hueco que gracias a la presencia de una pequeña coriente eléctrica y un alto campoeléctrico son inmediantamente separadas evitando la recombinación, de tal modo que la intensidad de la corriente. La intesidad de la corriente generada estará relacionada con la energía depositada.
+Gracias a la TPC podemos reconstruir la traza del tritio que nos da información acerca del ángulo $\theta_{lab}$ de las partículas resultantes de la reacción. Experimentalmente esta información viene en forma de una nuble de puntos que hay que clusterizar y ajustar (mediante una regresión lineal 3D), y una vez conocida da dirección del haz, $\theta$ se obtiene como el ángulo entre ambas direcciones. En experimentos previos \cite{MAUSS2019498} se ha visto que la resolución en esta variable, ligada al tamaño finito de los \textit{pads}, se sitúa en $1^{\circ}$ FWHM. Como veremos más adelante, este factor será el dominante entre nuestras incertidumbres.
 
-Al igual que con la interacción partícula-gas, las pérdidas de energía a través de la generación de pares de portadores respoe a fenómenos estocásticos, y como tal introduce un error estadístico intrínseco a la medida de energía de los silicios, que nosotros en la simulación debemos considerar. La manera de tener en cuenta este fenómeno se hace a través de la resolución intrínseca del semiconductor.
+%que podremos obtener $\theta$ sabiendo la dirección incidente. La distribución de cada medida de $\theta_{lab}$ sería una gaussiana con FWHM = 1$^{\circ}$, que será, tal y como veremos, el factor que generá mas anchura $\sigma$ en las distribuciones de energía. Este valor fue obtenido en experimentos previos \cite{MAUSS2019498}.
 
+\subsection{Sección eficaz}
 
-La \textbf{resolución energética intrínseca} $R$ estará relacionada con el FWHM de la distribución estadística de la energía depositada en el silicio por parte de la partícula para la energía de dicha particula, de tal modo que:
-
+La sección eficaz diferencial nos da información acerca de la distribución de probabilidad de que una partícula saliente tenga una dirección respecto el haz inicial específico. Se define como el área efectiva por unidad de ángulo sólido $\D\Omega(\theta,\phi)$ que caracteriza la dispersión en cada dirección. Matemáticamente se expresa como
 \begin{equation}
-	\text{FWHM} = R \cdot E
+\frac{\D\sigma}{\D\Omega(\theta,\phi)},
 \end{equation}
-y dado que $\sigma = 2.35 \text{FWHM} $, tenemos que la $\sigma$ de la distribución gaussiana que parece seguir la energía depositada es:
+donde $\D\sigma$ es la sección eficaz para partículas dispersadas dentro de un elemento de ángulo sólido $\D\Omega(\theta,\phi)$. Por otro lado la sección eficaz global nos habla de la probabilidad de interacción de dos partículas en un canal determinado (elástico, inelástico...) modelado a través de una superficie efectiva, lo que nos viene a decir que contiene información física sobre el espín, paridad... ya que todos estos factores están relacionados con la interacción entre las partículas.
 
-\begin{equation}
-	\sigma  = \frac{R \cdot E}{2.35}
-\end{equation}
-Ahora bien, la resolución intrínseca, en el caso de los detectores semiconductor dependenj del número de portadores de carga y del \textit{factor de Fano}. A pesar de numerosos experimentos, el factor de Fano tanto para el silicio como para el germanio aún no está bien determinado. Sin embargo, está claro que \( F \) es pequeño, en el orden de 0{.}12. La \textbf{resolución esperada} es \cite{Leo:302344}
-
-\begin{equation}
-	R = 2.35 \sqrt{\frac{F}{J}} = 2.35 \sqrt{\frac{F w}{E}}
-\end{equation}
-donde \( w \) es la energía promedio para la creación de un par electrón-hueco, y \( J = E/w \). El valor de la creación de un par electrón-hueco depende del tipo de semiconductor y de lat temperatura. Por ejemplo para el silicio tenemos $w=3.62$ eV para una $T=$300 K mientras que $w=3.81$ eV si $T=77$ K. Nosotros usamos valores experimentales usadas con nuestras partículas. En particular nosotros sabemos que para una energía de 5.5 MeV de nuestras parículas al atravesar el semiconductor contamos con una resolucion de $50$ keV, tal que la $\sigma$ que vamos a usar en la simulación para parametrizar la energía deposiada en los silicios viene dada por:
-
-\begin{equation}
-	\sigma = \frac{0.0213}{2.35} \sqrt{E} \ \unit{MeV} \label{Ec:03-resolucion}
-\end{equation}
-Las especificaciones técnicas de los silicios están detalladas en   \cite{MAUSS2019498}. , donde se nos dice que los detectores de silicio se encuentran acoplados a un preamplificador de carga sensible con una sensibilidad de 10 mV/MeV, seguido de un amplificador CAEN N568 configurado con un tiempo de moldeado de 3 $\mu$s y una ganancia de $\times 32$.
-
-\subsection{Sttragling Angular}
-
-Gracias a la TPC podemos reconstruir la traza del tritio que nos da información acerca del ángulo $\theta_{lab}$ de las partículas resultantes de una interacción. También podemos obtenerla  a partir del vértice de interacción, la dirección del haz y el punto de interacción con el impacto del silicio. Debido a las dimensiones del pad en los que se recoge la carga y la propia resolución del silicio, en ambos casos se tiene una resolución similar. La distribución de cada medida de $\theta_{lab}$ sería una gaussiana con FWHM = 1$^{\circ}$, que será, tal y como veremos, el factor que generá mas anchura $\sigma$ en las distribuciones de energía.
-
-\subsection{Estadística real vs simulada}
-
-En nuestra simulacióm emitimos una cantidad de partículas arbitrarias individualmente, número que no se corresponde con el experimento real. Ni siquiera todas las partículas del beam interaccionan con el gas de la TPC según la reacción de interés $^{11} \text{Li}(d,t)^{10}\text{Li}$. Tenemos, de alguna forma, que obtener una relación entre el número de cuentas procedentes del experimento con el que nos queremos comparar y la simulación, de tal modo que podamos relacionar los resultados entre ambas. Así:
-
-\begin{equation}
-	N_{\text{eventos}}  = N_{\text{beam }} \cdot N_{\text{targets}} \cdot \sigma \cdot \epsilon \label{Ec:3.21}
-\end{equation}
-doinde $\sigma$ es la sección eficaz total integrada en todo el ángulo solido y $\epsilon$ es la eficiencia. La sección eficaz es diferente para cada excitación, tal y como podemos ver en la \cref{Fig:04-seccion_eficaz}, por lo que el factor dependerá de que energía de excitación estemos tabulando.
+Esta sección eficaz diferencial es diferente para cada excitación, la de 0.0 MeV (\textit{ground-state}) y anchura 0.1 MeV asociado con el orbital $2s_{1/2}$ y la de 0.2 MeV y anchura 0.2 MeV asociada con el orbital $1p_{1/2}$, tal y como podemos ver en la \cref{Fig:04-seccion_eficaz}, por lo que la distribución a \textit{samplear} en $\theta_{\text{CM}}$ dependerá del estado a considerar. 
 
 \begin{center}
 	\includegraphics[width=0.7\linewidth]{Imagenes/Seccion_Eficaz.pdf}
@@ -201,40 +211,48 @@ doinde $\sigma$ es la sección eficaz total integrada en todo el ángulo solido 
 	\label{Fig:04-seccion_eficaz}
 \end{center}
 
-Por otro lado para la simulación todos las partícuals de entrada experimentarán dicha reacción con un 100\% de probabilidad, teniendo en cuenta la sección eficaz más como una distribución del ángulo de salida que como un factor de probabilidad de  que suceda la reacción. En la simulación el número de eventos es, denotándolo con una prima:
+
+\subsection{Estadística real vs simulada}
+
+En nuestra simulación emitimos una cantidad de partículas a nuestra elección, suficiente para tener una buena estadística y un costo computacional moderado. En el experimento no todas las partículas del \textit{beam} interaccionan con el gas de la TPC según la reacción de interés $^{11} \text{Li}(d,t)^{10}\text{Li}$, ya que se trata de un fenómeno probabilístico determinado por la sección eficaz; además, no todos los eventos son detectados, lo que afecta la eficiencia del sistema (el cociente entre eventos detectados y eventos que realmente ocurren es la eficiencia). Tenemos, de alguna forma, que obtener una relación entre el número de cuentas procedentes del experimento con el que nos queremos comparar y la simulación, de tal modo que podamos relacionar los resultados entre ambas. Así:
+
+\begin{equation}
+	N_{\text{eventos}}  = N_{\text{beam}} \cdot N_{\text{targets}} \cdot \sigma \cdot \epsilon \label{Ec:3.21}
+\end{equation}
+donde $\sigma$ es la sección eficaz total integrada en todo el ángulo solido y $\epsilon$ es la eficiencia. 
+
+Por otro lado, para la simulación todas las partículas de entrada experimentarán dicha reacción con un 100\% de probabilidad, teniendo en cuenta la sección eficaz más como una distribución del ángulo de salida que como un factor de probabilidad de  que suceda la reacción. En la simulación el número de eventos es, denotándolo con una prima:
 
 \begin{equation}
 	N'_{\text{eventos}} = N_{\text{iter}} \cdot \epsilon
 \end{equation}
-siendo $\epsilon$ la misma eficiencia que la de la \cref{Ec:3.21}. Lógicamente en ambos casos tendremos la misma eficienia será la misma, ya que el número de partículas que llega a los detectores de silicio y que se parán en el gas es la misma. Es decir, los factores geométricos y factores relaciondos interacción haz-materia y haz-silicios, que son los que influyen en esta eficiencia, al ser tenidos en cuenta en la smulación ambas efiencias deben ser iguales.
+siendo $\epsilon$ la misma eficiencia que la de la \cref{Ec:3.21}. Lógicamente en ambos casos tendremos la misma eficiencia ya que los factores geométricos y de interacción radiación-materia están incluidos en la simulación.
+
 
 Para recuperar los eventos reales tendremos que multiplicar por un factor $\alpha$ calculado a través de la división de los valores anteriores: 
 \begin{equation}
 	\alpha=\frac{N_{\text{eventos}}}{N_ {\text{eventos}'}} = \frac{N_{\text{beam}} \cdot N_{\text{targets}} \cdot \sigma}{N_{\text{iter}}}
 \end{equation}
-Para poder realcionar correctamente un histograma de la simulación y el histograma rela bastará con multiplicarla por este factor $\alpha$, tal que:
+Para poder relacionar correctamente un histograma de la simulación y el histograma real bastará con multiplicarla por este factor $\alpha$, tal que:
 
 \begin{equation}
-	\text{Histo real} =  \alpha \cdot \text{Histo simulado }
+	\text{Histograma real} =  \alpha \cdot \text{Histograma simulado }
 \end{equation}
-Ahora tenemos que calcular de alguna forma este $\alpha$. Primero debemos de hacer la integral de $\sigma$, la cual se hace a de diferentes métodos de integración, obteniendo: 
+Ahora tenemos que calcular de alguna forma este $\alpha$. Primero debemos de hacer la integral de $\sigma$, obteniendo 
 
 \begin{table}[H] \centering
 	\input{Cuerpo/SeccionEficaz.tex}
-	\caption{Valores de la sección eficaz tota para ambos métodos y ambas excitaciones.}
+	\caption{Valores de la sección eficaz total para ambas excitaciones.}
 \end{table}
-Nosotros usaremos el procedente de la regla del trapecio ya que los puntos no son equidistantes. Los resultado que nostros usaremos tendrán en cuent un haz de $^{11}$Li con una intensidad de 3000 partículas por segundo que durará 6 días, por lo que
-
+Los parámetros que  usaremos tendrán en cuente un haz de $^{11}$Li con una intensidad de 3000 partículas por segundo que durará 6 días, por lo que
 \begin{equation}
-	N_{\text{beam}} = 3110400000 
+	N_{\text{beam}} = \num{3.1e+9} \ \text{partículas}
 \end{equation}
 Para calcular el número de partículas del gas en la dirección incidente usamos:
-
 \begin{equation}
 	N_{\text{targets}} = f_{d}N_{\text{gas}} l_x
 \end{equation}
-donde hemos usado que la fracciń de deutero es 78.26\%, la densidad del gas es $N_{\text{gas}}=\num{4.9945E+19}$ átomos/cm$^{3}$ y que $l_x=25.5$ cm \cite{ZIEGLER20101818}. Así podemos obtener un valor $\alpha$:
-
+donde hemos usado que la fracción de deuterio es 78.26\%, la densidad del gas es $N_{\text{gas}}=\num{4.99E+19}$ átomos/cm$^{3}$ y que $l_x=25.5$ cm \cite{ZIEGLER20101818}. Empleando $N_{iter}=10^6$, podemos obtener un valor $\alpha$:
 \begin{equation}
 	\input{Cuerpo/alphas.tex}
 \end{equation}

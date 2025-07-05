@@ -1,0 +1,38 @@
+
+
+\documentclass[12 pt]{article} %E aceptable tamen 11pt
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+
+\include{Paquetes}
+
+
+\definecolor{usc}{RGB}{15,41,118}
+\definecolor{grise}{RGB}{234, 236, 240}
+
+
+\begin{document}
+\pagenumbering{Roman}
+\input{Introduccion/titulo} \newpage 
+\input{Introduccion/declaracions} \newpage
+\input{Introduccion/resumo} % paxina de resumo e agradecementos. Débese ter en conta o idioma seleccionado para 
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+\setlength{\parskip}{2.2mm} % Cambia el espacio entre párrafos
+%%%%%%% Incluimos as seccións que sexan necesarias
+\pagestyle{fancy}
+\input{Cuerpo/Sec_01}
+\input{Cuerpo/Sec_02}
+\input{Cuerpo/Sec_03}
+\input{Cuerpo/Sec_04}
+\input{Cuerpo/Sec_05}
+\input{Cuerpo/Sec_06}
+\input{Cuerpo/Sec_07}  
+%%%%%%%Bibliografía
+\appendix
+\printbibliography
+
+\end{document}

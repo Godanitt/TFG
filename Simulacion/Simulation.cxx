@@ -117,8 +117,8 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
     auto *hKinSampled{new TH2D{"hKinSampled", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3} [MeV];Cuentas", 220, 0, 80,220,-5,80}};
     
     // Measured para Trigger l1
-    auto *hKinMeasuredL1{new TH2D{"hKinMeasuredL1", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3} [MeV];Cuentas", 220, 0, 80,220,-5,80}};
-    auto *hKinReallyMeasuredL1{new TH2D{"hKinReallyMeasuredL1", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3} [MeV];Cuentas", 220, 0, 80,220,-5,80}};
+    auto *hKinMeasuredL1{new TH2D{"hKinMeasuredL1", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3} [MeV];Cuentas", 220, 0, 80,220,-2,12}};
+    auto *hKinReallyMeasuredL1{new TH2D{"hKinReallyMeasuredL1", "#theta_{3} vs T_{3} Sampled;#theta_{3}; T_{3} [MeV];Cuentas", 220, 0, 80,220,-2,12}};
 
     auto *hKinMeasured{new TH2D{"hKinMeasured", "#theta_{3} vs T_{3} Recostrued; #theta_{3};T_{3} [MeV];Cuentas", 220, 0, 80, 220, -5, 80}};
     auto *hKinL1{new TH2D{"hKinL1", "#theta_{3} vs T_{3} Sampleado; #theta_{3};T_{3};Cuentas", 220, 0, 80, 220, -5, 80}};
@@ -134,7 +134,7 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
     auto* hInteractionYZ{new TH2D{"hImpactSilF0", "I; y[mm];z[mm];Cuentas", 200, 100, 155, 200,100, 155}};;
 
 
-    auto *hRangeTheta{new TH2D{"hRangeTheta", "Rango vs #theta_{3}; #theta_{3} [^{#circ}];R [mm];Cuentas", 220, 0, 80, 220, 0, 300}};
+    auto *hRangeTheta{new TH2D{"hRangeTheta", "Rango vs #theta_{3}; #theta_{3} [^{#circ}];L_{xy} [mm];Cuentas", 220, 0, 80, 220, 0, 300}};
 
     
     // TH1D
@@ -365,6 +365,7 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
             hRange->Fill(rangeBeforeSil0);
             hRangeTheta->Fill(theta3*TMath::RadToDeg(),rangeBeforeSil0);
             hKinL1->Fill(theta3*TMath::RadToDeg(),t3);
+
         }
 
 
@@ -390,11 +391,12 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
         if (hasStoppedInTPC) {
             hKinMeasuredL1->Fill(theta3*TMath::RadToDeg(),t3);
             hRangeTheta->Fill(theta3*TMath::RadToDeg(),range);
-            if (range>=20) { hKinReallyMeasuredL1->Fill(theta3*TMath::RadToDeg(),t3);}
+
+            if (range>=20) { 
+            hKinReallyMeasuredL1->Fill(theta3*TMath::RadToDeg(),t3);
+            //hRangeTheta->Fill(theta3*TMath::RadToDeg(),range);
+            }
         }
-
-
-
     }
 
     outfile->cd();
@@ -452,9 +454,9 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
     hImpactSilL0->Scale(factorHisto);   
     hKinSampled->Scale(factorHisto);
     hExSampled->Scale(factorHisto);
-    hKinMeasuredL1->Scale(factorHisto);
     hInteractionXY->Scale(factorHisto);
     hInteractionYZ->Scale(factorHisto);
+    hKinMeasuredL1->Scale(factorHisto);
     hKinReallyMeasuredL1->Scale(factorHisto);
     hRangeTheta->Scale(factorHisto);
 
@@ -482,7 +484,7 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
     sils->GetLayer("r0").GetSilMatrix()->Draw();
 
     c3->Update();
-    c3->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Impacts/Impacts_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    //c3->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Impacts/Impacts_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
 
     SetMyStyle();
@@ -500,8 +502,8 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
     hInteractionYZ->SetTitle("");
     hInteractionYZ->Draw("colz");
     c4->cd(2)->SetLeftMargin(0.15);
-    c4->cd(2)->SetRightMargin(0.1);
-    c4->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Kinematics/Vertex_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    c4->cd(2)->SetRightMargin(0.15);
+    //c4->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Kinematics/Vertex_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
     auto *c5{new TCanvas{"c5", "ExSampled",600,440}};
 
@@ -510,27 +512,45 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
     hExSampled->GetXaxis()->SetRangeUser(-2, 2);
     hExSampled->Draw("h");
     c5->SetRightMargin(0.01);
-    c5->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/ExHisto/ExSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    //c5->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/ExHisto/ExSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
     
 
-    kin->SetBeamEnergyAndEx(tBeam*11,ExOg);
+    kin->SetBeamEnergyAndEx(tBeam*10.75,ExOg);
     auto* g3 {kin->GetKinematicLine3()};
     SetMyStyle();
+    
     auto *c6{new TCanvas{"c6", "kinSampled",550, 330}};
     c6->SetRightMargin(0.15);
     hKinSampled->SetTitle("");
     hKinSampled->Draw("colz");
+    g3->SetLineWidth(3);
     g3->Draw("l same");
 
-    c6->SaveAs(TString::Format("/home/daniel/GitHub/dTFG/Memoria/Imagenes/Kinematics/KinSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    TLegend* legend3 = new TLegend(0.15, 0.78, 0.47, 0.9);
+    legend3->SetTextSize(0.05);  // Tamaño del texto
+    legend3->SetTextFont(62);     // Fuente en negrita
+    legend3->AddEntry(g3, "Cinematica teorica", "l");
+    legend3->Draw("same");
+
+
+    c6->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Kinematics/KinSampled_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
 
 
     auto *c7{new TCanvas{"c7", "kinMeasuredL1",700,440}};
-    hKinReallyMeasuredL1->SetTitle("");
-    hKinReallyMeasuredL1->Draw("colz");
+    hKinMeasuredL1->SetTitle("");
+    hKinMeasuredL1->Draw("colz");
     c7->SetRightMargin(0.15);
+    c7->SetBottomMargin(0.12);
+    g3->SetLineWidth(2);
     g3->Draw("l same");
+
+    TLegend* legend2 = new TLegend(0.15, 0.78, 0.55, 0.9);
+    legend2->SetTextSize(0.05);  // Tamaño del texto
+    legend2->SetTextFont(62);     // Fuente en negrita
+    legend2->AddEntry(g3, "Cinematica teorica", "l");
+    legend2->Draw("same");
+
     if (incIdx==0) {
     c7->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Trigger/EkinMeasuredL1_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
     }
@@ -555,6 +575,7 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
     legend->SetTextFont(62);     // Fuente en negrita
 
     c8->SetRightMargin(0.15);
+    c8->SetBottomMargin(0.15);
 
     hRangeTheta->Draw("colz");
     line->Draw("same");

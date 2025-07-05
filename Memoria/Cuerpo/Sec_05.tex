@@ -1,115 +1,105 @@
 \section{Análisis de los resultados}
 
-En esta sección vamos a analizar los resultados obtenidos en la simulación, centrándonos principalmente en las diferentes anchuras de la energía de excitación recostruida. Dado que tendremos dos anchuras, en función de la energía de excitación vamos a usar la notación $\sigma(E^*)$ como anchura del ajuste gaussiano a la distribución de energía de excitación recostruida para $E^*$.  
-
-\subsection{Recostrucción sin fuentes de incertidumbre y sin Briet-Wigner}
-
-En este apartado presentamos los datos de $\sigma$ sin ninguna fuente de incertidumbre y sin aplicar las distribuciones de la energía de excitación Briet-Wigner.
-
-\vspace*{-0.25cm}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{Imagenes/Rec_incIdx4_single.pdf}
-    \caption{Energía de excitación sin incertidumbre.}
-    \label{Fig:05-RecExcIdx3}
-\end{figure}
+En esta sección vamos a analizar los resultados obtenidos en la simulación, centrándonos principalmente en las diferentes contribuciones de cada fuente de incertidumbre a la anchura $\sigma$.  Vamos a usar la notación $\sigma(E^*)$ como anchura gaussiana a la distribución de energía de excitación reconstruida para $E^*$.  
 
 
-\subsection{Recostrucción sin fuentes de incertidumbre}
+\subsection{Reconstrucción sin fuentes d e incertidumbre}
 
-En primer lugar vamos a analizar la recostrucción de la energía de excitación sin considerar ninguna fuente de incertidumbre de las aquí modeladas, que como ya mencionamos son el sttragling, la dispersión angular y la resolución de los silicios. Como podemos ver en la imagen \cref{Fig:05-RecExcIdx3}, obtenemos prácticamente una distribución Briet-Wigner, con 
+En primer lugar vamos a analizar la reconstrucción de la energía de excitación sin considerar ninguna fuente de incertidumbre de las aquí modeladas. Como podemos ver en la imagen \cref{Fig:05-RecExcIdx3}, obtenemos prácticamente una distribución Breit-Wigner, con 
 
 \begin{equation}
-    \sigma_{0} (0) = \num{0.001363305730(0.0000960943)} \text{ MeV} \quad 
-    \sigma_{0} (0.2) = \num{0.011362236853(0.0034089820)} \text{ MeV}
+    \sigma_{0} (0) = \num{10.2(9.0)} \text{ keV} \quad 
+    \sigma_{0} (0.2) = \num{2.8(2.5)} \text{ keV}
 \end{equation} 
-el origen de esta $\sigma$ se puede deber al cálculo numérico del ordenador, ya que entre interacción e interacción se pierden dígitos, posibles errores sistemáticos en la simulación, e incluso errores en la generación de las distribuciones de los parámetros iniciales (energía de excitación, punto de interacción...). En cualquier caso, un análisis máx exahustivo del error permitiría obtener un origen claro de esta $\sigma$, y sería una buena práctica para futuras simulaciones.
+Uno de los posibles origenes de este término es que ROOT exija numéricamente un $\sigma$ real no nulo, para que la convolución voigt sea computable. También podría deberse a errores numéricos fruto del cálculo con números finitos. 
 
 \vspace*{-0.25cm}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Imagenes/Rec_incIdx3_single.pdf}
-    \caption{Energía de excitación sin incertidumbre.}
+    \includegraphics[width=0.95\textwidth]{Imagenes/Rec_incIdx3_single.pdf}
+    \caption{$E_{ex}$ para $\sigma_{0}$. Izquierda, los espectros y ajuste Voigt. Derecha, los espectros y su suma.}
     \label{Fig:05-RecExcIdx3}
 \end{figure}
 
-En cualquier caso, podemos ver claramente que la anchura intríseca de los estados del litio 10 ya produce un efecto de superposición de picos que dificultará el tratamiendo de datos experimentales, incluso reduciendo errores sistemáticos y estadísticos.
-
-Cada una de las $\sigma$ obtenidas estarán afectadas por este error, tal que en realidad la $\sigma$ que podemos inferir de la simulación será:
-\begin{equation}
-    \sigma_{real}^2 = \sigma_{obtenida}^2 - \sigma_{0}^2
-\end{equation}
-Aunque como podemos ver en  \cref{Tab:05-ExcRec} la $\sigma_{0}$ es muy pequeña comparándola con lo obtenido en los otras simulaciones, por lo que podemos considerar que la $\sigma$ obtenida es prácticamente la real. 
-
-
-
-\subsection{Recostrucción solo con straggling y resolución del silicio}
-
-En este apartado vamos a analizar la recostrucción de la energía de excitación considerando únicamente el straggling y la resolución del silicio, es decir, $\sigma_{straggling}$ y $\sigma_{sil}$, que se pueden considerar como
-
+\subsection{Reconstrucción solo con \textit{straggling}  y resolución del silicio}
+95
+En este apartado vamos a analizar la reconstrucción de la energía de excitación considerando únicamente el \textit{straggling} y la resolución del silicio, es decir, $\sigma_{straggling}$ y $\sigma_{sil}$, que se pueden considerar como
 \begin{equation}
     \sigma_{str}^2 = \sigma_{straggling}^2 + \sigma_{sil}^2
 \end{equation}
-Como podemos ver en la imagen \cref{Fig:05-RecExcIdx1}, ahora ya vemos más superposición en los picos, tal que en la suma de ambos histogramas no diferenciamos dos picos como si teníamos en el caso anterior. Curiosamente, es el efecto de la incertidumbre el que ahora hace que el pico más ancho sea el pico del estado fundamental y no del estado excitado. Todo esto se refleja en los resultados obtenidos: 
+Como podemos ver en la imagen \cref{Fig:05-RecExcIdx1}, ahora ya vemos más superposición en los picos, tal que en la suma de ambos histogramas no diferenciamos dos picos como sí teníamos en el caso anterior. Curiosamente, es el efecto de la incertidumbre el que ahora hace que el pico más ancho sea el pico del estado fundamental y no del estado excitado. Todo esto se refleja en los resultados obtenidos: 
 
 \begin{equation}
-    \sigma_{str} (0) = \num{0.086197097183(0.0004708945)} \text{ MeV} \quad 
-    \sigma_{str} (0.2) = \num{0.065691148826(0.0011537355)} \text{ MeV}
+    \sigma_{str} (0) = \num{78.60(0.63)} \text{keV} \quad 
+    \sigma_{str} (0.2) = \num{62.50(0.93)} \text{keV}
 \end{equation} 
-Este comportamiento podría parecer, en un principio, carente de sentido, y más cuando tenemos en cuenta que para un mismo ángulo la energía en el caso de la interacción con excitación tiene menos energía \cref{Fig:04-Kin}, lo que hace que la tasa de interacción con el gas de la cámara sea mayor y por tanto mayor debería ser el sttragling del gas. Sin embargo es precisamente por esto por lo que ocurre: pese a que lo que acabamos de decir es cierto, si nos fijamos en las secciones eficaces \cref{Fig:04-seccion_eficaz} y en la cinemática sampleada \cref{Fig:04-kinSampled0} y \cref{Fig:04-kinSampled2}, vamos claramente que para $E^*=0.0$ existe una mayor cantidad de estados con energías pequeñas, por lo que en realidad sufrirán más sttragling (en promedio) los tritios procedentes de interacciones en los que participa el estado fundamental. 
 
-
-\vspace*{-0.55cm}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Imagenes/Rec_incIdx1_single.pdf}
-    \caption{Energía de excitación para $\sigma_{str}$.}
+    \includegraphics[width=0.95\textwidth]{Imagenes/Rec_incIdx1_single.pdf}
+    \caption{$E_{ex}$ para $\sigma_{str}$. Izquierda, los espectros y ajuste Voigt. Derecha, los espectros y su suma.}
     \label{Fig:05-RecExcIdx1}
 \end{figure}
 
-\subsection{Recostrucción solo con stragling angular}
+\vspace*{-0.25cm}
 
-Aquí solo vamos a tener en cuenta el efecto de la dispersión angular, con el cual obtenemos una varianza gaussiana tal que: 
+
+En un principio el \textit{straggling}  debería contribuir por igual a ambos picos al tener una energía de excitación muy parecida y prácticamente el mismo rango. La diferencia radica en las secciones eficaces. Si nos fijamos en las secciones eficaces \cref{Fig:04-seccion_eficaz} y en la cinemática sampleada \cref{Fig:04-kinSampled0} y \cref{Fig:04-kinSampled2}, vamos claramente que para $E^*=0.0$ existe una mayor cantidad de estados con energías pequeñas, por lo que en realidad sufrirán más \textit{straggling} (en promedio) los tritios procedentes de interacciones en los que participa el estado fundamental. 
+
+
+\vspace*{-0.45cm}
+\subsection{Reconstrucción solo con resolución angular}
+
+Aquí solo vamos a tener en cuenta el efecto de la dispersión angular, con el cual obtenemos una anchura gaussiana tal que: 
 
 \begin{equation}
-    \sigma_{\theta}(0.0) = \num{0.201336762255(0.0006744131)} \ \text{MeV} \quad 
-    \sigma_{\theta}(0.2) = \num{0.168440735045(0.0007209796)} \ \text{MeV}
+    \sigma_{\theta}(0.0) = \num{202.40(0.91)} \ \text{MeV} \quad 
+    \sigma_{\theta}(0.2) = \num{171.3(1.0)} \ \text{MeV}
 \end{equation} 
-con un valor mucho mas grande que el anterior y que como podemos ver en \cref{Tab:05-ExcRec} es prácticamente toda la contribución a $\sigma_{tot}$. En la imagen \cref{Fig:05-RecExcIdx2} podemos ver como ya no diferenciamos los picos en el histograma apilado. Sin embargo, debemos tener en cuenta que el número de 
+con un valor mucho más grande que el procedente de la interacción con la materia. En la imagen \cref{Fig:05-RecExcIdx2} podemos ver como ya no diferenciamos visualmente los picos en el histograma apilado. 
 
 \vspace*{-0.25cm}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Imagenes/Rec_incIdx2_single.pdf}
-    \caption{Energía de excitación para $\sigma_{\theta}$.}
+    \includegraphics[width=0.95\textwidth]{Imagenes/Rec_incIdx2_single.pdf}
+    \caption{$E_{ex}$ para $\sigma_{\theta}$. Izquierda, los espectros y ajuste Voigt. Derecha, los espectros y su suma.}
     \label{Fig:05-RecExcIdx2}
 \end{figure}
 
-\subsection{Recostrucción con todas las fuentes de incertidumbre}
+\subsection{Reconstrucción con todas las fuentes de incertidumbre}
 
-Aquí solo vamos a tener en cuenta todos las fuentes de incertidumbre implementadas, obteniendo así: 
+Aquí vamos a tener en cuenta todos las fuentes de incertidumbre implementadas, obteniendo así: 
 
 \begin{equation}
-    \sigma_{tot}(0.0) =\num{0.219033325961(0.0006865088)} \ \text{MeV} \quad 
-    \sigma_{tot}(0.2) = \num{0.179463342520(0.0007321261)} \ \text{MeV}
+    \sigma_{tot}(0.0) =\num{218.80(0.98)} \ \text{MeV} \quad 
+    \sigma_{tot}(0.2) = \num{171.3(1.0)} \ \text{MeV}
 \end{equation} 
-e, igual que en el caso anterior, no podemos distiguir los picos del histograma apilado \cref{Fig:05-RecExcIdx0}. 
-\vspace*{-0.25cm}
+e, igual que en el caso anterior, no podemos distiguir visualmente los picos del histograma apilado \cref{Fig:05-RecExcIdx0}. 
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Imagenes/Rec_incIdx0_single.pdf}
-    \caption{Energía de excitación para $\sigma_{tot}$.}
+    \includegraphics[width=0.95\textwidth]{Imagenes/Rec_incIdx0_single.pdf}
+    \caption{$E_{ex}$ para $\sigma_{tot}$. Izquierda, los espectros y ajuste Voigt. Derecha, los espectros y su suma.}
     \label{Fig:05-RecExcIdx0}
 \end{figure}
 
+
 \subsection{Resumen de resultados}
 
-En la \cref{Tab:05-ExcRec} mostramos los resultados de todas las $\sigma$ para las distribuciones gaussianas o voigt obtenidas en la simulación. Como podemos comprobar las $\sigma$ (y por tanto la FWHM)  si tenemos en cuenta todas las fuentes de incertidumbre y la anchura de la resonancia, de cada una de las distribuciones es mucho más grande que la distancia entre las energías del estado fundamental y el primer excitado, por lo que no vampos a poder distinguirlas experimentalmente, a no ser que seamos capaces de reducir considerablemente la mayor fuente de incertidumbre que es la resolución angular. 
+En la \cref{Tab:05-ExcRec} mostramos los resultados de todas las $\sigma$ para las distribuciones gaussianas dentro de la función Voigt. Como podemos comprobar las $\sigma$ (y por tanto la FWHM)  si tenemos en cuenta todas las fuentes de incertidumbre y la anchura de la resonancia, de cada una de las distribuciones es mucho más grande que la distancia entre las energías del estado fundamental y el primer excitado. Para obtener un buen fit con el que poder obtener las energías de excitación tendríamos que ajustar las dos funciones Voigt con una sigma constante fijada, con los valores por ejemplo obtenido en esta simulación. La sigma aquí obtenida podría ser un parámetro constante que permitiría hacer el ajuste real y determinar las amplitudes $\Gamma$ en el experimento real. En la tabla \cref{Tab:05-GammaRec} podemos ver las anchuras $\Gamma$ que obtenemos con la reconstrucción, que en general es muy similar a los valores sampleados (de media un 5\% menor excepto para $\Gamma_0(0.2)$).  
 
-\begin{table}[H] \centering 
+\vspace*{2em}
+
+\begin{minipage}{0.45\linewidth} \centering
 \input{Cuerpo/SigmasTab.tex}
-\caption{$\sigma$ del ajuste gaussiano a la distribución de energía de excitación recostruida.}
+\captionof{table}{$\sigma$ del ajuste voigt a la distribución de energía de excitación reconstruida.}
 \label{Tab:05-ExcRec}
-\end{table}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\linewidth} \centering
+\input{Cuerpo/GammaTab.tex}
+\captionof{table}{$\Gamma$ del ajuste voigt a la distribución de energía de excitación reconstruida.}
+\label{Tab:05-GammaRec}
+\end{minipage}
 
-Debemos encontrar otro método para obtener los resultados esperados con una resolución que permita diferenciar los estados del litio 10.
+\vspace*{2em}

@@ -45,14 +45,13 @@ auto* g4Li10Ex2 {kinEx2->GetKinematicLine4()};
 
 
 
-auto* canvas10 {new TCanvas {"canvas10", "Li10",800,400}};
+auto* canvas10 {new TCanvas {"canvas10", "Li10",400,400}};
 
 
 // Grosor de los ejes
 gStyle->SetLineWidth(2);      // Más grueso el eje X
 gStyle->SetLineWidth(2);      // Más grueso el eje Y
 
-canvas10->DivideSquare(2);
 canvas10->cd(1);
 
 g3Li10Ex0->SetLineColor(kBlue);
@@ -75,6 +74,8 @@ legend->Draw();
 g3Li10Ex0->SetTitle(";#theta_{3Lab} [#circ];E_{3Lab} [MeV]");
 
 canvas10->RedrawAxis();         // Redibuja los ejes, opcional
+
+/*
 canvas10->cd(2);
 
 
@@ -105,7 +106,7 @@ canvas10->RedrawAxis();         // Redibuja los ejes, opcional
 canvas10->RedrawAxis();
 canvas10->cd(2);
 
-
+*/
 canvas10->Update();
 canvas10->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/Cinematica.pdf"));
 

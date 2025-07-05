@@ -9,7 +9,7 @@
 #include <string>
 #include <iostream>
 
-void ExportSigmasToCSV(const double sigma[2][5],const double usigma[2][5], const std::string& filename = "sigmas.csv") {
+void ExportSigmasToCSV(const double sigma[2][5],const double usigma[2][5], const std::string& filename = "sigmas.csv", const std::string& nombre = "sigma") {
     std::ofstream file(filename);
     if (!file.is_open()) {
         std::cerr << "No se pudo abrir el archivo para escritura.\n";
@@ -17,18 +17,16 @@ void ExportSigmasToCSV(const double sigma[2][5],const double usigma[2][5], const
     }
 
     // Cabecera (opcional)
-    file << ",$\\sigma(0.0)$ [keV] , $\\sigma(0.20)$ [keV] \n";
+    file << ",$\\" + nombre +"(0.0)$ [keV] , $\\" + nombre+ "(0.20)$ [keV] \n"; 
 
     std::string* firstColumn[4];  // array de 4 punteros a std::string
 
-    firstColumn[0] = new std::string("$\\sigma_{tot}$");
-    firstColumn[1] = new std::string("$\\sigma_{straggling}$");
-    firstColumn[2] = new std::string("$\\sigma_{\\theta}$");
-    firstColumn[3] = new std::string("$\\sigma_{0}$");
-    firstColumn[4] = new std::string("$\\sigma_{\\Gamma=0}$");
-
+    firstColumn[0] = new std::string("$\\"+nombre+"_{tot}$");
+    firstColumn[1] = new std::string("$\\"+nombre+"_{str}$");
+    firstColumn[2] = new std::string("$\\"+nombre+"_{\\theta}$");
+    firstColumn[3] = new std::string("$\\"+nombre+"_{0}$");
     // Filas: cada fila representa un valor de Ex
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 4; i++) {
         file << *firstColumn[i] << ",";
         for (int j = 0; j < 2; j++) {
             file <<  TString::Format("$\\num{%.1f(%.1f)}$",1000.0*sigma[j][i],1000.0*usigma[j][i]);
@@ -38,7 +36,7 @@ void ExportSigmasToCSV(const double sigma[2][5],const double usigma[2][5], const
     }
 }
 
-TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigmaOut, double& usigmaOut,EColor color = kBlue, int incIdx=0) {
+TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigmaOut, double& usigmaOut,double& gammaOut, double& ugammaOut, EColor color = kBlue, int incIdx=0) {
 
     ROOT::EnableImplicitMT(); // Enable multithreading
     ROOT::RDataFrame df {"SimulationTree", TString::Format("./Outputs/tree_Ex_%.2f_incIdx%i.root", Ex,incIdx)};
@@ -85,14 +83,18 @@ TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigma
 
     double sigma{0};
     double usigma{0};
+    double gamma{0};
+    double ugamma{0};
 
     if (incIdx!=4){
         TF1 *fitVoigt = new TF1("voigt", [](double *x, double *par) {
             return par[0] * TMath::Voigt(x[0] - par[1], par[2], par[3]);
         }, xmin,xmax, 4);
         // Introducimos estimaciones iniciales para obtener las Voigt ajustadas: 
-        double sigmaInicial{0.05};
-        double gammaInicial{0.1};
+        double sigmaInicial{0.00};
+        double gammaInicial{0.3};
+        if (Ex==0.0)
+            double gammaInicial=0.1;
         if (incIdx == 0 || incIdx == 2){
             sigmaInicial=0.2;
         }
@@ -118,6 +120,8 @@ TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigma
         // par[3] = Gamma (anchura Lorentziana)
         sigma = fitVoigt->GetParameter(2);
         usigma = fitVoigt->GetParError(2);
+        gamma = fitVoigt->GetParameter(3);
+        ugamma = fitVoigt->GetParError(3);
     }
 
     if (incIdx==4){
@@ -157,12 +161,16 @@ TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigma
 
     sigmaOut=sigma;
     usigmaOut=usigma;
+    gammaOut=gamma;
+    ugammaOut=ugamma;
+
+
 
     return hClone;
 }
 // Dibuja sin apilar (nostack)
 
-void Read_tree_aux(int incIdx, double sigma[2],double usigma[2]){
+void Read_tree_aux(int incIdx, double sigma[2],double usigma[2],double gamma[2],double ugamma[2]){
 
     gStyle->SetOptStat(0);  // Desactiva globalmente
     auto* c0 {new TCanvas {"c0", "c0"}};
@@ -175,8 +183,8 @@ void Read_tree_aux(int incIdx, double sigma[2],double usigma[2]){
 
     std::vector<std::pair<TH1*, double>> hList;
 
-    hList.push_back({read_tree(0.0, c0, 1, hs, sigma[0],usigma[0] ,kRed, incIdx), 0.0});
-    hList.push_back({read_tree(0.20, c0, 2, hs,sigma[1],usigma[1] ,kBlue, incIdx), 0.20});
+    hList.push_back({read_tree(0.0, c0, 1, hs, sigma[0],usigma[0],gamma[0],ugamma[0],kRed, incIdx), 0.0});
+    hList.push_back({read_tree(0.20, c0, 2, hs,sigma[1],usigma[1],gamma[1],ugamma[1],kBlue, incIdx), 0.20});
     //hList.push_back({read_tree(0.47, c0, 3, hs,sigma[2] ,kGreen,  incIdx), 0.47});
 
 
@@ -270,14 +278,25 @@ void Read_tree(){
     double usigma[2][5] {0};
     double usigmaIdx[2] {0};
 
-    for (int i = 0; i < 5; i++) {
-        Read_tree_aux(uncertaintySelector[i],sigmaIdx,usigmaIdx);
+    double gamma[2][5] {0};
+    double gammaIdx[2] {0};
+    double ugamma[2][5] {0};
+    double ugammaIdx[2] {0};
+
+    for (int i = 0; i < 4; i++) {
+        Read_tree_aux(uncertaintySelector[i],sigmaIdx,usigmaIdx,gammaIdx,ugammaIdx);
         for (int j=0; j<2; j++){
             sigma[j][i]=sigmaIdx[j];
             usigma[j][i]=usigmaIdx[j];
+            gamma[j][i] = gammaIdx[j];       // CORREGIDO
+            ugamma[j][i] = ugammaIdx[j];     // CORREGIDO
+            std::cout<<"sigma"<<sigmaIdx[j]<<"\n";
+            std::cout<<"gamma"<<gammaIdx[j]<<"\n";
         }
     }
     ExportSigmasToCSV(sigma,usigma,"SigmasTab.csv");
+    ExportSigmasToCSV(gamma,ugamma,"GammaTab.csv","Gamma");
+
 
 
     std::cout << "Archivo sigmas.csv exportado correctamente.\n";
@@ -311,7 +330,39 @@ void Read_tree(){
 
     }
     tex << " \\bottomrule \n";
-
-
     tex << "\\end{tabular}\n";
+
+    std::cout << "Archivo gammas.csv exportado correctamente.\n";
+
+    isPrimero=true;
+
+    std::ifstream csv2("GammaTab.csv");
+    std::ofstream tex2("/home/daniel/GitHub/TFG/Memoria/Cuerpo/GammaTab.tex");
+
+    tex2 << "\\begin{tabular}{llll} \\hline\n";  // ajusta columnas según el CSV
+
+    tex2 << "\\toprule \n";  // ajusta columnas según el CSV
+
+    while (std::getline(csv2, linea)) {
+        std::istringstream ss(linea);
+        std::string valor;
+        bool primero = true;
+
+        while (std::getline(ss, valor, ',')) {
+            if (!primero) tex2 << " & ";
+            tex2 << valor;
+            primero = false;
+        }
+        if (isPrimero==true){tex2 << " \\\\ \\midrule \n";}
+        else {tex2 << "\\\\ \n";}
+
+        isPrimero=false;
+
+    }
+    tex2 << " \\bottomrule \n";
+
+
+    tex2 << "\\end{tabular}\n";
+
+    
 }

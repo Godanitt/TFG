@@ -30,7 +30,7 @@ int main() {
 
 
     SetMyStyle();
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 5; i++) {
         std::cout << "Seleccionamos incertidumbre: "  << uncertaintySelector[i] << "\n";
         entries=Simulation(7.5, 0.0, 100000,uncertaintySelector[i]);
 
@@ -59,7 +59,7 @@ int main() {
     bool primera = true;
     bool isPrimero=true;
     for (int i=0; i<2; i++) {
-        tex<<TString::Format(" %.4f",100.0*entriesMatrix[i][1]/entriesMatrix[i][0])+"\\% &";
+        tex<<TString::Format(" %.2f",100.0*entriesMatrix[i][1]/entriesMatrix[i][0])+"\\% &";
     }
     tex << "\\\\ \n\\bottomrule \n";
 

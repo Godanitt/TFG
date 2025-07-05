@@ -1,12 +1,4 @@
 
-% Autor y título
-
-\documentclass[12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
-
-% Paquetess
-
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
@@ -137,7 +129,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\usepackage{biblatex} %Imports biblatex package
+\usepackage[style=numeric,backend=biber,url=false]{biblatex}
 \addbibresource{sample.bib} %Import the bibliography file
 
 %##############################################################################
@@ -161,7 +153,6 @@
 %######### Geometría #################################################
 %##############################################################################
 
-%\geometry{a4paper, total={169mm,245mm}, left=20mm, top=30mm}
 \geometry{a4paper,left=2cm,right=2cm,top=2.5cm,bottom=2.5cm}
 
 
@@ -181,8 +172,8 @@
 
 \usepackage[colorlinks=true, linkcolor=Blue, citecolor=ForestGreen, urlcolor=BrickRed]{hyperref} % Crea las
 \usepackage[nameinlink]{cleveref}
-\crefname{figure}{fig.}{figs.}
-\crefname{table}{tab.}{Tabs.}
+\crefname{figure}{Figura}{Figuras}
+\crefname{table}{Tabla}{Tablas}
 
 %##############################################################################
 %######### Formato de pagina #################################################
@@ -325,46 +316,7 @@
 \newcommand{\hnj}{\hat{\mathbf{j}}}
 \renewcommand{\hnk}{\hat{\mathbf{k}}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%% COMIENZA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
-\title{\textbf{\Huge Trabajo de Fin de Grado}}
-\author{\Large Daniel Vázquez Lago}
-\date{\today}
-			
 
-\begin{document}
-
-\maketitle
-\newpage
-\tableofcontents
-\newpage
-
-\setlength{\parskip}{2.2mm} % Cambia el espacio entre párrafos
-
-
-\begin{Anotacion}
-\textcolor{red}{Cosas que añadir actualmente:}
-\end{Anotacion}
-
-\input{Cuerpo/Sec_01.tex}
-\input{Cuerpo/Sec_02.tex}
-\input{Cuerpo/Sec_03.tex}
-\input{Cuerpo/Sec_04.tex}
-\input{Cuerpo/Sec_05.tex}
-\input{Cuerpo/Sec_06.tex}
-\input{Cuerpo/Sec_07.tex}
-
-
-
-
-\newpage
-%\appendix
-%\input{Cuerpo/Ap_01.tex}
-%\newpage 
-
-\printbibliography
-\addcontentsline{toc}{section}{Referencias}
-			
-\end{document}
+\newcommand{\litioNueve}{$^{9}$Li }
+\newcommand{\litioDiez}{$^{10}$Li }
+\newcommand{\litioOnce}{$^{11}$Li }
