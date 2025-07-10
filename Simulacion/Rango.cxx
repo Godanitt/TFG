@@ -40,9 +40,9 @@ for (int i=0; i<n; ++i) {
 
 
     // Si usas la función fRange(E):
-    rango =(2.0/4.0) *  srim.EvalRange("light", energia);
+    rango =(2.0/4.0) *  srim.EvalRange("lightInSil", energia);
 
-    rangoReally = (1.0/1000.0) * srim.EvalRange("light", energia);
+    rangoReally = (1.0/1.0) * srim.EvalRange("lightInSil", energia);
     // Se multiplica por 1/2 porque no sabemos cuanto afecta que el rango sea en XY
     // hay que ponderar ya que range=sqrt(x**2+y**2+z**2) -> si rXY**2=range**2-z**2
 
@@ -82,7 +82,7 @@ c10->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Memoria/Imagenes/RangoTheta
 auto *c11{new TCanvas{"c11", "c11", 440,440}};
 gRangoVsE->SetLineWidth(3);
 gRangoVsE->GetXaxis()->SetTitle("E [MeV]"); // eje X
-gRangoVsE->GetYaxis()->SetTitle("Rango [m]");        // eje Y
+gRangoVsE->GetYaxis()->SetTitle("Rango [mm]");        // eje Y
 gRangoVsE->SetTitle("");        // eje Y
 gRangoVsE->Draw("al");
 c11->SetRightMargin(0.05);

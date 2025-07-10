@@ -51,11 +51,11 @@ TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigma
 
     double factorHisto{0};
 
-    double interacciones{5000000};
+    double interacciones{5000000.0};
 
-    if (Ex==0.0) {factorHisto=336920/interacciones;}
+    if (Ex==0.0) {factorHisto=336920.0/(interacciones*2.0);}
 
-    if (Ex==0.2) {factorHisto=259406/interacciones;}
+    if (Ex==0.2) {factorHisto=259406.0/(interacciones*2.0);}
 
     
     hEx->Scale(factorHisto);   
@@ -122,6 +122,12 @@ TH1* read_tree(double Ex, TCanvas* c, int squareCanvas,THStack* hs,double& sigma
         usigma = fitVoigt->GetParError(2);
         gamma = fitVoigt->GetParameter(3);
         ugamma = fitVoigt->GetParError(3);
+        
+
+        gROOT->ForceStyle();        
+        fitVoigt->SetLineColor(color-5); 
+        gPad->Update();
+
     }
 
     if (incIdx==4){
@@ -292,6 +298,8 @@ void Read_tree(){
             ugamma[j][i] = ugammaIdx[j];     // CORREGIDO
             std::cout<<"sigma"<<sigmaIdx[j]<<"\n";
             std::cout<<"gamma"<<gammaIdx[j]<<"\n";
+
+            
         }
     }
     ExportSigmasToCSV(sigma,usigma,"SigmasTab.csv");

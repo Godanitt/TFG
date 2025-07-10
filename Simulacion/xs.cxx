@@ -198,7 +198,7 @@ void xs()
     double *x = graphs[j]->GetX();
     double *y = graphs[j]->GetY();
 
-    for (int i = 0; i < N - 1; i += 2)
+    for (int i = 0; i < N - 1; i += 2)-gjo
     {
         double theta0 = x[i] * TMath::DegToRad();
         double theta1 = x[i + 1] * TMath::DegToRad();
@@ -226,8 +226,8 @@ void xs()
 
     ExportsCSVToTex("SeccionEficaz.csv","SeccionEficaz.tex");
 
-    double alpha1{6000.0*6.0*24.0*3600.0*0.7826*4.9945*((1e-8))*25.5*(sigma[0][0])};
-    double alpha2{6000.0*6.0*24.0*3600.0*0.7826*4.9945*((1e-8))*25.5*(sigma[1][0])};
+    double alpha1{3000.0*6.0*24.0*3600.0*0.7826*4.9945*((1e-8))*25.5*(sigma[0][0])};
+    double alpha2{3000.0*6.0*24.0*3600.0*0.7826*4.9945*((1e-8))*25.5*(sigma[1][0])};
 
     std::ofstream tex("/home/daniel/GitHub/TFG/Memoria/Cuerpo/alphas.tex");
     std::cout<<"sigma="<<sigma[0][0]<<"\n";

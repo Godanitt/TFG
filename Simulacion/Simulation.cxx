@@ -436,16 +436,16 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
     hKinMeasuredL1->Draw("colz");
 
 
-    c1->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Simulacion/Graficas/Completo_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
+    //c1->SaveAs(TString::Format("/home/daniel/GitHub/TFG/Simulacion/Graficas/Completo_Ex%.2f_incIdx%i.pdf", ExOg,incIdx));
 
     // Escalamos todas las gráficas: 
 
     double factorHisto{double(interacciones)};
     std::cout<<"factorHisto="<<factorHisto<<"\n";
 
-    if (ExOg==0.00) {factorHisto=336920/double(interacciones);}
+    if (ExOg==0.00) {factorHisto=336920/(double(interacciones)*2.0);}
 
-    if (ExOg==0.20) {factorHisto=259406/double(interacciones);}
+    if (ExOg==0.20) {factorHisto=259406/(double(interacciones)*2.0);}
 
     
     hImpactSilF0->Scale(factorHisto);   
@@ -460,7 +460,7 @@ std::vector<double> Simulation(double tBeam=7.5,double Ex=0.0, int interacciones
     hKinReallyMeasuredL1->Scale(factorHisto);
     hRangeTheta->Scale(factorHisto);
 
-
+        
     SetMyStyle();
     gROOT->ForceStyle();
     auto *c3{new TCanvas{"c3", "T3_vs_theta"}};

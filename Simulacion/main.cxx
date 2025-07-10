@@ -30,7 +30,7 @@ int main() {
 
 
     SetMyStyle();
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 1; i++) {
         std::cout << "Seleccionamos incertidumbre: "  << uncertaintySelector[i] << "\n";
         entries=Simulation(7.5, 0.0, 100000,uncertaintySelector[i]);
 
